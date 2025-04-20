@@ -37,6 +37,17 @@ services:
     networks:
       - app-network
 
+  client:
+    build: ./client
+    container_name: math-client
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    networks:
+      - app-network
+    depends_on:
+      - api
+
 networks:
   app-network:
     driver: bridge
