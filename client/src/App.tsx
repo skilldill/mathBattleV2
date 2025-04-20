@@ -1,5 +1,5 @@
 import './App.css'
-import MathBattleCoverPNG from './assets/math-battle-cover.png';
+import MathBattleCoverPNG from './assets/MathBattleCover.png';
 
 function App() {
   return (
