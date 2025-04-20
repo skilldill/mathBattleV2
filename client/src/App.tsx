@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <div className="cover-image-container">
-        <img src={MathBattleCoverPNG} alt="Math Battle Cover" />
+        <img src={MathBattleCoverPNG} alt="Math Battle Cover" style={{ width: '100%' }} />
       </div>
       <h1>Math Battle comming soon</h1>
     </>

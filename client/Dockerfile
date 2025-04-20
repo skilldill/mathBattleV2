@@ -1,10 +1,24 @@
-FROM node:lts AS build
+# --- Build stage ---
+FROM node:20-alpine AS builder
+
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
 COPY . .
+
+RUN npm install
 RUN npm run build
 
-FROM httpd:2.4 AS runtime
-COPY --from=build /app/dist /usr/local/apache2/htdocs/
-EXPOSE 80
+# --- Serve stage ---
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Устанавливаем serve глобально
+RUN npm install -g serve
+
+# Копируем собранные файлы
+COPY --from=builder /app/dist ./dist
+
+EXPOSE 3000
+
+# Запускаем serve для раздачи статики
+CMD ["serve", "-s", "dist", "-l", "3000"]
