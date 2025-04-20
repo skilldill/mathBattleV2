@@ -8,16 +8,16 @@ connectDB()
 const app = new Elysia()
 
 // Healthcheck endpoint
-app.get('/health', () => ({
+app.get('/api/health', () => ({
   status: 'ok',
   timestamp: new Date().toISOString()
 }))
 
-app.get('/math-tasks-difficulties', () => {
+app.get('/api/math-tasks-difficulties', () => {
   return DIFFICULTIES_LIST;
 })
 
-app.post('/math-tasks', ({ body }) => {
+app.post('/api/math-tasks', ({ body }) => {
   const { count, difficulty } = body;
   const tasks = mathService.getTasksList(count, difficulty);
   return tasks;
