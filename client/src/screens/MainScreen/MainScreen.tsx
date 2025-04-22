@@ -28,7 +28,7 @@ export const MainScreen: React.FC = () => {
             </IonText>
             <IonImg src={MathBattleCoverPng} />
             <IonText>
-                <h2>👋 Привет, {user?.first_name || "незнакомец"}!</h2>
+                <h2>👋 Привет, {user?.username || "незнакомец"}!</h2>
             </IonText>
             <ColumnLayout>
                 <IonButton size='large' onClick={() => openModal('settingsScreen')}>
