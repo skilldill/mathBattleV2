@@ -46,8 +46,8 @@ services:
     networks:
       - app-network
 
-  tgBot:
-    build: ./tgBot
+  tgbot:
+    build: ./tgbot
     container_name: tg-bot
     restart: unless-stopped
     networks:

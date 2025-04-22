@@ -1,4 +1,4 @@
-import { Telegraf } from 'telegraf';
+import { Telegraf } from './node_modules/telegraf/typings';
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
