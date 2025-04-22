@@ -1,5 +1,5 @@
 import { IonApp, setupIonicReact } from '@ionic/react';
-import { MainScreen, PuzzlesScreen } from './screens';
+import { MainScreen, PuzzlesScreen, ProfileStatisticsScreen, PuzzlesResultScreen } from './screens';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 /* Core CSS required for Ionic components to work properly */
@@ -39,6 +39,8 @@ const App: React.FC = () => (
       <Switch>
         <Route path="/puzzles" component={PuzzlesScreen} />
         <Route path="/" component={MainScreen} />
+        <Route path="/profile-statistics" component={ProfileStatisticsScreen} />
+        <Route path="/puzzles-result" component={PuzzlesResultScreen} />
       </Switch>
     </Router>
   </IonApp>
