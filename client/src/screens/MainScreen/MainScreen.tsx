@@ -32,7 +32,7 @@ export const MainScreen: React.FC = () => {
             <IonText>
                 <h2>👋 Привет, {user?.first_name || "незнакомец"}!</h2>
             </IonText>
-
+            <code>{JSON.stringify((window as any).Telegram?.WebApp)}</code>
 
             <ColumnLayout>
                 <IonButton size='large' onClick={() => openModal('settingsScreen')}>
