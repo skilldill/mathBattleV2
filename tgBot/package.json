@@ -7,8 +7,7 @@
     "dev": "bun --watch run index.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@types/mongoose": "^5.11.97"
+    "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
