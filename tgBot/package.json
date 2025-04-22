@@ -13,7 +13,8 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "telegraf": "^4.11.3"
+    "@types/node": "^22.14.1",
+    "telegraf": "^4.16.3"
   },
   "bun": {
     "module": "index.ts"

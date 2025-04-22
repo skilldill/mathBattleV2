@@ -1,4 +1,4 @@
-import { Telegraf } from './node_modules/telegraf/typings';
+import { Telegraf } from 'telegraf';
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
@@ -15,4 +15,4 @@ bot.start((ctx) => {
 })
 
 bot.launch()
-console.log('🤖 Бот работает!')
+console.log('🤖 Math Battle Bot работает!')
