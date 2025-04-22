@@ -4,7 +4,6 @@ import { ColumnLayout, ScreenLayout } from '../../components';
 import { useState } from 'react';
 import { AboutScreen } from '../AboutScreen/AboutScreen';
 import { SettingsTasksScreen } from '../SettingsTasksScreen/SettingsTasksScreen';
-import { useTelegramUser } from '../../hooks/useTelegramUser';
 
 const MODAL_SCREENS = {
     aboutScreen: () => <AboutScreen />,
@@ -12,7 +11,6 @@ const MODAL_SCREENS = {
 }
 
 export const MainScreen: React.FC = () => {
-    const { user } = useTelegramUser();
     const [modalScreen, setModalScreen] = useState<keyof typeof MODAL_SCREENS>('aboutScreen');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -29,10 +27,6 @@ export const MainScreen: React.FC = () => {
                 <h1>Math Battle</h1>
             </IonText>
             <IonImg src={MathBattleCoverPng} />
-            <IonText>
-                <h2>👋 Привет, {user?.first_name || "незнакомец"}!</h2>
-            </IonText>
-            <code>{JSON.stringify(Object.keys(window))}</code>
 
             <ColumnLayout>
                 <IonButton size='large' onClick={() => openModal('settingsScreen')}>
@@ -56,3 +50,4 @@ export const MainScreen: React.FC = () => {
         </ScreenLayout>
     );
 };
+
