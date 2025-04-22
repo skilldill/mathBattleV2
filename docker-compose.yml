@@ -46,6 +46,13 @@ services:
     networks:
       - app-network
 
+  tgBot:
+    build: ./tgBot
+    container_name: tg-bot
+    restart: unless-stopped
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge
