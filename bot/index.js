@@ -1,4 +1,7 @@
-import { Telegraf } from 'telegraf';
+const { config } = require('dotenv');
+const { Telegraf } = require('telegraf');
+
+config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 

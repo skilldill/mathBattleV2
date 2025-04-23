@@ -15,6 +15,13 @@ services:
     networks:
       - app-network
 
+  tgbot:
+    build: ./bot
+    container_name: tg-bot
+    restart: unless-stopped
+    networks:
+      - app-network
+
   mongodb:
     image: mongo:latest
     container_name: mongodb
@@ -24,12 +31,6 @@ services:
     networks:
       - app-network
 
-  tgbot:
-    build: ./tgBot
-    container_name: tg-bot
-    restart: unless-stopped
-    networks:
-      - app-network
 networks:
   app-network:
     driver: bridge
