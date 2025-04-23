@@ -39,7 +39,7 @@ const App: React.FC = () => (
       <Switch>
         <Route path="/puzzles" component={PuzzlesScreen} />
         <Route path="/profile-statistics" component={ProfileStatisticsScreen} />
-        <Route path="/puzzles-result" component={PuzzlesResultScreen} />
+        <Route path="/puzzles-result/:id" component={PuzzlesResultScreen} />
         <Route path="/" component={MainScreen} />
       </Switch>
     </Router>

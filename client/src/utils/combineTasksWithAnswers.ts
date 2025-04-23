@@ -3,6 +3,7 @@ import { MathTaskDto, MathTaskResultDto } from "../types/MathTaskDto";
 
 
 export const combineTasksWithAnswers = (tasks: MathTaskDto[], answers: Answer[]): MathTaskResultDto[] => {
+    console.log(tasks, answers);
     return tasks.map((task, index) => {
         const { readableTask, result } = task;
         const { answer, time } = answers[index];

@@ -13,7 +13,7 @@ export class ApiService {
     }
 
     static async saveResult(result: SaveResultDto): Promise<{ id: string }> {
-        const response = await httpClient.post('/api/save-result', result);
+        const response = await httpClient.post('/api/result', result);
         return response.data;
     }
 }

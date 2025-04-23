@@ -2,19 +2,16 @@ import { useState } from "react";
 
 export const useTimer = () => {
     const [startTime, setStartTime] = useState<number>(0);
-    const [endTime, setEndTime] = useState<number>(0);
 
     const startTimer = () => {
-        setStartTime(Date.now());
-    }
-
-    const stopTimer = () => {
-        setEndTime(Date.now());
+        const startTime = Date.now();
+        setStartTime(startTime);
     }
 
     const getTime = () => {
+        const endTime = Date.now();
         return endTime - startTime;
     }
 
-    return { startTimer, stopTimer, getTime };
+    return { startTimer, getTime };
 }

@@ -10,26 +10,26 @@ import { useTimer } from '../../hooks/useTimer';
 export const PuzzlesScreen: React.FC = () => {
   const { fetchTasks, loading, tasks, checkAnswer, saveResult } = useMathTasks();
   const history = useHistory();
-  const { getTime, startTimer, stopTimer } = useTimer();
+  const { getTime, startTimer } = useTimer();
   const [currentTaskId, setCurrentTaskId] = useState<number>(0);
 
+  const tasksReady = async () => {
+    await fetchTasks(20, 'combo');
+    startTimer();
+  }
+
   useEffect(() => {
-    fetchTasks(20, 'combo');
+    tasksReady();
   }, []);
 
-  useEffect(() => {
-    startTimer();
-  }, [currentTaskId]);
-
   const handleVariantClick = (variant: number) => {
-    stopTimer();
-    checkAnswer({answer: variant, time: getTime()});
+    checkAnswer({ answer: variant, time: getTime() });
 
     setCurrentTaskId((currentTaskId) => {
       if (currentTaskId < tasks.length - 1) {
+        startTimer();
         return currentTaskId + 1;
       }
-      saveResult();
       return currentTaskId;
     });
   }

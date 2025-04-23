@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ApiService } from '../api/ApiService';
 import { MathTaskDto, MathTaskResultDto } from '../types/MathTaskDto';
 import { useTimer } from './useTimer';
@@ -13,15 +13,23 @@ export const useMathTasks = () => {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [answers, setAnswers] = useState<Answer[]>([]);
-    
-    const { startTimer, stopTimer, getTime } = useTimer();
+    const [difficulty, setDifficulty] = useState<string>('easy');
+
+    useEffect(() => {
+        if (tasks.length > 0 && answers.length === tasks.length) {
+            saveResult();
+        }
+    }, [answers]);
+
+    const { startTimer, getTime } = useTimer();
 
     const fetchTasks = async (count: number, difficulty: string) => {
         try {
             setLoading(true);
+            setDifficulty(difficulty);
             const data = await ApiService.getMathTasks(count, difficulty);
             setTasks(data);
-            startTimer();
+            startTimer();    
         } catch (err) {
             setError('Failed to fetch tasks');
         } finally {
@@ -38,25 +46,25 @@ export const useMathTasks = () => {
         }
     };
 
-    const checkAnswer = (answer: {answer: number, time: number}) => {
+    const checkAnswer = (answer: Answer) => {
+        console.log('answer', answer);
         setAnswers((answers) => [...answers, answer]);
     }
 
     const saveResult = async () => {
-        stopTimer();
         setLoading(true);
-
-        const result = combineTasksWithAnswers(tasks, answers);
+        console.log('answers in saveResult', answers.length);
+        const resultForSave = combineTasksWithAnswers(tasks, answers);
 
         const data = await ApiService.saveResult({
-            tasks: result,
+            tasks: resultForSave,
             userId: '1',
             time: getTime(),
-            difficulty: 'easy'
+            difficulty
         });
 
         try {
-            history.push('/puzzles-result' + data.id);
+            history.push('/puzzles-result/' + data.id);
         } catch (err) {
             setError('Failed to save result');
         } finally {
