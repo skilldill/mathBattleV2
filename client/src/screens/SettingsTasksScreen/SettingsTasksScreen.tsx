@@ -6,7 +6,7 @@ export const SettingsTasksScreen: React.FC = () => {
   const history = useHistory();
 
   return (
-    <ColumnLayout>
+    <ColumnLayout withPadding>
       <IonText>
         <h1>Проверь свои <br /> математические способности!</h1>
       </IonText>

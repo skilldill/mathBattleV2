@@ -25,7 +25,7 @@ export const MainScreen: React.FC = () => {
                 <h1>Math Battle</h1>
             </IonText>
             <IonImg src={MathBattleCoverPng} />
-            <ColumnLayout>
+            <ColumnLayout withPadding>
                 <IonButton size='large' onClick={() => openModal('settingsScreen')}>
                     Проверить себя
                 </IonButton>
@@ -36,7 +36,7 @@ export const MainScreen: React.FC = () => {
 
             <IonModal isOpen={isModalOpen} onDidDismiss={() => setIsModalOpen(false)}>
                 <IonContent>
-                    <ColumnLayout>
+                    <ColumnLayout withPadding>
                         {renderModalScreen()}
                         <IonButton onClick={() => setIsModalOpen(false)} size='large' color='primary' fill='clear'>
                             Закрыть

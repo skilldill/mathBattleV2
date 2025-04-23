@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useMathTasks } from '../../hooks/useMathTasks';
-import { ColumnLayout, ScreenLayout } from '../../components';
+import { ColumnLayout, ProgressBar, ScreenLayout } from '../../components';
 import { IonButton, IonSpinner } from '@ionic/react';
 import { VerticalCenterLayout } from '../../components/VerticalCenterLayout/VerticalCenterLayout';
 import { MathTaskCard } from '../../components/MathTaskCard/MathTaskCard';
@@ -44,11 +44,12 @@ export const PuzzlesScreen: React.FC = () => {
           <IonSpinner></IonSpinner>
         </VerticalCenterLayout>
         ) : (
-          <ColumnLayout>
+          <ColumnLayout withPadding>
+            <ProgressBar progress={currentTaskId / tasks.length * 100} />
             <MathTaskCard task={tasks[currentTaskId]} onVariantClick={handleVariantClick} />
           </ColumnLayout>
         )}
-        <ColumnLayout>
+        <ColumnLayout withPadding>
           <IonButton size="large" fill="clear" color='danger' onClick={handleFinishClick}>Завершить</IonButton>
         </ColumnLayout>
     </ScreenLayout>
