@@ -7,7 +7,7 @@ import { MathTaskCard } from '../../components/MathTaskCard/MathTaskCard';
 import { useHistory } from 'react-router';
 
 export const PuzzlesScreen: React.FC = () => {
-  const { fetchTasks, loading, tasks } = useMathTasks();
+  const { fetchTasks, loading, tasks, checkAnswer } = useMathTasks();
   const history = useHistory();
 
   const [currentTaskId, setCurrentTaskId] = useState<number>(0);
@@ -17,10 +17,13 @@ export const PuzzlesScreen: React.FC = () => {
   }, []);
 
   const handleVariantClick = (variant: number) => {
+    checkAnswer(variant);
+
     setCurrentTaskId((currentTaskId) => {
       if (currentTaskId < tasks.length - 1) {
         return currentTaskId + 1;
       }
+      history.push('/puzzles-result');
       return currentTaskId;
     });
   }

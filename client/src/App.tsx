@@ -38,9 +38,9 @@ const App: React.FC = () => (
     <Router>
       <Switch>
         <Route path="/puzzles" component={PuzzlesScreen} />
-        <Route path="/" component={MainScreen} />
         <Route path="/profile-statistics" component={ProfileStatisticsScreen} />
         <Route path="/puzzles-result" component={PuzzlesResultScreen} />
+        <Route path="/" component={MainScreen} />
       </Switch>
     </Router>
   </IonApp>
