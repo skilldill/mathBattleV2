@@ -5,25 +5,31 @@ import { IonButton, IonSpinner } from '@ionic/react';
 import { VerticalCenterLayout } from '../../components/VerticalCenterLayout/VerticalCenterLayout';
 import { MathTaskCard } from '../../components/MathTaskCard/MathTaskCard';
 import { useHistory } from 'react-router';
+import { useTimer } from '../../hooks/useTimer';
 
 export const PuzzlesScreen: React.FC = () => {
-  const { fetchTasks, loading, tasks, checkAnswer } = useMathTasks();
+  const { fetchTasks, loading, tasks, checkAnswer, saveResult } = useMathTasks();
   const history = useHistory();
-
+  const { getTime, startTimer, stopTimer } = useTimer();
   const [currentTaskId, setCurrentTaskId] = useState<number>(0);
 
   useEffect(() => {
     fetchTasks(20, 'combo');
   }, []);
 
+  useEffect(() => {
+    startTimer();
+  }, [currentTaskId]);
+
   const handleVariantClick = (variant: number) => {
-    checkAnswer(variant);
+    stopTimer();
+    checkAnswer({answer: variant, time: getTime()});
 
     setCurrentTaskId((currentTaskId) => {
       if (currentTaskId < tasks.length - 1) {
         return currentTaskId + 1;
       }
-      history.push('/puzzles-result');
+      saveResult();
       return currentTaskId;
     });
   }

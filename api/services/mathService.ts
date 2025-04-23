@@ -198,4 +198,3 @@ export class MathTasksService {
 }
 
 export const mathService = new MathTasksService();
-console.log(mathService.getTasksList(5, 'easy'));

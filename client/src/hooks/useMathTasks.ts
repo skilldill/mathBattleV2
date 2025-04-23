@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { ApiService } from '../api/ApiService';
-import { MathTaskDto } from '../types/MathTaskDto';
+import { MathTaskDto, MathTaskResultDto } from '../types/MathTaskDto';
 import { useTimer } from './useTimer';
 import { useHistory } from 'react-router';
+import { Answer } from '../types/common.types';
+import { combineTasksWithAnswers } from '../utils/combineTasksWithAnswers';
 
 export const useMathTasks = () => {
     const history = useHistory();
@@ -10,7 +12,7 @@ export const useMathTasks = () => {
     const [difficulties, setDifficulties] = useState<string[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
-    const [answers, setAnswers] = useState<number[]>([]);
+    const [answers, setAnswers] = useState<Answer[]>([]);
     
     const { startTimer, stopTimer, getTime } = useTimer();
 
@@ -19,6 +21,7 @@ export const useMathTasks = () => {
             setLoading(true);
             const data = await ApiService.getMathTasks(count, difficulty);
             setTasks(data);
+            startTimer();
         } catch (err) {
             setError('Failed to fetch tasks');
         } finally {
@@ -35,20 +38,24 @@ export const useMathTasks = () => {
         }
     };
 
-    const checkAnswer = (answer: number) => {
+    const checkAnswer = (answer: {answer: number, time: number}) => {
         setAnswers((answers) => [...answers, answer]);
     }
 
     const saveResult = async () => {
+        stopTimer();
         setLoading(true);
 
-        const result = {
-            tasks: tasks,
-            answers: answers,
-            time: getTime()
-        }
+        const result = combineTasksWithAnswers(tasks, answers);
+
+        const data = await ApiService.saveResult({
+            tasks: result,
+            userId: '1',
+            time: getTime(),
+            difficulty: 'easy'
+        });
+
         try {
-            const data = await ApiService.saveResult(result);
             history.push('/puzzles-result' + data.id);
         } catch (err) {
             setError('Failed to save result');
