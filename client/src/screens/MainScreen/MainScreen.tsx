@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { AboutScreen } from '../AboutScreen/AboutScreen';
 import { SettingsTasksScreen } from '../SettingsTasksScreen/SettingsTasksScreen';
 import { useTelegramUser } from '../../hooks/useTelegramUser';
+import { useHistory } from 'react-router-dom';
+
 const MODAL_SCREENS = {
     aboutScreen: () => <AboutScreen />,
     settingsScreen: () => <SettingsTasksScreen />,
@@ -15,10 +17,14 @@ export const MainScreen: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const renderModalScreen = MODAL_SCREENS[modalScreen];
     const { user } = useTelegramUser();
-
+    const history = useHistory();
     const openModal = (screen: keyof typeof MODAL_SCREENS) => {
         setModalScreen(screen);
         setIsModalOpen(true);
+    }
+
+    const openTechDevScreen = () => {
+        history.push('/tech-dev');
     }
 
     return (
@@ -39,6 +45,7 @@ export const MainScreen: React.FC = () => {
                 <IonButton color="success" size='large' onClick={() => openModal('aboutScreen')}>
                     О проекте
                 </IonButton>
+                <IonButton fill="clear" color="warning" size='large' onClick={openTechDevScreen}>Тех. данные</IonButton>
             </ColumnLayout>
 
             <IonModal isOpen={isModalOpen} onDidDismiss={() => setIsModalOpen(false)}>

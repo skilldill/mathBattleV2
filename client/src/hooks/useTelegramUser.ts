@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { initData, User } from '@telegram-apps/sdk';
+import { User, retrieveLaunchParams } from '@telegram-apps/sdk';
 
 // {
 //   addedToAttachmentMenu: false,
@@ -19,9 +19,10 @@ export const useTelegramUser = () => {
   const [isTelegram, setIsTelegram] = useState(false);
 
   useEffect(() => {
-    const userData = initData.user();
-    if (userData) {
-      setUser(userData);
+    const { tgWebAppData } = retrieveLaunchParams();
+    console.log('tgWebAppData', tgWebAppData);
+    if (tgWebAppData) {
+      setUser(tgWebAppData.user);
       setIsTelegram(true);
     }
   }, []);
