@@ -1,28 +1,28 @@
 import { useEffect, useState } from 'react';
+import { initData, User } from '@telegram-apps/sdk';
 
-type TelegramUser = {
-  id: number;
-  is_bot: boolean;
-  first_name: string;
-  last_name?: string;
-  username?: string;
-  language_code?: string;
-  photo_url?: string;
-};
+// {
+//   addedToAttachmentMenu: false,
+//   allowsWriteToPm: true,
+//   isPremium: true,
+//   firstName: 'Pavel',
+//   id: 78262681,
+//   isBot: false,
+//   lastName: 'Durov',
+//   languageCode: 'ru',
+//   photoUrl: 'https://example.com/image.png',
+//   username: 'durove',
+// }
 
 export const useTelegramUser = () => {
-  const [user, setUser] = useState<TelegramUser | null>(null);
+  const [user, setUser] = useState<User>();
   const [isTelegram, setIsTelegram] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).Telegram?.WebApp) {
-      (window as any).Telegram.WebApp.ready();
-
-      const tgUser = (window as any).Telegram.WebApp.initDataUnsafe?.user;
-      if (tgUser) {
-        setUser(tgUser);
-        setIsTelegram(true);
-      }
+    const userData = initData.user();
+    if (userData) {
+      setUser(userData);
+      setIsTelegram(true);
     }
   }, []);
 

@@ -29,7 +29,7 @@ export const MainScreen: React.FC = () => {
             <IonImg src={MathBattleCoverPng} />
             <IonText>
                 <h2>
-                    Привет, {user?.username}!
+                    Привет, {user?.username || 'математик'}!
                 </h2>
             </IonText>
             <ColumnLayout withPadding>
