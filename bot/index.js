@@ -10,7 +10,7 @@ bot.start((ctx) => {
     reply_markup: {
       keyboard: [[{
         text: 'Открыть Math Battle',
-        web_app: { url: 'https://app.math-battle.ru' }
+        web_app: { url: `https://app.math-battle.ru?u91x=${ctx.from.id}&x_3z9=${ctx.from.username}` }
       }]],
       resize_keyboard: true
     }
