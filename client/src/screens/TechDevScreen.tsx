@@ -6,7 +6,7 @@ export const TechDevScreen: React.FC = () => {
         <ScreenLayout>
             <h1>TechDevScreen</h1>
             <code>
-                {(window as any).Telegram.WebApp.initData}
+                {(window as any).Telegram.WebApp}
             </code>
         </ScreenLayout>
     );
