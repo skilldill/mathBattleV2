@@ -15,15 +15,18 @@ import { User, retrieveLaunchParams } from '@telegram-apps/sdk';
 // }
 
 export const useTelegramUser = () => {
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<any>();
   const [isTelegram, setIsTelegram] = useState(false);
 
   useEffect(() => {
     const { tgWebAppData } = retrieveLaunchParams();
     console.log('tgWebAppData', tgWebAppData);
     if (tgWebAppData) {
-      setUser(tgWebAppData.user);
+      setUser(tgWebAppData);
       setIsTelegram(true);
+    } else {
+      setUser({ status: 'ТГ данных нет' });
+      setIsTelegram(false);
     }
   }, []);
 
