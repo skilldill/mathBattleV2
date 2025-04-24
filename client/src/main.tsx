@@ -4,9 +4,6 @@ import App from './App';
 
 import { setupIonicReact } from '@ionic/react';
 
-import { init } from '@telegram-apps/sdk-react';
-
-init();
 
 setupIonicReact({
   mode: 'ios'
