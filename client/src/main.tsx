@@ -3,28 +3,10 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 
 import { setupIonicReact } from '@ionic/react';
-import { init, miniApp } from '@telegram-apps/sdk';
 
+import { init } from '@telegram-apps/sdk-react';
 
-const initializeTelegramSDK = async () => {
-  try {
-    await init();
-
-
-    if (miniApp.ready.isAvailable()) {
-      await miniApp.ready();
-      console.log('Mini App готово');
-    }
-
-
-  } catch (error) {
-    console.error('Ошибка инициализации:', error);
-  }
-};
-
-
-initializeTelegramSDK();
-
+init();
 
 setupIonicReact({
   mode: 'ios'

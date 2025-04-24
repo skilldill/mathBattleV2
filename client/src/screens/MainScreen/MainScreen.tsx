@@ -4,7 +4,6 @@ import { ColumnLayout, ScreenLayout } from '../../components';
 import { useState } from 'react';
 import { AboutScreen } from '../AboutScreen/AboutScreen';
 import { SettingsTasksScreen } from '../SettingsTasksScreen/SettingsTasksScreen';
-import { useTelegramUser } from '../../hooks/useTelegramUser';
 import { useHistory } from 'react-router-dom';
 
 const MODAL_SCREENS = {
@@ -16,7 +15,6 @@ export const MainScreen: React.FC = () => {
     const [modalScreen, setModalScreen] = useState<keyof typeof MODAL_SCREENS>('aboutScreen');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const renderModalScreen = MODAL_SCREENS[modalScreen];
-    const { user } = useTelegramUser();
     const history = useHistory();
     const openModal = (screen: keyof typeof MODAL_SCREENS) => {
         setModalScreen(screen);
@@ -35,7 +33,7 @@ export const MainScreen: React.FC = () => {
             <IonImg src={MathBattleCoverPng} />
             <IonText>
                 <h2>
-                    Привет, {user?.username || 'математик'}!
+                    Привет, 'математик!
                 </h2>
             </IonText>
             <ColumnLayout withPadding>
