@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useMathTasks } from '../../hooks/useMathTasks';
 import { ColumnLayout, ProgressBar, ScreenLayout } from '../../components';
-import { IonButton, IonSpinner } from '@ionic/react';
+import { IonActionSheet, IonButton, IonSpinner } from '@ionic/react';
 import { VerticalCenterLayout } from '../../components/VerticalCenterLayout/VerticalCenterLayout';
 import { MathTaskCard } from '../../components/MathTaskCard/MathTaskCard';
 import { useHistory } from 'react-router';
 import { useTimer } from '../../hooks/useTimer';
+import { useTasksStore } from '../../store/tasksStore';
+
 
 export const PuzzlesScreen: React.FC = () => {
-  const { fetchTasks, loading, tasks, checkAnswer, saveResult } = useMathTasks();
-  const history = useHistory();
-  const { getTime, startTimer } = useTimer();
   const [currentTaskId, setCurrentTaskId] = useState<number>(0);
 
+  const { fetchTasks, loading, tasks, checkAnswer, saveResult } = useMathTasks();
+  const history = useHistory();
+  const { count, difficulty } = useTasksStore();
+  const { getTime, startTimer } = useTimer();
+
   const tasksReady = async () => {
-    await fetchTasks(20, 'combo');
+    await fetchTasks(count, difficulty);
     startTimer();
   }
 
@@ -59,8 +63,33 @@ export const PuzzlesScreen: React.FC = () => {
           </ColumnLayout>
         )}
         <ColumnLayout withPadding>
-          <IonButton size="large" fill="clear" color='danger' onClick={handleFinishClick}>Завершить</IonButton>
+          <IonButton size="large" fill="clear" color='danger' id="open-action-sheet">Завершить</IonButton>
         </ColumnLayout>
+        <IonActionSheet
+          trigger="open-action-sheet"
+          header="Результаты не сохранятся, точно хотите завершить?"
+          buttons={[
+            {
+              text: 'Завершить',
+              role: 'destructive',
+              data: {
+                action: 'close',
+              },
+            },
+            {
+              text: 'Отменить',
+              role: 'cancel',
+              data: {
+                action: 'cancel',
+              },
+            },
+          ]}
+          onDidDismiss={(event) => {
+            if (event.detail.data.action === 'close') {
+              handleFinishClick();
+            }
+          }}
+        ></IonActionSheet>
     </ScreenLayout>
   );
 };

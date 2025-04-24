@@ -5,15 +5,18 @@ import { useTimer } from './useTimer';
 import { useHistory } from 'react-router';
 import { Answer } from '../types/common.types';
 import { combineTasksWithAnswers } from '../utils/combineTasksWithAnswers';
+import { useUserStore } from '../store/userStore';
 
 export const useMathTasks = () => {
-    const history = useHistory();
     const [tasks, setTasks] = useState<MathTaskDto[]>([]);
     const [difficulties, setDifficulties] = useState<string[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [answers, setAnswers] = useState<Answer[]>([]);
     const [difficulty, setDifficulty] = useState<string>('easy');
+
+    const history = useHistory();
+    const userId = useUserStore((state) => state.userId);
 
     useEffect(() => {
         if (tasks.length > 0 && answers.length === tasks.length) {
@@ -58,7 +61,7 @@ export const useMathTasks = () => {
 
         const data = await ApiService.saveResult({
             tasks: resultForSave,
-            userId: '1',
+            userId: userId || 'common',
             time: getTime(),
             difficulty
         });

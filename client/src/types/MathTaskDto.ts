@@ -21,3 +21,20 @@ export type SaveResultDto = {
     time: number;
     difficulty: string;
 }
+
+export type ResultDto = {
+    id: string;
+    userId: string;
+    tasks: MathTaskResultDto[];
+    time: number;
+    difficulty: string;
+    createdAt: string;
+}
+
+export type ResultListDto = {
+    taskCount: number;
+    time: number;
+    difficulty: string;
+    date: string;
+    id: string;
+}

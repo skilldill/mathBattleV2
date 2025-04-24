@@ -1,19 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useUserStore } from "../store/userStore";
 
-type UserInfo = {
-    userId: string;
-    userName: string;
-}
 
 export const useTgUserInfo = () => {
-    const [userInfo, setUserInfo] = useState<UserInfo>();
+    const { setUserData } = useUserStore()
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const userId = params.get('u91x');
         const userName = params.get('x_3z9');
-        setUserInfo({ userId: userId ?? '', userName: userName ?? '' });
+        
+        if (userId && userName) {
+            setUserData(userName, userId);
+        }
     }, []);
-
-    return { userInfo }
 }

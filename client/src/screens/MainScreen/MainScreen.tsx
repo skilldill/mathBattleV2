@@ -5,7 +5,9 @@ import { useState } from 'react';
 import { AboutScreen } from '../AboutScreen/AboutScreen';
 import { SettingsTasksScreen } from '../SettingsTasksScreen/SettingsTasksScreen';
 import { useHistory } from 'react-router-dom';
-import { useTgUserInfo } from '../../hooks/useTgUserInfo';
+import { useUserStore } from '../../store/userStore';
+
+
 const MODAL_SCREENS = {
     aboutScreen: () => <AboutScreen />,
     settingsScreen: () => <SettingsTasksScreen />,
@@ -16,13 +18,14 @@ export const MainScreen: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const renderModalScreen = MODAL_SCREENS[modalScreen];
     const history = useHistory();
-    const { userInfo } = useTgUserInfo();
+    const userName = useUserStore((state) => state.userName);
 
     const openModal = (screen: keyof typeof MODAL_SCREENS) => {
         setModalScreen(screen);
         setIsModalOpen(true);
     }
 
+    // Может понадобится для открытия экрана с технической поддержкой
     const openTechDevScreen = () => {
         history.push('/tech-dev');
     }
@@ -35,7 +38,7 @@ export const MainScreen: React.FC = () => {
             <IonImg src={MathBattleCoverPng} />
             <IonText>
                 <h2>
-                    Привет, {userInfo?.userName || 'математик'}!
+                    Привет, {userName || 'математик'}!
                 </h2>
             </IonText>
             <ColumnLayout withPadding>
@@ -45,7 +48,6 @@ export const MainScreen: React.FC = () => {
                 <IonButton color="success" size='large' onClick={() => openModal('aboutScreen')}>
                     О проекте
                 </IonButton>
-                <IonButton fill="clear" color="warning" size='large' onClick={openTechDevScreen}>Тех. данные</IonButton>
             </ColumnLayout>
 
             <IonModal isOpen={isModalOpen} onDidDismiss={() => setIsModalOpen(false)}>

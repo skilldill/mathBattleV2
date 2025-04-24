@@ -30,21 +30,26 @@ import '@ionic/react/css/palettes/dark.always.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { useTgUserInfo } from './hooks/useTgUserInfo';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <Router>
-      <Switch>
-        <Route path="/puzzles" component={PuzzlesScreen} />
-        <Route path="/profile-statistics" component={ProfileStatisticsScreen} />
-        <Route path="/puzzles-result/:id" component={PuzzlesResultScreen} />
-        <Route path="/tech-dev" component={TechDevScreen} />
-        <Route path="/" component={MainScreen} />
-      </Switch>
-    </Router>
-  </IonApp>
-);
+const App: React.FC = () => {
+  useTgUserInfo();
+
+  return (
+    <IonApp>
+      <Router>
+        <Switch>
+          <Route path="/puzzles" component={PuzzlesScreen} />
+          <Route path="/profile-statistics" component={ProfileStatisticsScreen} />
+          <Route path="/puzzles-result/:id" component={PuzzlesResultScreen} />
+          <Route path="/tech-dev" component={TechDevScreen} />
+          <Route path="/" component={MainScreen} />
+        </Switch>
+      </Router>
+    </IonApp>
+  );
+};
 
 export default App;

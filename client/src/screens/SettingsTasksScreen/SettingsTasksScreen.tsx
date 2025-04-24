@@ -1,27 +1,24 @@
-import { ColumnLayout } from "../../components";
-import { IonText, IonButton } from "@ionic/react";
+import { ColumnLayout, TasksSetting } from "../../components";
+import { IonButton } from "@ionic/react";
 import { useHistory } from "react-router-dom";
+import { useTasksStore } from "../../store/tasksStore";
 
 export const SettingsTasksScreen: React.FC = () => {
+  const { count, difficulty, setCreateParams } = useTasksStore();
   const history = useHistory();
+
+  const handleClick = (count: number, difficulty: string) => {
+    setCreateParams(count, difficulty);
+  }
+
+  const handleStart = () => {
+    history.push('/puzzles');
+  }
 
   return (
     <ColumnLayout withPadding>
-      <IonText>
-        <h1>Проверь свои <br /> математические способности!</h1>
-      </IonText>
-      <IonText>
-        <p>🔥 Готов прокачать свои мозги? Сейчас я закину тебе 20 бодрых математических примеров!</p>
-        <p>
-          Твоя задача — решить их как можно быстрее.
-
-          Когда закончишь — я сразу выдам тебе результат: сколько правильных и за сколько времени ты справился.
-        </p>
-        <p>
-          💥 Если ты готов — жми “Полетели!”
-        </p>
-      </IonText>
-      <IonButton size="large" onClick={() => history.push('/puzzles')}>
+      <TasksSetting onClick={handleClick} />
+      <IonButton size="large" onClick={handleStart} disabled={!count || !difficulty}>
         Полетели!
       </IonButton>
     </ColumnLayout>
