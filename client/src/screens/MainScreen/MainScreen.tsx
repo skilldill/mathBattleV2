@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { AboutScreen } from '../AboutScreen/AboutScreen';
 import { SettingsTasksScreen } from '../SettingsTasksScreen/SettingsTasksScreen';
 import { useHistory } from 'react-router-dom';
-
+import { useTgUserInfo } from '../../hooks/useTgUserInfo';
 const MODAL_SCREENS = {
     aboutScreen: () => <AboutScreen />,
     settingsScreen: () => <SettingsTasksScreen />,
@@ -16,6 +16,8 @@ export const MainScreen: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const renderModalScreen = MODAL_SCREENS[modalScreen];
     const history = useHistory();
+    const { userInfo } = useTgUserInfo();
+
     const openModal = (screen: keyof typeof MODAL_SCREENS) => {
         setModalScreen(screen);
         setIsModalOpen(true);
@@ -33,7 +35,7 @@ export const MainScreen: React.FC = () => {
             <IonImg src={MathBattleCoverPng} />
             <IonText>
                 <h2>
-                    Привет, 'математик!
+                    Привет, {userInfo?.userName || 'математик'}!
                 </h2>
             </IonText>
             <ColumnLayout withPadding>
