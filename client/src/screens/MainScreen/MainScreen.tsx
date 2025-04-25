@@ -56,7 +56,7 @@ export const MainScreen: React.FC = () => {
                     <ColumnLayout withPadding style={{ backgroundColor: '#000000', height: '100%' }}>
                         {renderModalScreen()}
                         <Button variant='clear' onClick={() => setIsModalOpen(false)}>
-                            Закрыть
+                            На главную
                         </Button>
                     </ColumnLayout>
                 </IonContent>

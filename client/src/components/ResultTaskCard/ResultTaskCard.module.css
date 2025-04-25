@@ -1,0 +1,31 @@
+.taskDescription {
+    font-size: 40px;
+    font-weight: 600;
+    color: #ffffffaa;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.taskAnswer {
+    font-size: 20px;
+    font-weight: 500;
+    color: #ffffffdd;
+    margin: 0;
+    padding: 0;
+}
+
+.taskTime {
+    font-size: 20px;
+    font-weight: 500;
+    color: #ffffffaa;
+    margin: 0;
+    padding: 0;
+}
+
+.errorAnswer {
+    color: #ff0000aa;
+}
+
+.successAnswer {
+    color: #4caf50dd;
+}

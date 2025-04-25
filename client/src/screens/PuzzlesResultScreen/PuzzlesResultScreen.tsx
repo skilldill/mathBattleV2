@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { IonSpinner, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonChip } from "@ionic/react";
 import { VerticalCenterLayout } from "../../components/VerticalCenterLayout/VerticalCenterLayout";
 import { Button } from "../../components/Button/Button";
+import { ResultTaskCard } from "../../components/ResultTaskCard/ResultTaskCard";
 
 export const PuzzlesResultScreen: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -26,22 +27,7 @@ export const PuzzlesResultScreen: React.FC = () => {
                     <ColumnLayout>
                         <h1>Результаты</h1>
                         {result.tasks.map((task) => (
-                            <IonCard key={task.task}>
-                                <IonCardHeader>
-                                    <IonCardTitle>{task.task}</IonCardTitle>
-                                </IonCardHeader>
-                                <IonCardContent>
-                                    <IonChip>
-                                        Ответ должен быть: {task.result}
-                                    </IonChip>
-                                    <IonChip color={task.result === task.answer ? 'success' : 'danger'}>
-                                        Твой ответ: {task.answer}
-                                    </IonChip>
-                                    <IonChip>
-                                        Время: {(task.time / 1000).toFixed(1)} секунд
-                                    </IonChip>
-                                </IonCardContent>
-                            </IonCard>
+                            <ResultTaskCard key={task.task} task={task} />
                         ))}
                     </ColumnLayout>
                 )}
