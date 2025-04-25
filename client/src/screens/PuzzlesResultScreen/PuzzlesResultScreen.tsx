@@ -2,8 +2,9 @@ import { ColumnLayout, ScreenLayout } from "../../components";
 import { useHistory, useParams } from "react-router";
 import { useResults } from "../../hooks/useResults";
 import { useEffect } from "react";
-import { IonSpinner, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonChip, IonButton } from "@ionic/react";
+import { IonSpinner, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonChip } from "@ionic/react";
 import { VerticalCenterLayout } from "../../components/VerticalCenterLayout/VerticalCenterLayout";
+import { Button } from "../../components/Button/Button";
 
 export const PuzzlesResultScreen: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -44,7 +45,7 @@ export const PuzzlesResultScreen: React.FC = () => {
                         ))}
                     </ColumnLayout>
                 )}
-                <IonButton onClick={() => history.push('/')}>На главную</IonButton>
+                <Button onClick={() => history.push('/')}>На главную</Button>
             </ColumnLayout>
         </ScreenLayout>
     );

@@ -1,4 +1,5 @@
 import { MathTaskDto } from "../../types/MathTaskDto";
+import { Button } from "../Button/Button";
 import { ColumnLayout } from "../ColumnLayout/ColumnLayout";
 import styles from './MathTaskCard.module.css';
 import { IonButton, IonText } from "@ionic/react";
@@ -21,7 +22,9 @@ export const MathTaskCard: React.FC<MathTaskCardProps> = ({ task, onVariantClick
                 </IonText>
                 <div className={styles.variants}>
                     {task.variants.map((variant) => (
-                        <IonButton size="large" key={variant} onClick={() => handleVariantClick(variant)}>{variant}</IonButton>
+                        <Button key={variant} onClick={() => handleVariantClick(variant)}>
+                            {variant}
+                        </Button>
                     ))}
                 </div>
             </ColumnLayout>

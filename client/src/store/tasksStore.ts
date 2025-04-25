@@ -1,13 +1,13 @@
 import { create } from "zustand";
 
 type TasksStore = {
-    count: number;
-    difficulty: string;
+    count: number | undefined;
+    difficulty: string | undefined;
     setCreateParams: (count: number, difficulty: string) => void;
 }
 
 export const useTasksStore = create<TasksStore>((set) => ({
-    count: 20,
-    difficulty: 'combo',
+    count: undefined,
+    difficulty: undefined,
     setCreateParams: (count: number, difficulty: string) => set({ count, difficulty }),
 }));

@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonImg, IonText, IonModal, useIonModal } from '@ionic/react';
+import { IonContent, IonImg, IonText, IonModal } from '@ionic/react';
 import MathBattleCoverPng from '../../assets/MathBattleCover.png';
 import { ColumnLayout, ScreenLayout } from '../../components';
 import { useState } from 'react';
@@ -6,6 +6,7 @@ import { AboutScreen } from '../AboutScreen/AboutScreen';
 import { SettingsTasksScreen } from '../SettingsTasksScreen/SettingsTasksScreen';
 import { useHistory } from 'react-router-dom';
 import { useUserStore } from '../../store/userStore';
+import { Button } from '../../components/Button/Button';
 
 
 const MODAL_SCREENS = {
@@ -42,21 +43,21 @@ export const MainScreen: React.FC = () => {
                 </h2>
             </IonText>
             <ColumnLayout withPadding>
-                <IonButton size='large' onClick={() => openModal('settingsScreen')}>
+                <Button onClick={() => openModal('settingsScreen')}>
                     Проверить себя
-                </IonButton>
-                <IonButton color="success" size='large' onClick={() => openModal('aboutScreen')}>
+                </Button>
+                <Button variant='outline' onClick={() => openModal('aboutScreen')}>
                     О проекте
-                </IonButton>
+                </Button>
             </ColumnLayout>
 
             <IonModal isOpen={isModalOpen} onDidDismiss={() => setIsModalOpen(false)}>
                 <IonContent>
                     <ColumnLayout withPadding>
                         {renderModalScreen()}
-                        <IonButton onClick={() => setIsModalOpen(false)} size='large' color='primary' fill='clear'>
+                        <Button variant='clear' onClick={() => setIsModalOpen(false)}>
                             Закрыть
-                        </IonButton>
+                        </Button>
                     </ColumnLayout>
                 </IonContent>
             </IonModal>

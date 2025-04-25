@@ -1,14 +1,14 @@
 .progressBar {
     width: 100%;
     height: 24px;
-    background-color: #e0e0e0;
+    background: linear-gradient(135deg, #a5a5a52d, #b0b0b066);
     border-radius: 10px;
     overflow: hidden;
 }
 
 .progressBarIndicator {
     height: 100%;
-    background-color: #007bff;
+    background: linear-gradient(135deg, #10b9812d, #10b98166);
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
     transition: width 0.3s ease-in-out;

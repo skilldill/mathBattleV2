@@ -7,11 +7,11 @@ import { MathTaskCard } from '../../components/MathTaskCard/MathTaskCard';
 import { useHistory } from 'react-router';
 import { useTimer } from '../../hooks/useTimer';
 import { useTasksStore } from '../../store/tasksStore';
-
+import { Button } from '../../components/Button/Button';
 
 export const PuzzlesScreen: React.FC = () => {
   const [currentTaskId, setCurrentTaskId] = useState<number>(0);
-
+  const [isActionSheetOpen, setIsActionSheetOpen] = useState<boolean>(false);
   const { fetchTasks, loading, tasks, checkAnswer, saveResult } = useMathTasks();
   const history = useHistory();
   const { count, difficulty } = useTasksStore();
@@ -38,16 +38,13 @@ export const PuzzlesScreen: React.FC = () => {
     });
   }
 
-  const handleFinishClick = () => {
-    // history.push('/results');
-    // Добавь предупреждение о том, что нужно завершить задачу
-    // Можно добавить action sheet с вопросом "Вы уверены, что хотите завершить задачу?"
-    // Если пользователь нажмет "Да", то переходим на главную страницу
-    // Если пользователь нажмет "Нет", то ничего не делаем
-    // Можно добавить action sheet с вопросом "Вы уверены, что хотите завершить задачу?"
-    // Если пользователь нажмет "Да", то переходим на главную страницу
-    // Если пользователь нажмет "Нет", то ничего не делаем
-    history.push('/');
+  const handleActionClick = (event: any) => {
+    if (event.detail.data.action === 'close') {
+      history.push('/');
+    }
+    if (event.detail.data.action === 'cancel') {
+      setIsActionSheetOpen(false);
+    }
   }
 
   return (
@@ -63,10 +60,10 @@ export const PuzzlesScreen: React.FC = () => {
           </ColumnLayout>
         )}
         <ColumnLayout withPadding>
-          <IonButton size="large" fill="clear" color='danger' id="open-action-sheet">Завершить</IonButton>
+          <Button variant='outline' color='danger' onClick={() => setIsActionSheetOpen(true)}>Завершить</Button>
         </ColumnLayout>
         <IonActionSheet
-          trigger="open-action-sheet"
+          isOpen={isActionSheetOpen}
           header="Результаты не сохранятся, точно хотите завершить?"
           buttons={[
             {
@@ -77,18 +74,15 @@ export const PuzzlesScreen: React.FC = () => {
               },
             },
             {
-              text: 'Отменить',
+              text: 'Продолжить решать примеры',
               role: 'cancel',
               data: {
                 action: 'cancel',
               },
             },
           ]}
-          onDidDismiss={(event) => {
-            if (event.detail.data.action === 'close') {
-              handleFinishClick();
-            }
-          }}
+          onDidDismiss={handleActionClick}
+          onWillDismiss={() => setIsActionSheetOpen(false)}
         ></IonActionSheet>
     </ScreenLayout>
   );

@@ -2,6 +2,7 @@ import { ColumnLayout, TasksSetting } from "../../components";
 import { IonButton } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useTasksStore } from "../../store/tasksStore";
+import { Button } from "../../components/Button/Button";
 
 export const SettingsTasksScreen: React.FC = () => {
   const { count, difficulty, setCreateParams } = useTasksStore();
@@ -16,11 +17,11 @@ export const SettingsTasksScreen: React.FC = () => {
   }
 
   return (
-    <ColumnLayout withPadding>
+    <ColumnLayout>
       <TasksSetting onClick={handleClick} />
-      <IonButton size="large" onClick={handleStart} disabled={!count || !difficulty}>
+      <Button color='success' onClick={handleStart} disabled={!count || !difficulty}>
         Полетели!
-      </IonButton>
+      </Button>
     </ColumnLayout>
   );
 };
