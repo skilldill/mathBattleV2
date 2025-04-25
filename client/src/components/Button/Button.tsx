@@ -14,6 +14,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
             className={cn(styles.button, styles[variant], styles[color], {
                 [styles.disabled]: disabled
             })} 
+            disabled={disabled}
             {...rest}
         >
             {children}
