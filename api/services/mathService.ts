@@ -5,9 +5,9 @@ export const MATH_DIVISION = '/';
 
 export const SIMPLE_ACTIONS_NAMES_LIST = ['plus', 'minus'];
 export const ALL_ACTIONS_NAMES_LIST = ['plus', 'minus', 'multiply', 'divide'];
-type Difficulty = 'easy' | 'medium' | 'hard' | 'combo';
+type Difficulty = 'easy' | 'medium' | 'hard' | 'combo' | 'easy-light';
 
-export const DIFFICULTIES_LIST = ['easy', 'medium', 'hard', 'combo'];
+export const DIFFICULTIES_LIST = ['easy', 'medium', 'hard', 'combo', 'easy-light'];
 
 export const SYMBOLS_ACTIONS_MAP: Record<string, string> = {
     plus: MATH_PLUS,
@@ -80,29 +80,29 @@ export class MathTasksService {
         const variants: number[] = [NaN, NaN, NaN, NaN];
         const resultIndex = getRandomPositiveInt(variants.length - 1);
         variants[resultIndex] = result;
-    
+
         for (let i = 0; i < variants.length; i++) {
             if (!isNaN(variants[i])) continue;
-    
+
             let delta = getRandomPositiveInt(10) - 5;
             if (isDecimal) {
                 delta += Math.random();
-                delta = parseFloat(delta.toFixed(2)); // округляем дельту, чтобы она тоже выглядела "красиво"
+                delta = parseFloat(delta.toFixed(2));
             }
-    
+
             let variant = result + delta;
             variant = parseFloat(variant.toFixed(2));
-    
+
             variant = getRandomPositiveIfNotIn(variants, Math.abs(Math.round(variant)));
-    
+
             if (isDecimal) {
                 variant += Math.random();
                 variant = parseFloat(variant.toFixed(2));
             }
-    
+
             variants[i] = variant;
         }
-    
+
         return variants;
     }
 
@@ -188,7 +188,6 @@ export class MathTasksService {
             return tasks;
         }
 
-        // Конкретные уровни
         switch (difficulty) {
             case 'easy':
                 for (let i = 0; i < tasksCount; i++) {
@@ -203,6 +202,15 @@ export class MathTasksService {
             case 'hard':
                 for (let i = 0; i < tasksCount; i++) {
                     tasks.push(createTask(4, 20, ALL_ACTIONS_NAMES_LIST));
+                }
+                break;
+            case 'easy-light':
+                for (let i = 0; i < tasksCount; i++) {
+                    let task;
+                    do {
+                        task = createTask(2, 30, SIMPLE_ACTIONS_NAMES_LIST);
+                    } while (task.result < 0 || task.result > 30);
+                    tasks.push(task);
                 }
                 break;
         }

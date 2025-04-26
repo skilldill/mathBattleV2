@@ -18,16 +18,16 @@ export const TasksSetting: React.FC<TaskSettingProps> = ({ onClick }) => {
     return (
         <ColumnLayout>
             <IonText>
-                <h4>{selectedDifficulty ? `Выбрано: ${selectedDifficulty}` : 'Выбери сложность 👇'}</h4>
+                <h4>{selectedDifficulty ? selectedDifficulty : 'Выбери сложность 👇'}</h4>
             </IonText>
-            <Button onClick={() => handleClick(10, 'easy', 'Малыш 👶')}>
+            <Button onClick={() => handleClick(10, 'easy-light', 'Малыш 👶')}>
                 👶 Малыш - 10 примеров 
             </Button>
-            <Button onClick={() => handleClick(10, 'medium', 'Школьник 👦')}>
+            <Button onClick={() => handleClick(10, 'easy', 'Школьник 👦')}>
                 👦 Школьник - 10 примеров
             </Button>
-            <Button onClick={() => handleClick(10, 'hard', 'Студент 👨‍🎓')}>
-                👨‍🎓 Студент - 10 примеров
+            <Button onClick={() => handleClick(15, 'medium', 'Студент 👨‍🎓')}>
+                👨‍🎓 Студент - 15 примеров
             </Button>
             <Button onClick={() => handleClick(20, 'combo', 'Ниндзя 🥷')}>
                 🥷 Ниндзя - 20 примеров, от простых до сложных

@@ -1,10 +1,10 @@
 import React from 'react';
-import { ScreenLayout } from '../../components';
+import { ColumnLayout, ScreenLayout } from '../../components';
 import { IonImg } from '@ionic/react';
 import MathBattleCoverPng from '../../assets/MathBattleCover.png';
 export const AboutScreen: React.FC = () => {
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       <h1>О проекте</h1>
       <IonImg src={MathBattleCoverPng} />
       <p>🎯 <strong>MathBattle — это больше, чем просто математика!</strong><br/>
