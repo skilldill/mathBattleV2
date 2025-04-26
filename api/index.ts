@@ -38,6 +38,21 @@ app.post('/api/result', async ({ body }) => {
   return { id: savedResult.id };
 })
 
+app.post('/api/result-rating', async ({ body }) => {
+  const { tasks, time, userId, difficulty } = body;
+  console.log(tasks, time, userId, difficulty);
+  const result = new ResultModel({
+    tasks,
+    time,
+    userId,
+    difficulty,
+    isRating: true
+  });
+  const savedResult = await result.save();
+
+  return { id: savedResult.id };
+})
+
 app.get('/api/result/:id', async ({ params }) => {
   const { id } = params;
   const result = await ResultModel.findById(id);

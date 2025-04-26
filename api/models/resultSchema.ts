@@ -21,6 +21,7 @@ const TaskSchema = new mongoose.Schema({
 
 const ResultSchema = new mongoose.Schema({
   userId: { type: String, required: true },
+  isRating: { type: Boolean, required: true, default: false },
   tasks: { type: [TaskSchema], required: true },
   time: { type: Number, required: true }, // Общее время сессии
   difficulty: { type: String, required: true }, // Например: "easy", "medium", "hard"
