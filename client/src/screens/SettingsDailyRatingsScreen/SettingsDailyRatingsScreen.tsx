@@ -5,7 +5,8 @@ import { Button } from '../../components/Button/Button';
 import { useTasksStore } from '../../store/tasksStore';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import { VerticalCenterLayout } from '../../components/VerticalCenterLayout/VerticalCenterLayout';
+import { IonText } from '@ionic/react';
 export const SettingsDailyRatingsScreen: React.FC = () => {
     const { setCreateParams } = useTasksStore();
     const history = useHistory();
@@ -21,6 +22,9 @@ export const SettingsDailyRatingsScreen: React.FC = () => {
             <div>
                 <h1>{t('settingRatingGameScreenTitle')}</h1>
             </div>
+            <IonText>
+                <p>{t('ratingGameDescription')}</p>
+            </IonText>
             <Button onClick={handleStart}>
                 {t('ratingGameStartButtonText')}
             </Button>

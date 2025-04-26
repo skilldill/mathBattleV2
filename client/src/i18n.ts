@@ -5,12 +5,9 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 const resources = {
   en: {
     translation: {
-      settingRatingGameScreenTitle: '🏆 Rating Game',
-      ratingGameStartButtonText: '🏆 To the top of the leaderboard!',
-      topMathematiciansRatingTitle: 'Top Mathematicians 👩‍🎓',
-      topMathematiciansRatingContent: 'The leaderboard will be here soon...',
       finish: 'Finish',
       actionSheetFinishTitle: 'Are you sure you want to finish the game without saving your results?',
+      defaultUsername: 'математик',
       mathBattle: 'Math Battle',
       statistics: 'Statistics',
       results: 'Results',
@@ -25,23 +22,42 @@ const resources = {
       studentStatus: '👨‍🎓 Student',
       ninjaStatus: '🥷 Ninja',
       greeting: 'Hello, {{userName}}!',
-      ratingGame: 'Rating Game',
+      
       checkYourself: 'Check Yourself',
       leaderboard: 'Leaderboard',
       continueSolving: 'Continue solving exercises',
       solvingExercisesTitle: 'Solving exercises',
       startTrainingGame: 'Let\'s go!',
+
+      // Rating game
+      settingRatingGameScreenTitle: '🏆 Rating Game',
+      ratingGameStartButtonText: '🏆 To the top of the leaderboard!',
+      topMathematiciansRatingTitle: 'Top Mathematicians 👩‍🎓',
+      ratingGame: 'Rating Game',
+      topMathematiciansRatingContent: 'The leaderboard will be here soon...',
+      ratingGameDescription: '20 exercises with different difficulty, from easy to really tough. Your goal: solve the examples as fast as you can, but don\'t forget about accuracy!',
+
+      // Result card
+      resultCardTotalExercisesFieldTitle: 'Total exercises',
+      resultCardCorrectAnswersFieldTitle: 'Correct answers',
+      resultCardIncorrectAnswersFieldTitle: 'Incorrect answers',
+      resultCardAccuracyFieldTitle: 'Accuracy',
+      resultCardTotalTimeFieldTitle: 'Total time',
+      resultCardAverageTimeFieldTitle: 'Average time',
+      resultCardAnswerFieldTitle: 'Your answer',
+      resultCardTimeFieldTitle: 'Time', 
+      // units
+      timeSecondsUnit: 'sec',
+      timeMinutesUnit: 'min',
+      timeHoursUnit: 'h',
     }
   },
   ru: {
     translation: {
-      settingRatingGameScreenTitle: '🏆 Рейтинговая игра',
-      ratingGameStartButtonText: '🏆 На вершину рейтинга!',
-      topMathematiciansRatingTitle: 'Топ математиков 👩‍🎓',
-      topMathematiciansRatingContent: 'Скоро здесь будет таблица лидеров...',
+      
       finish: 'Завершить',
       actionSheetFinishTitle: 'Ты уверен, что хочешь завершить игру без сохранения результатов?',
-
+      defaultUsername: 'математик',
       mathBattle: 'Math Battle',
       statistics: 'Статистика',
       results: 'Результаты',
@@ -56,12 +72,34 @@ const resources = {
       studentStatus: '👨‍🎓 Студент',
       ninjaStatus: '🥷 Ниндзя',
       greeting: 'Привет, {{userName}}!',
-      ratingGame: 'Рейтинговая игра',
+      
       checkYourself: 'Проверить себя',
       leaderboard: 'Таблица лидеров',
       continueSolving: 'Продолжить решать примеры',
       solvingExercisesTitle: 'Решение примеров',
       startTrainingGame: 'Полетели!',
+
+      // Rating game
+      settingRatingGameScreenTitle: '🏆 Рейтинговая игра',
+      ratingGameStartButtonText: '🏆 На вершину рейтинга!',
+      topMathematiciansRatingContent: 'Скоро здесь будет таблица лидеров...',
+      ratingGame: 'Рейтинговая игра',
+      topMathematiciansRatingTitle: 'Топ математиков 👩‍🎓',
+      ratingGameDescription: '20 примеров с разной сложностью, от простых до сложных. Твоя цель: решить примеры как можно быстрее, но не забывай про точность!',
+
+      // Result card
+      resultCardTotalExercisesFieldTitle: 'Всего примеров',
+      resultCardCorrectAnswersFieldTitle: 'Правильно решено',
+      resultCardIncorrectAnswersFieldTitle: 'Неправильно решено',
+      resultCardTotalTimeFieldTitle: 'Время решения',
+      resultCardAverageTimeFieldTitle: 'Среднее время',
+      resultCardAnswerFieldTitle: 'Твой ответ',
+      resultCardTimeFieldTitle: 'Время выполнения',
+
+      // units
+      timeSecondsUnit: 'сек',
+      timeMinutesUnit: 'мин',
+      timeHoursUnit: 'ч',
     }
   }
 };
@@ -73,7 +111,6 @@ i18n
     debug: true,
     resources,
     fallbackLng: 'en',
-    lng: 'ru',
     detection: {
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'],

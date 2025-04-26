@@ -44,7 +44,7 @@ export const MainScreen: React.FC = () => {
             <IonImg src={MathBattleCoverPng} />
             <IonText>
                 <h2>
-                    {t('greeting', { userName: userName || t('mathematician') })}
+                    {t('greeting', { userName: userName || t('defaultUsername') })}
                 </h2>
             </IonText>
 
