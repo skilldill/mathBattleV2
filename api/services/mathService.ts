@@ -76,17 +76,33 @@ export type MathTask = {
 
 export class MathTasksService {
     getResultVariants(result: number): number[] {
+        const isDecimal = result % 1 !== 0;
         const variants: number[] = [NaN, NaN, NaN, NaN];
         const resultIndex = getRandomPositiveInt(variants.length - 1);
         variants[resultIndex] = result;
-
+    
         for (let i = 0; i < variants.length; i++) {
             if (!isNaN(variants[i])) continue;
-
-            const delta = getRandomPositiveInt(10) - 5;
-            variants[i] = getRandomPositiveIfNotIn(variants, result + delta);
+    
+            let delta = getRandomPositiveInt(10) - 5;
+            if (isDecimal) {
+                delta += Math.random();
+                delta = parseFloat(delta.toFixed(2)); // округляем дельту, чтобы она тоже выглядела "красиво"
+            }
+    
+            let variant = result + delta;
+            variant = parseFloat(variant.toFixed(2));
+    
+            variant = getRandomPositiveIfNotIn(variants, Math.abs(Math.round(variant)));
+    
+            if (isDecimal) {
+                variant += Math.random();
+                variant = parseFloat(variant.toFixed(2));
+            }
+    
+            variants[i] = variant;
         }
-
+    
         return variants;
     }
 
@@ -148,8 +164,6 @@ export class MathTasksService {
             variants,
         };
     }
-
-
 
     getTasksList(tasksCount: number, difficulty: Difficulty = 'combo'): MathTask[] {
         const tasks: MathTask[] = [];
