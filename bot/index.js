@@ -4,7 +4,7 @@ const { START_MESSAGE_MAP, QUESTION_MESSAGE_MAP, BUTTON_MESSAGE_MAP, MESSAGE_BUT
 config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
-
+const ADMIN_ID = process.env.ADMIN_ID;
 
 const getUrlWebApp = (userId, username) => `https://app.math-battle.ru?u91x=${userId}&x_3z9=${username}`;
 
@@ -21,6 +21,13 @@ bot.start((ctx) => {
       resize_keyboard: true
     }
   })
+
+  if (ADMIN_ID) {
+    bot.telegram.sendMessage(
+      ADMIN_ID,
+      `Новый пользователь подключился! 👨‍🎓\nИмя: ${ctx.from.first_name || ''} ${ctx.from.last_name || ''}\nUsername: @${ctx.from.username || 'нет'}\nID: ${ctx.from.id}`
+    );
+  }
 
   setTimeout(() => {
     const questionMessage = QUESTION_MESSAGE_MAP[ctx.from.language_code] || QUESTION_MESSAGE_MAP['en'];
