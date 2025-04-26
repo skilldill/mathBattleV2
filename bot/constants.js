@@ -35,22 +35,18 @@ const START_MESSAGE_MAP = {
     'en': START_MESSAGE_EN,
 }
 
-const QUESTION_MESSAGE_RU = `
-А ты точно математик? Сколько будет 2 + 2 * 2?`;
+const QUESTION_MESSAGE_RU = `А ты точно математик? Сколько будет 2 + 2 * 2?`;
 
-const QUESTION_MESSAGE_EN = `
-Are you a true mathematician? How much is 2 + 2 * 2?`;
+const QUESTION_MESSAGE_EN = `Are you a true mathematician? How much is 2 + 2 * 2?`;
 
 const QUESTION_MESSAGE_MAP = {
     'ru': QUESTION_MESSAGE_RU,
     'en': QUESTION_MESSAGE_EN,
 }
 
-const BUTTON_MESSAGE_RU = `
-🔥 Доказать, кто тут математик!`;
+const BUTTON_MESSAGE_RU = `🔥 Доказать, кто тут математик!`;
 
-const BUTTON_MESSAGE_EN = `
-🔥 Prove who is the true mathematician!`;
+const BUTTON_MESSAGE_EN = `🔥 Prove who is the true mathematician!`;
 
 const BUTTON_MESSAGE_MAP = {
     'ru': BUTTON_MESSAGE_RU,
