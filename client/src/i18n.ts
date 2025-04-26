@@ -36,9 +36,9 @@ const resources = {
       ratingGame: 'Rating Game',
       topMathematiciansRatingContent: '🛠 The leaderboard will be here soon...',
       ratingGameDescription: [
-        '🛠 In development... You can solve examples, but the results will be later.',
-        '20 exercises with different difficulty, from easy to really tough. Your goal: solve the examples as fast as you can, but don\'t forget about accuracy!',
-        '⚠️ If you play for the first time, try to solve the examples from "Check Yourself" first. ⚠️',
+        '🛠 In development... You can solve exercises, but the results will be later.',
+        '20 exercises with different difficulty, from easy to really tough. Your goal: solve the exercises as fast as you can, but don\'t forget about accuracy!',
+        '⚠️ If you play for the first time, try to solve the exercises from "Check Yourself" first. ⚠️',
       ],
 
       // Result card
