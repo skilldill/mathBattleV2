@@ -1,5 +1,4 @@
 import { ColumnLayout, TasksSetting } from "../../components";
-import { IonButton } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useTasksStore } from "../../store/tasksStore";
 import { Button } from "../../components/Button/Button";
@@ -7,7 +6,7 @@ import { useState } from "react";
 
 export const SettingsTasksScreen: React.FC = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState(false);
-  const { count, difficulty, setCreateParams } = useTasksStore();
+  const { setCreateParams } = useTasksStore();
   const history = useHistory();
 
   const handleClick = (count: number, difficulty: string) => {

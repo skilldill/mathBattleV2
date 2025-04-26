@@ -41,7 +41,8 @@ const App: React.FC = () => {
     <IonApp>
       <Router>
         <Switch>
-          <Route path="/puzzles" component={PuzzlesScreen} />
+          <Route path="/puzzles" component={() => <PuzzlesScreen isRating={false} />} />
+          <Route path="/puzzles-rating" component={() => <PuzzlesScreen isRating={true} />} />
           <Route path="/profile-statistics" component={ProfileStatisticsScreen} />
           <Route path="/puzzles-result/:id" component={PuzzlesResultScreen} />
           <Route path="/tech-dev" component={TechDevScreen} />

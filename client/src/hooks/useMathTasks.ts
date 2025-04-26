@@ -14,13 +14,13 @@ export const useMathTasks = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [answers, setAnswers] = useState<Answer[]>([]);
     const [difficulty, setDifficulty] = useState<string>('easy');
-
+    const [isRating, setIsRating] = useState<boolean>(false);
     const history = useHistory();
     const userId = useUserStore((state) => state.userId);
 
     useEffect(() => {
         if (tasks.length > 0 && answers.length === tasks.length) {
-            saveResult();
+            saveResult(isRating);
         }
     }, [answers]);
 
@@ -54,16 +54,16 @@ export const useMathTasks = () => {
         setAnswers((answers) => [...answers, answer]);
     }
 
-    const saveResult = async () => {
+    const saveResult = async (isRating: boolean = false) => {
         setLoading(true);
-        console.log('answers in saveResult', answers.length);
         const resultForSave = combineTasksWithAnswers(tasks, answers);
 
         const data = await ApiService.saveResult({
             tasks: resultForSave,
             userId: userId || 'common',
             time: getTime(),
-            difficulty
+            difficulty,
+            isRating
         });
 
         try {
@@ -75,5 +75,5 @@ export const useMathTasks = () => {
         }
     }
 
-    return { tasks, difficulties, error, loading, fetchTasks, fetchDifficulties, checkAnswer, saveResult };
+    return { tasks, difficulties, error, loading, fetchTasks, fetchDifficulties, checkAnswer, saveResult, setIsRating };
 };

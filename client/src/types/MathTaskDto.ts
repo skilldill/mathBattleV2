@@ -20,6 +20,7 @@ export type SaveResultDto = {
     userId: string;
     time: number;
     difficulty: string;
+    isRating: boolean;
 }
 
 export type ResultDto = {

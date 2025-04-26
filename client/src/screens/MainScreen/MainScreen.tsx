@@ -7,11 +7,14 @@ import { SettingsTasksScreen } from '../SettingsTasksScreen/SettingsTasksScreen'
 import { useHistory } from 'react-router-dom';
 import { useUserStore } from '../../store/userStore';
 import { Button } from '../../components/Button/Button';
-
+import { SettingsDailyRatingsScreen } from '../SettingsDailyRatingsScreen/SettingsDailyRatingsScreen';
+import { RatingsScreen } from '../RatingsScreen/RatingsScreen';
 
 const MODAL_SCREENS = {
     aboutScreen: () => <AboutScreen />,
     settingsScreen: () => <SettingsTasksScreen />,
+    settingsDailyRatingsScreen: () => <SettingsDailyRatingsScreen />,
+    ratingsScreen: () => <RatingsScreen />,
 }
 
 export const MainScreen: React.FC = () => {
@@ -42,9 +45,16 @@ export const MainScreen: React.FC = () => {
                     Привет, {userName || 'математик'}!
                 </h2>
             </IonText>
+
             <ColumnLayout withPadding>
+                <Button color='success' onClick={() => openModal('settingsDailyRatingsScreen')}>
+                    Рейтинговая игра
+                </Button>
                 <Button onClick={() => openModal('settingsScreen')}>
                     Проверить себя
+                </Button>
+                <Button onClick={() => openModal('ratingsScreen')}>
+                    Таблица лидеров
                 </Button>
                 <Button variant='outline' onClick={() => openModal('aboutScreen')}>
                     О проекте

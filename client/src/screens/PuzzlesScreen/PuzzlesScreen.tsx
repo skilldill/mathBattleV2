@@ -9,10 +9,16 @@ import { useTimer } from '../../hooks/useTimer';
 import { useTasksStore } from '../../store/tasksStore';
 import { Button } from '../../components/Button/Button';
 
-export const PuzzlesScreen: React.FC = () => {
+
+type PuzzlesScreenProps = {
+  isRating: boolean;
+}
+
+export const PuzzlesScreen: React.FC<PuzzlesScreenProps> = ({ isRating }) => {
   const [currentTaskId, setCurrentTaskId] = useState<number>(0);
   const [isActionSheetOpen, setIsActionSheetOpen] = useState<boolean>(false);
-  const { fetchTasks, loading, tasks, checkAnswer, saveResult } = useMathTasks();
+
+  const { fetchTasks, loading, tasks, checkAnswer, setIsRating } = useMathTasks();
   const history = useHistory();
   const { count, difficulty } = useTasksStore();
   const { getTime, startTimer } = useTimer();
@@ -21,6 +27,11 @@ export const PuzzlesScreen: React.FC = () => {
     await fetchTasks(count, difficulty);
     startTimer();
   }
+
+  useEffect(() => {
+    setIsRating(isRating);
+    console.log('isRating', isRating);
+  }, [isRating]);
 
   useEffect(() => {
     tasksReady();
