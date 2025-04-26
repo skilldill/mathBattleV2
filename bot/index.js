@@ -1,6 +1,6 @@
 const { config } = require('dotenv');
 const { Telegraf } = require('telegraf');
-const { START_MESSAGE_MAP, QUESTION_MESSAGE_MAP, BUTTON_MESSAGE_MAP, MESSAGE_BUTTON_TEXT, MESSAGE_BUTTON_TEXT } = require('./constants');
+const { START_MESSAGE_MAP, QUESTION_MESSAGE_MAP, BUTTON_MESSAGE_MAP, MESSAGE_BUTTON_TEXT } = require('./constants');
 config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
