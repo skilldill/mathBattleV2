@@ -8,6 +8,7 @@ import { useHistory } from 'react-router';
 import { useTimer } from '../../hooks/useTimer';
 import { useTasksStore } from '../../store/tasksStore';
 import { Button } from '../../components/Button/Button';
+import { useTranslation } from 'react-i18next';
 
 
 type PuzzlesScreenProps = {
@@ -22,6 +23,7 @@ export const PuzzlesScreen: React.FC<PuzzlesScreenProps> = ({ isRating }) => {
   const history = useHistory();
   const { count, difficulty } = useTasksStore();
   const { getTime, startTimer } = useTimer();
+  const { t } = useTranslation();
 
   const tasksReady = async () => {
     await fetchTasks(count, difficulty);
@@ -59,7 +61,7 @@ export const PuzzlesScreen: React.FC<PuzzlesScreenProps> = ({ isRating }) => {
   }
 
   return (
-    <ScreenLayout title="Задачи">
+    <ScreenLayout title={t('solvingExercisesTitle')}>
       {loading ? (
         <VerticalCenterLayout>
           <IonSpinner></IonSpinner>
@@ -71,21 +73,21 @@ export const PuzzlesScreen: React.FC<PuzzlesScreenProps> = ({ isRating }) => {
           </ColumnLayout>
         )}
         <ColumnLayout withPadding>
-          <Button variant='outline' color='danger' onClick={() => setIsActionSheetOpen(true)}>Завершить</Button>
+          <Button variant='outline' color='danger' onClick={() => setIsActionSheetOpen(true)}>{t('finish')}</Button>
         </ColumnLayout>
         <IonActionSheet
           isOpen={isActionSheetOpen}
-          header="Результаты не сохранятся, точно хотите завершить?"
+          header={t('actionSheetFinishTitle')}
           buttons={[
             {
-              text: 'Завершить',
+              text: t('finish'),
               role: 'destructive',
               data: {
                 action: 'close',
               },
             },
             {
-              text: 'Продолжить решать примеры',
+              text: t('continueSolving'),
               role: 'cancel',
               data: {
                 action: 'cancel',

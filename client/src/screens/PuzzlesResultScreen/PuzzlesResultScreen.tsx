@@ -8,11 +8,13 @@ import { Button } from "../../components/Button/Button";
 import { ResultTaskCard } from "../../components/ResultTaskCard/ResultTaskCard";
 import { Block } from "../../components/Glass/Block";
 import { ResultSummary } from "../../components/ResultSummary/ResultSummary";
+import { useTranslation } from 'react-i18next';
 
 export const PuzzlesResultScreen: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const { result, loading, fetchResultById } = useResults();
     const history = useHistory();
+    const { t } = useTranslation();
 
     useEffect(() => {
         fetchResultById(id);
@@ -27,14 +29,14 @@ export const PuzzlesResultScreen: React.FC = () => {
                     </VerticalCenterLayout>
                 ) : (
                     <ColumnLayout>
-                        <h1>Результаты</h1>
+                        <h1>{t('results')}</h1>
                         <ResultSummary result={result} />
                         {result.tasks.map((task) => (
                             <ResultTaskCard key={task.task} task={task} />
                         ))}
                     </ColumnLayout>
                 )}
-                <Button onClick={() => history.push('/')}>На главную</Button>
+                <Button onClick={() => history.push('/')}>{t('toHome')}</Button>
             </ColumnLayout>
         </ScreenLayout>
     );

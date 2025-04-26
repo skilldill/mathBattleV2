@@ -9,6 +9,7 @@ import { useUserStore } from '../../store/userStore';
 import { Button } from '../../components/Button/Button';
 import { SettingsDailyRatingsScreen } from '../SettingsDailyRatingsScreen/SettingsDailyRatingsScreen';
 import { RatingsScreen } from '../RatingsScreen/RatingsScreen';
+import { useTranslation } from 'react-i18next';
 
 const MODAL_SCREENS = {
     aboutScreen: () => <AboutScreen />,
@@ -23,6 +24,7 @@ export const MainScreen: React.FC = () => {
     const renderModalScreen = MODAL_SCREENS[modalScreen];
     const history = useHistory();
     const userName = useUserStore((state) => state.userName);
+    const { t } = useTranslation();
 
     const openModal = (screen: keyof typeof MODAL_SCREENS) => {
         setModalScreen(screen);
@@ -37,27 +39,24 @@ export const MainScreen: React.FC = () => {
     return (
         <ScreenLayout>
             <IonText>
-                <h1>Math Battle</h1>
+                <h1>{t('mathBattle')}</h1>
             </IonText>
             <IonImg src={MathBattleCoverPng} />
             <IonText>
                 <h2>
-                    Привет, {userName || 'математик'}!
+                    {t('greeting', { userName: userName || t('mathematician') })}
                 </h2>
             </IonText>
 
             <ColumnLayout withPadding>
                 <Button color='success' onClick={() => openModal('settingsDailyRatingsScreen')}>
-                    Рейтинговая игра
+                    {t('ratingGame')}
                 </Button>
                 <Button onClick={() => openModal('settingsScreen')}>
-                    Проверить себя
+                    {t('checkYourself')}
                 </Button>
                 <Button onClick={() => openModal('ratingsScreen')}>
-                    Таблица лидеров
-                </Button>
-                <Button variant='outline' onClick={() => openModal('aboutScreen')}>
-                    О проекте
+                    {t('leaderboard')}
                 </Button>
             </ColumnLayout>
 
@@ -66,7 +65,7 @@ export const MainScreen: React.FC = () => {
                     <ColumnLayout withPadding style={{ backgroundColor: '#000000', height: '100%' }}>
                         {renderModalScreen()}
                         <Button variant='clear' onClick={() => setIsModalOpen(false)}>
-                            На главную
+                            {t('toHome')}
                         </Button>
                     </ColumnLayout>
                 </IonContent>
