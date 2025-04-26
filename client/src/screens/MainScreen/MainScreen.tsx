@@ -49,11 +49,11 @@ export const MainScreen: React.FC = () => {
             </IonText>
 
             <ColumnLayout withPadding>
-                <Button color='success' onClick={() => openModal('settingsDailyRatingsScreen')}>
-                    {t('ratingGame')}
-                </Button>
                 <Button onClick={() => openModal('settingsScreen')}>
                     {t('checkYourself')}
+                </Button>
+                <Button color='success' onClick={() => openModal('settingsDailyRatingsScreen')}>
+                    {t('ratingGame')}
                 </Button>
                 <Button onClick={() => openModal('ratingsScreen')}>
                     {t('leaderboard')}

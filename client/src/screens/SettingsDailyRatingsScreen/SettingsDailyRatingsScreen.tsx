@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Block } from '../../components/Glass/Block';
 import { ColumnLayout } from '../../components/ColumnLayout/ColumnLayout';
 import { Button } from '../../components/Button/Button';
@@ -17,13 +17,17 @@ export const SettingsDailyRatingsScreen: React.FC = () => {
         history.push('/puzzles-rating');
     }
 
+    const ratingGameDescription = t('ratingGameDescription', { returnObjects: true });
+
     return (
         <ColumnLayout style={{ height: '100%' }}>
             <div>
                 <h1>{t('settingRatingGameScreenTitle')}</h1>
             </div>
             <IonText>
-                <p>{t('ratingGameDescription')}</p>
+                {(ratingGameDescription as string[]).map((text: string) => (
+                    <p key={text}>{text}</p>
+                ))}
             </IonText>
             <Button onClick={handleStart}>
                 {t('ratingGameStartButtonText')}

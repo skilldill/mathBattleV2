@@ -34,8 +34,12 @@ const resources = {
       ratingGameStartButtonText: '🏆 To the top of the leaderboard!',
       topMathematiciansRatingTitle: 'Top Mathematicians 👩‍🎓',
       ratingGame: 'Rating Game',
-      topMathematiciansRatingContent: 'The leaderboard will be here soon...',
-      ratingGameDescription: '20 exercises with different difficulty, from easy to really tough. Your goal: solve the examples as fast as you can, but don\'t forget about accuracy!',
+      topMathematiciansRatingContent: '🛠 The leaderboard will be here soon...',
+      ratingGameDescription: [
+        '🛠 In development... You can solve examples, but the results will be later.',
+        '20 exercises with different difficulty, from easy to really tough. Your goal: solve the examples as fast as you can, but don\'t forget about accuracy!',
+        '⚠️ If you play for the first time, try to solve the examples from "Check Yourself" first. ⚠️',
+      ],
 
       // Result card
       resultCardTotalExercisesFieldTitle: 'Total exercises',
@@ -82,10 +86,14 @@ const resources = {
       // Rating game
       settingRatingGameScreenTitle: '🏆 Рейтинговая игра',
       ratingGameStartButtonText: '🏆 На вершину рейтинга!',
-      topMathematiciansRatingContent: 'Скоро здесь будет таблица лидеров...',
+      topMathematiciansRatingContent: '🛠Скоро здесь будет таблица лидеров...',
       ratingGame: 'Рейтинговая игра',
       topMathematiciansRatingTitle: 'Топ математиков 👩‍🎓',
-      ratingGameDescription: '20 примеров с разной сложностью, от простых до сложных. Твоя цель: решить примеры как можно быстрее, но не забывай про точность!',
+      ratingGameDescription: [
+        '🛠 В разработке... Ты можешь решать примеры, но результаты будут позже.',
+        '20 примеров с разной сложностью, от простых до сложных. Твоя цель: решить примеры как можно быстрее, но не забывай про точность!',
+        '⚠️ Если ты играешь первый раз, то попробуй сначала решить примеры из "Проверь себя" ⚠️',
+      ],
 
       // Result card
       resultCardTotalExercisesFieldTitle: 'Всего примеров',
