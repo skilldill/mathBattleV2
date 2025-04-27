@@ -45,5 +45,9 @@ bot.start((ctx) => {
   }, 3000)
 })
 
+bot.command('users', (ctx) => {
+  if (ctx.from.id !== ADMIN_ID) return;
+})
+
 bot.launch()
 console.log('🤖 Math Battle Bot работает!')

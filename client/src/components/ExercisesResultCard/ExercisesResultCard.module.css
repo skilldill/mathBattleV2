@@ -1,0 +1,13 @@
+.resultText {
+    font-size: 20px;
+    font-weight: 500;
+    color: #ffffffaa;
+    margin: 0;
+    padding: 0;
+} 
+
+.resultTextValue {
+    font-size: 20px;
+    font-weight: 500;
+    color: #ffffff;
+}

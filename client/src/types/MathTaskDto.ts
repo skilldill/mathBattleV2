@@ -38,4 +38,7 @@ export type ResultListDto = {
     difficulty: string;
     date: string;
     id: string;
+    totalErrors: number;
+    totalCorrectAnswers: number;
+    isRating: boolean;
 }

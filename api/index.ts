@@ -68,7 +68,10 @@ app.get('/api/results/:userId', async ({ params }) => {
     time: result.time,
     difficulty: result.difficulty,
     date: result.createdAt,
-    id: result.id
+    id: result.id,
+    totalErrors: result.tasks.filter(task => task.answer !== task.result).length,
+    totalCorrectAnswers: result.tasks.filter(task => task.answer === task.result).length,
+    isRating: result.isRating
   }));
   return formattedResults;
 })

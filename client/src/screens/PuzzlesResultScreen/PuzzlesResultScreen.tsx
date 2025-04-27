@@ -9,6 +9,7 @@ import { ResultTaskCard } from "../../components/ResultTaskCard/ResultTaskCard";
 import { Block } from "../../components/Glass/Block";
 import { ResultSummary } from "../../components/ResultSummary/ResultSummary";
 import { useTranslation } from 'react-i18next';
+import { StickyBlock } from "../../components/StickyBlock/StickyBlock";
 
 export const PuzzlesResultScreen: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -36,7 +37,11 @@ export const PuzzlesResultScreen: React.FC = () => {
                         ))}
                     </ColumnLayout>
                 )}
-                <Button onClick={() => history.push('/')}>{t('toHome')}</Button>
+                <StickyBlock stickySide="bottom">
+                    <ColumnLayout withPadding>
+                        <Button onClick={() => history.push('/')}>{t('toHome')}</Button>
+                    </ColumnLayout>
+                </StickyBlock>
             </ColumnLayout>
         </ScreenLayout>
     );

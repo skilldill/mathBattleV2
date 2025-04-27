@@ -22,12 +22,15 @@ const resources = {
       studentStatus: '👨‍🎓 Student',
       ninjaStatus: '🥷 Ninja',
       greeting: 'Hello, {{userName}}!',
-      
+      inDevelopment: 'In development...',
+      toBack: 'To Back',
       checkYourself: 'Check Yourself',
       leaderboard: 'Leaderboard',
       continueSolving: 'Continue solving exercises',
       solvingExercisesTitle: 'Solving exercises',
       startTrainingGame: 'Let\'s go!',
+      playerTitleScreen: 'Your personal results',
+      
 
       // Rating game
       settingRatingGameScreenTitle: '🏆 Rating Game',
@@ -49,7 +52,11 @@ const resources = {
       resultCardTotalTimeFieldTitle: 'Total time',
       resultCardAverageTimeFieldTitle: 'Average time',
       resultCardAnswerFieldTitle: 'Your answer',
-      resultCardTimeFieldTitle: 'Time', 
+      resultCardTimeFieldTitle: 'Time',
+      resultCardOpenButtonText: 'Open',
+      resultCardDifficultyFieldTitle: 'Difficulty',
+      resultCardTotalErrorsFieldTitle: 'Total errors',
+      resultCardTotalCorrectAnswersFieldTitle: 'Total correct answers',
       // units
       timeSecondsUnit: 'sec',
       timeMinutesUnit: 'min',
@@ -76,12 +83,13 @@ const resources = {
       studentStatus: '👨‍🎓 Студент',
       ninjaStatus: '🥷 Ниндзя',
       greeting: 'Привет, {{userName}}!',
-      
+      inDevelopment: 'В разработке...',
       checkYourself: 'Проверить себя',
       leaderboard: 'Таблица лидеров',
       continueSolving: 'Продолжить решать примеры',
       solvingExercisesTitle: 'Решение примеров',
       startTrainingGame: 'Полетели!',
+      playerTitleScreen: 'Твои личные результаты',
 
       // Rating game
       settingRatingGameScreenTitle: '🏆 Рейтинговая игра',
@@ -103,7 +111,10 @@ const resources = {
       resultCardAverageTimeFieldTitle: 'Среднее время',
       resultCardAnswerFieldTitle: 'Твой ответ',
       resultCardTimeFieldTitle: 'Время выполнения',
-
+      resultCardDifficultyFieldTitle: 'Сложность',
+      resultCardTotalErrorsFieldTitle: 'Всего ошибок',
+      resultCardTotalCorrectAnswersFieldTitle: 'Правильно решено',
+      resultCardOpenButtonText: 'Открыть',
       // units
       timeSecondsUnit: 'сек',
       timeMinutesUnit: 'мин',

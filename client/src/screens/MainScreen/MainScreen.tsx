@@ -41,7 +41,9 @@ export const MainScreen: React.FC = () => {
             <IonText>
                 <h1>{t('mathBattle')}</h1>
             </IonText>
-            <IonImg src={MathBattleCoverPng} />
+            <ColumnLayout withPadding style={{ alignItems: 'center' }}>
+                <IonImg src={MathBattleCoverPng} style={{ width: '350px' }} />
+            </ColumnLayout>
             <IonText>
                 <h2>
                     {t('greeting', { userName: userName || t('defaultUsername') })}
@@ -57,6 +59,9 @@ export const MainScreen: React.FC = () => {
                 </Button>
                 <Button onClick={() => openModal('ratingsScreen')}>
                     {t('leaderboard')}
+                </Button>
+                <Button onClick={() => history.push('/player')}>
+                    {t('playerTitleScreen')} 
                 </Button>
             </ColumnLayout>
 

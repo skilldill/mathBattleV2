@@ -1,0 +1,17 @@
+.sticky-block {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  right: 0;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.sticky-top {
+  top: 0;
+}
+
+.sticky-bottom {
+  bottom: 0;
+}
