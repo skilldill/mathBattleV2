@@ -1,4 +1,4 @@
-const START_MESSAGE_RU = `
+export const START_MESSAGE_RU = `
 👋 Привет! Это Math Battle — арена для настоящих гениев чисел!
 
 Сейчас ты можешь:
@@ -14,7 +14,7 @@ const START_MESSAGE_RU = `
 
 Жми кнопку ниже и вступай в игру!`;
 
-const START_MESSAGE_EN = `
+export const START_MESSAGE_EN = `
 👋 Hi! This is Math Battle — the arena for true number geniuses!
 
 Right now you can:
@@ -30,38 +30,31 @@ Right now you can:
 
 Click the button below to join the game!`;
 
-const START_MESSAGE_MAP = {
+export const START_MESSAGE_MAP = {
     'ru': START_MESSAGE_RU,
     'en': START_MESSAGE_EN,
 }
 
-const QUESTION_MESSAGE_RU = `А ты точно математик? Сколько будет 2 + 2 * 2?`;
+export const QUESTION_MESSAGE_RU = `А ты точно математик? Сколько будет 2 + 2 * 2?`;
 
-const QUESTION_MESSAGE_EN = `Are you a true mathematician? How much is 2 + 2 * 2?`;
+export const QUESTION_MESSAGE_EN = `Are you a true mathematician? How much is 2 + 2 * 2?`;
 
-const QUESTION_MESSAGE_MAP = {
+export const QUESTION_MESSAGE_MAP = {
     'ru': QUESTION_MESSAGE_RU,
     'en': QUESTION_MESSAGE_EN,
 }
 
-const BUTTON_MESSAGE_RU = `🔥 Доказать, кто тут математик!`;
+export const BUTTON_MESSAGE_RU = `🔥 Доказать, кто тут математик!`;
 
-const BUTTON_MESSAGE_EN = `🔥 Prove who is the true mathematician!`;
+export const BUTTON_MESSAGE_EN = `🔥 Prove who is the true mathematician!`;
 
-const BUTTON_MESSAGE_MAP = {
+export const BUTTON_MESSAGE_MAP = {
     'ru': BUTTON_MESSAGE_RU,
     'en': BUTTON_MESSAGE_EN,
 }
 
 
-const MESSAGE_BUTTON_TEXT = {
+export const MESSAGE_BUTTON_TEXT = {
     'ru': 'ПОЛЕТЕЛИ!',
     'en': 'LET\'S GO!',
-}
-
-module.exports = {
-    START_MESSAGE_MAP,
-    QUESTION_MESSAGE_MAP,
-    BUTTON_MESSAGE_MAP,
-    MESSAGE_BUTTON_TEXT,
 }
