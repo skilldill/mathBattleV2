@@ -50,6 +50,8 @@ services:
     build: ./bot
     container_name: tg-bot
     restart: unless-stopped
+    depends_on:
+      - mongodb
     networks:
       - app-network
 

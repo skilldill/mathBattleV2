@@ -6,9 +6,6 @@ const { ResultModel } = require('./dbModels');
 
 config();
 
-const MONGO_URI = process.env.MONGODB_URI;
-
-
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const ADMIN_ID = process.env.ADMIN_ID;
 
