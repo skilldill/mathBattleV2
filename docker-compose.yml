@@ -50,6 +50,10 @@ services:
     build: ./bot
     container_name: tg-bot
     restart: unless-stopped
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/math
+    depends_on:
+      - mongodb
     networks:
       - app-network
 
