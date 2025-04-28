@@ -12,19 +12,17 @@ const MONGO_URI = process.env.MONGODB_URI;
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const ADMIN_ID = process.env.ADMIN_ID;
 
-async function connectDB() {
+export async function connectDB() {
   try {
-    await mongoose.connect(MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('✅ Успешное подключение к MongoDB');
+    console.log('Connecting to MongoDB', process.env.MONGODB_URI);
+    const mongoUrl = process.env.MONGODB_URI || 'mongodb://mongodb:27017/math';
+    await mongoose.connect(mongoUrl);
+    console.log('📦 Connected to MongoDB');
   } catch (error) {
-    console.error('❌ Ошибка подключения к MongoDB:', error.message);
-    process.exit(1); // Завершаем процесс при ошибке подключения
+    console.error('Failed to connect to MongoDB:', error);
+    process.exit(1);
   }
 }
-
 // Вызываем функцию подключения
 connectDB();
 
