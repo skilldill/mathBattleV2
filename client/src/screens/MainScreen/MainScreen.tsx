@@ -10,6 +10,7 @@ import { Button } from '../../components/Button/Button';
 import { SettingsDailyRatingsScreen } from '../SettingsDailyRatingsScreen/SettingsDailyRatingsScreen';
 import { RatingsScreen } from '../RatingsScreen/RatingsScreen';
 import { useTranslation } from 'react-i18next';
+import { BlockForAuthUser } from '../../components/BlockForAuthUser/BlockForAuthUser';
 
 const MODAL_SCREENS = {
     aboutScreen: () => <AboutScreen />,
@@ -54,15 +55,19 @@ export const MainScreen: React.FC = () => {
                 <Button onClick={() => openModal('settingsScreen')}>
                     {t('checkYourself')}
                 </Button>
-                <Button color='success' onClick={() => openModal('settingsDailyRatingsScreen')}>
-                    {t('ratingGame')}
-                </Button>
+                <BlockForAuthUser>
+                    <Button color='success' onClick={() => openModal('settingsDailyRatingsScreen')}>
+                        {t('ratingGame')}
+                    </Button>
+                </BlockForAuthUser>
                 <Button onClick={() => openModal('ratingsScreen')}>
                     {t('leaderboard')}
                 </Button>
-                <Button onClick={() => history.push('/player')}>
-                    {t('playerTitleScreen')} 
-                </Button>
+                <BlockForAuthUser>
+                    <Button onClick={() => history.push('/player')}>
+                        {t('playerTitleScreen')}
+                    </Button>
+                </BlockForAuthUser>
             </ColumnLayout>
 
             <IonModal isOpen={isModalOpen} onDidDismiss={() => setIsModalOpen(false)}>
