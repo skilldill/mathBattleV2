@@ -2,12 +2,19 @@ import { config } from 'dotenv';
 import { Telegraf } from 'telegraf';
 import { START_MESSAGE_MAP, QUESTION_MESSAGE_MAP, BUTTON_MESSAGE_MAP, MESSAGE_BUTTON_TEXT } from './constants';
 import mongoose from 'mongoose';
-import { ResultModel } from './dbModels';
+import { ResultModel } from './db/ResultModel';
+import { UserModel } from './db/UserModel';
 
 config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const ADMIN_ID = process.env.ADMIN_ID;
+
+const saveUserToDB = async ({ userId, username, firstName, lastName, language }) => {
+  const user = await UserModel.findOne({ userId });
+  if (user) return;
+  await UserModel.create({ userId, username, firstName, lastName, language });
+}
 
 export function connectDB() {
   try {
@@ -25,8 +32,7 @@ connectDB();
 
 const getUrlWebApp = (userId, username) => `https://app.math-battle.ru?u91x=${userId}&x_3z9=${username}`;
 
-
-bot.start((ctx) => {
+bot.start(async (ctx) => {
   const message = START_MESSAGE_MAP[ctx.from.language_code] || START_MESSAGE_MAP['en'];
 
   ctx.reply(message, {
@@ -38,6 +44,14 @@ bot.start((ctx) => {
       resize_keyboard: true
     }
   })
+
+  await saveUserToDB({
+    userId: ctx.from.id,
+    username: ctx.from.username || 'математик',
+    firstName: ctx.from.first_name || 'математик',
+    lastName: ctx.from.last_name || 'математик',
+    language: ctx.from.language_code || 'en'
+  });
 
   if (ADMIN_ID) {
     bot.telegram.sendMessage(
@@ -71,28 +85,48 @@ bot.command('users', async (ctx) => {
   if (`${ctx.from.id}` !== `${ADMIN_ID}`) return;
 
   try {
-    const uniquePlayers = await ResultModel.aggregate([
-      {
-        $group: { _id: "$userId" }
-      },
-      {
-        $project: { _id: 0, userId: "$_id" }
-      },
-      { $sort: { userId: 1 } } // сортируем по алфавиту (опционально)
-    ]);
+    const users = await UserModel.find();
 
-    if (uniquePlayers.length === 0) {
-      return ctx.reply('Пока что нет игроков.');
+    if (users.length === 0) {
+      ctx.reply('Пока что нет математиков в боте нет 🤖');
+      return;
     }
 
-    const usersList = uniquePlayers.map((u, idx) => `${idx + 1}. ${u.userId}`).join('\n');
-
-    await ctx.reply(`👥 Уникальные игроки:\n\n${usersList}`);
+    ctx.reply(users.map(user => 
+      `👨‍🎓 ${user.username} ${user.firstName} ${user.lastName} ${user.language}`
+    ).join('\n'));
   } catch (error) {
-    console.error('Ошибка при получении уникальных игроков:', error);
-    await ctx.reply('Ошибка при получении списка игроков. Попробуйте позже!');
+    console.error('Ошибка при получении пользователей:', error);
+    ctx.reply('Ошибка при получении пользователей. Попробуйте позже!');
   }
 })
+
+// bot.command('users', async (ctx) => {
+//   if (`${ctx.from.id}` !== `${ADMIN_ID}`) return;
+
+//   try {
+//     const uniquePlayers = await ResultModel.aggregate([
+//       {
+//         $group: { _id: "$userId" }
+//       },
+//       {
+//         $project: { _id: 0, userId: "$_id" }
+//       },
+//       { $sort: { userId: 1 } } // сортируем по алфавиту (опционально)
+//     ]);
+
+//     if (uniquePlayers.length === 0) {
+//       return ctx.reply('Пока что нет игроков.');
+//     }
+
+//     const usersList = uniquePlayers.map((u, idx) => `${idx + 1}. ${u.userId}`).join('\n');
+
+//     await ctx.reply(`👥 Уникальные игроки:\n\n${usersList}`);
+//   } catch (error) {
+//     console.error('Ошибка при получении уникальных игроков:', error);
+//     await ctx.reply('Ошибка при получении списка игроков. Попробуйте позже!');
+//   }
+// })
 
 bot.launch()
 console.log('🤖 Math Battle Bot работает!')
