@@ -32,6 +32,32 @@ connectDB();
 
 const getUrlWebApp = (userId, username) => `https://app.math-battle.ru?u91x=${userId}&x_3z9=${username}`;
 
+const openWebApp = async (ctx) => {
+  try {
+    const user = await UserModel.findOne({ userId: ctx.from.id });
+    if (!user) {
+      await saveUserToDB({
+        userId: ctx.from.id,
+        username: ctx.from.username || 'математик',
+        firstName: ctx.from.first_name || 'математик',
+        lastName: ctx.from.last_name || 'математик',
+        language: ctx.from.language_code || 'en'
+      });
+
+      if (ADMIN_ID) {
+        bot.telegram.sendMessage(
+          ADMIN_ID,
+          `Новый пользователь подключился! 👨‍🎓\nИмя: ${ctx.from.first_name || ''} ${ctx.from.last_name || ''}\nUsername: @${ctx.from.username || 'нет'}\nID: ${ctx.from.id}`
+        );
+      }
+    };
+  } catch (error) {
+    console.error('Ошибка при открытии WebApp:', error);
+  }
+
+  return getUrlWebApp(ctx.from.id, ctx.from.username);
+}
+
 bot.start(async (ctx) => {
   const message = START_MESSAGE_MAP[ctx.from.language_code] || START_MESSAGE_MAP['en'];
 
@@ -39,7 +65,7 @@ bot.start(async (ctx) => {
     reply_markup: {
       inline_keyboard: [[{
         text: MESSAGE_BUTTON_TEXT[ctx.from.language_code] || MESSAGE_BUTTON_TEXT['en'],
-        web_app: { url: getUrlWebApp(ctx.from.id, ctx.from.username) }
+        web_app: { url: openWebApp(ctx.from.id, ctx.from.username) }
       }]],
       resize_keyboard: true
     }
@@ -68,7 +94,7 @@ bot.start(async (ctx) => {
       reply_markup: {
         keyboard: [[{
           text: buttonMessage,
-          web_app: { url: getUrlWebApp(ctx.from.id, ctx.from.username) }
+          web_app: { url: openWebApp(ctx.from.id, ctx.from.username) }
         }]],
         resize_keyboard: true
       }
