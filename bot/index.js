@@ -61,17 +61,8 @@ const openWebApp = async (ctx) => {
 
 bot.start(async (ctx) => {
   const message = START_MESSAGE_MAP[ctx.from.language_code] || START_MESSAGE_MAP['en'];
-  const url = await openWebApp(ctx.from.id, ctx.from.username);
 
-  ctx.reply(message, {
-    reply_markup: {
-      inline_keyboard: [[{
-        text: MESSAGE_BUTTON_TEXT[ctx.from.language_code] || MESSAGE_BUTTON_TEXT['en'],
-        web_app: { url }
-      }]],
-      resize_keyboard: true
-    }
-  })
+  ctx.reply(message)
 
   await saveUserToDB({
     userId: ctx.from.id,
@@ -101,7 +92,7 @@ bot.start(async (ctx) => {
         resize_keyboard: true
       }
     })
-  }, 3000)
+  }, 1000)
 })
 
 bot.command('health', (ctx) => {
