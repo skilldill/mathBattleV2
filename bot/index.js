@@ -79,20 +79,19 @@ bot.start(async (ctx) => {
     );
   }
 
-  setTimeout(() => {
-    const questionMessage = QUESTION_MESSAGE_MAP[ctx.from.language_code] || QUESTION_MESSAGE_MAP['en'];
-    const buttonMessage = BUTTON_MESSAGE_MAP[ctx.from.language_code] || BUTTON_MESSAGE_MAP['en'];
+  const questionMessage = QUESTION_MESSAGE_MAP[ctx.from.language_code] || QUESTION_MESSAGE_MAP['en'];
+  const buttonMessage = BUTTON_MESSAGE_MAP[ctx.from.language_code] || BUTTON_MESSAGE_MAP['en'];
 
-    ctx.reply(questionMessage, {
-      reply_markup: {
-        keyboard: [[{
-          text: buttonMessage,
-          web_app: { url: openWebApp(ctx.from.id, ctx.from.username) }
-        }]],
-        resize_keyboard: true
-      }
-    })
-  }, 1000)
+  ctx.reply(questionMessage, {
+    reply_markup: {
+      keyboard: [[{
+        text: buttonMessage,
+        web_app: { url: openWebApp(ctx.from.id, ctx.from.username) }
+      }]],
+      resize_keyboard: true
+    }
+  })
+
 })
 
 bot.command('health', (ctx) => {
@@ -111,7 +110,7 @@ bot.command('users', async (ctx) => {
       return;
     }
 
-    ctx.reply(users.map(user => 
+    ctx.reply(users.map(user =>
       `👨‍🎓 ${user.username} ${user.firstName} ${user.lastName} ${user.language}`
     ).join('\n'));
   } catch (error) {
