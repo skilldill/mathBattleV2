@@ -55,7 +55,14 @@ const openWebApp = async (ctx) => {
     console.error('Ошибка при открытии WebApp:', error);
   }
 
-  return getUrlWebApp(ctx.from.id, ctx.from.username);
+  if (ctx && ctx.from) {
+    const userId = ctx.from.id || '';
+    const username = ctx.from.username || '';
+    
+    return getUrlWebApp(userId, username);
+  }
+
+  return getUrlWebApp('', '');
 }
 
 bot.start(async (ctx) => {
