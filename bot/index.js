@@ -33,6 +33,7 @@ connectDB();
 const getUrlWebApp = (userId, username) => `https://app.math-battle.ru?u91x=${userId}&x_3z9=${username}`;
 
 const openWebApp = async (ctx) => {
+  if (!ctx || !ctx.from) return getUrlWebApp('', '');
   try {
     const user = await UserModel.findOne({ userId: ctx.from.id });
     if (!user) {
@@ -55,14 +56,7 @@ const openWebApp = async (ctx) => {
     console.error('Ошибка при открытии WebApp:', error);
   }
 
-  if (ctx && ctx.from) {
-    const userId = ctx.from.id || '';
-    const username = ctx.from.username || '';
-    
-    return getUrlWebApp(userId, username);
-  }
-
-  return getUrlWebApp('', '');
+  return getUrlWebApp(ctx.from.id, ctx.from.username);
 }
 
 bot.start(async (ctx) => {
