@@ -34,6 +34,7 @@ const getUrlWebApp = (userId, username) => `https://app.math-battle.ru?u91x=${us
 
 const openWebApp = async (ctx) => {
   if (!ctx || !ctx.from) return getUrlWebApp('', '');
+
   try {
     const user = await UserModel.findOne({ userId: ctx.from.id });
     if (!user) {
@@ -61,9 +62,17 @@ const openWebApp = async (ctx) => {
 
 bot.start(async (ctx) => {
   const message = START_MESSAGE_MAP[ctx.from.language_code] || START_MESSAGE_MAP['en'];
-  const url = await openWebApp(ctx.from.id, ctx.from.username);
+  const url = await openWebApp(ctx);
 
-  ctx.reply(message)
+  ctx.reply(message, {
+    reply_markup: {
+      inline_keyboard: [[{
+        text: MESSAGE_BUTTON_TEXT[ctx.from.language_code] || MESSAGE_BUTTON_TEXT['en'],
+        web_app: { url }
+      }]],
+      resize_keyboard: true
+    }
+  })
 
   await saveUserToDB({
     userId: ctx.from.id,
@@ -80,8 +89,9 @@ bot.start(async (ctx) => {
     );
   }
 
-  const questionMessage = QUESTION_MESSAGE_MAP[ctx.from.language_code] || QUESTION_MESSAGE_MAP['en'];
-  const buttonMessage = BUTTON_MESSAGE_MAP[ctx.from.language_code] || BUTTON_MESSAGE_MAP['en'];
+  setTimeout(() => {
+    const questionMessage = QUESTION_MESSAGE_MAP[ctx.from.language_code] || QUESTION_MESSAGE_MAP['en'];
+    const buttonMessage = BUTTON_MESSAGE_MAP[ctx.from.language_code] || BUTTON_MESSAGE_MAP['en'];
 
   ctx.reply(questionMessage, {
     reply_markup: {
@@ -90,9 +100,9 @@ bot.start(async (ctx) => {
         web_app: { url }
       }]],
       resize_keyboard: true
-    }
-  })
-
+      }
+    })
+  }, 3000)
 })
 
 bot.command('health', (ctx) => {
