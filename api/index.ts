@@ -78,97 +78,197 @@ app.get('/api/results/:userId', async ({ params }) => {
 
 app.get('/api/daily-rating/:userId', async ({ params }) => {
   const { userId } = params;
-  // const results = await ResultModel.find({ 
-  //   isRating: true, 
-  //   createdAt: { $gte: new Date(new Date().setDate(new Date().getDate() - 1)), $lte: new Date() },
-  // });
-  // return results;
 
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
 
-    const startOfToday = new Date();
-    startOfToday.setHours(0, 0, 0, 0);
+  const endOfToday = new Date();
+  endOfToday.setHours(23, 59, 59, 999);
 
-    const endOfToday = new Date();
-    endOfToday.setHours(23, 59, 59, 999);
-
-    const aggregationPipeline = [
-      {
-        $match: {
-          isRating: true,
-          createdAt: { $gte: startOfToday, $lte: endOfToday }
-        }
-      },
-      {
-        $addFields: {
-          tasksCount: { $size: "$tasks" },
-          tasksResolvedCount: {
-            $size: {
-              $filter: {
-                input: "$tasks",
-                as: "task",
-                cond: { $eq: ["$$task.answer", "$$task.result"] }
-              }
+  const aggregationPipeline = [
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "userId",
+        as: "userInfo"
+      }
+    },
+    {
+      $unwind: {
+        path: "$userInfo",
+        preserveNullAndEmptyArrays: false
+      }
+    },
+    {
+      $match: {
+        isRating: true,
+        createdAt: { $gte: startOfToday, $lte: endOfToday },
+      }
+    },
+    {
+      $addFields: {
+        tasksCount: { $size: "$tasks" },
+        tasksResolvedCount: {
+          $size: {
+            $filter: {
+              input: "$tasks",
+              as: "task",
+              cond: { $eq: ["$$task.answer", "$$task.result"] }
             }
           }
         }
-      },
-      {
-        $addFields: {
-          accuracy: { $divide: ["$tasksResolvedCount", "$tasksCount"] },
-          avgTimePerTask: { $divide: ["$time", "$tasksCount"] },
-          totalTime: "$time",
-          rating: {
-            $round: [
-              {
-                $multiply: [
-                  1000,
-                  { $divide: ["$tasksResolvedCount", "$tasksCount"] },
-                  { $divide: [15, { $divide: ["$time", "$tasksCount"] }] }
-                ]
-              },
-              0
-            ]
-          }
-        }
-      },
-      { $sort: { rating: -1 } },
-      {
-        $project: {
-          _id: 0,
-          userId: 1,
-          rating: 1,
-          tasksCount: 1,
-          tasksResolvedCount: 1,
-          totalTime: 1,
-          accuracy: { $round: ["$accuracy", 2] },
-          avgTimePerTask: { $round: ["$avgTimePerTask", 2] },
-          createdAt: 1
+      }
+    },
+    {
+      $addFields: {
+        accuracy: { $divide: ["$tasksResolvedCount", "$tasksCount"] },
+        avgTimePerTask: { $divide: ["$time", "$tasksCount"] },
+        totalTime: "$time",
+        rating: {
+          $round: [
+            {
+              $multiply: [
+                1000,
+                { $divide: ["$tasksResolvedCount", "$tasksCount"] },
+                { $divide: [15, { $divide: ["$time", "$tasksCount"] }] }
+              ]
+            },
+            0
+          ]
         }
       }
-    ];
-
-    // Выполняем агрегирование
-    const fullResults = await ResultModel.aggregate(aggregationPipeline);
-
-    // Берем топ-10
-    const top10 = fullResults.slice(0, 10);
-
-    let userPlace = null;
-    let userData = null;
-
-    if (userId) {
-      const index = fullResults.findIndex(result => result.userId === userId);
-      if (index !== -1) {
-        userPlace = index + 1;
-        userData = fullResults[index];
+    },
+    { $sort: { rating: -1 } },
+    {
+      $project: {
+        _id: 0,
+        userId: 1,
+        username: "$userInfo.username",
+        firstName: "$userInfo.firstName",
+        lastName: "$userInfo.lastName",
+        rating: 1,
+        tasksCount: 1,
+        tasksResolvedCount: 1,
+        totalTime: 1,
+        accuracy: { $round: ["$accuracy", 2] },
+        avgTimePerTask: { $round: ["$avgTimePerTask", 2] },
+        createdAt: 1
       }
     }
+  ];
 
-    return {
-      top10,
-      userPlace,
-      userData
+  // Выполняем агрегирование
+  const fullResults = await ResultModel.aggregate(aggregationPipeline);
+
+  // Берем топ-10
+  const top10 = fullResults.slice(0, 10);
+
+  let userPlace = null;
+  let userData = null;
+
+  if (userId) {
+    const index = fullResults.findIndex(result => result.userId === userId);
+    if (index !== -1) {
+      userPlace = index + 1;
+      userData = fullResults[index];
+    }
+  }
+
+  return {
+    top10,
+    userPlace,
+    userData
   };
+})
+
+app.get('/api/leaderboard', async () => {
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+
+  const endOfToday = new Date();
+  endOfToday.setHours(23, 59, 59, 999);
+
+  const aggregationPipeline = [
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "userId",
+        as: "userInfo"
+      }
+    },
+    {
+      $unwind: {
+        path: "$userInfo",
+        preserveNullAndEmptyArrays: false
+      }
+    },
+    {
+      $match: {
+        isRating: true,
+        createdAt: { $gte: startOfToday, $lte: endOfToday },
+      }
+    },
+    {
+      $addFields: {
+        tasksCount: { $size: "$tasks" },
+        tasksResolvedCount: {
+          $size: {
+            $filter: {
+              input: "$tasks",
+              as: "task",
+              cond: { $eq: ["$$task.answer", "$$task.result"] }
+            }
+          }
+        }
+      }
+    },
+    {
+      $addFields: {
+        accuracy: { $divide: ["$tasksResolvedCount", "$tasksCount"] },
+        avgTimePerTask: { $divide: ["$time", "$tasksCount"] },
+        totalTime: "$time",
+        rating: {
+          $round: [
+            {
+              $multiply: [
+                1000,
+                { $divide: ["$tasksResolvedCount", "$tasksCount"] },
+                { $divide: [15, { $divide: ["$time", "$tasksCount"] }] }
+              ]
+            },
+            0
+          ]
+        }
+      }
+    },
+    { $sort: { rating: -1 } },
+    {
+      $project: {
+        _id: 0,
+        userId: 1,
+        username: "$userInfo.username",
+        firstName: "$userInfo.firstName",
+        lastName: "$userInfo.lastName",
+        rating: 1,
+        tasksCount: 1,
+        tasksResolvedCount: 1,
+        totalTime: 1,
+        accuracy: { $round: ["$accuracy", 2] },
+        avgTimePerTask: { $round: ["$avgTimePerTask", 2] },
+        createdAt: 1
+      }
+    }
+  ];
+
+  // Выполняем агрегирование
+  const fullResults = await ResultModel.aggregate(aggregationPipeline);
+
+  // Берем топ-10
+  const top10 = fullResults.slice(0, 10);
+
+  return top10;
 })
 
 const port = process.env.PORT ? parseInt(process.env.PORT) : 3000

@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "elysia": "0.7.4",
-    "mongoose": "^8.2.3"
+    "mongoose": "^8.2.3",
+    "uuid": "^11.1.0"
   },
   "bun": {
     "module": "index.ts"

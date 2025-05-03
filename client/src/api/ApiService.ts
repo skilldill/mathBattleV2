@@ -1,5 +1,6 @@
 import { httpClient } from './httpClient';
 import { MathTaskDto, ResultDto, ResultListDto, SaveResultDto } from '../types/MathTaskDto';
+import { LeaderboardResponseDto } from '../types/common.types';
 
 export class ApiService {
     static async getMathTasks(count: number, difficulty: string): Promise<MathTaskDto[]> {
@@ -24,6 +25,11 @@ export class ApiService {
 
     static async getResultById(id: string): Promise<ResultDto> {
         const response = await httpClient.get(`/api/result/${id}`);
+        return response.data;
+    }
+
+    static async getLeaderboard(userId: string): Promise<LeaderboardResponseDto> {
+        const response = await httpClient.get(`/api/daily-rating/${userId}`);
         return response.data;
     }
 }
