@@ -43,6 +43,7 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
       - api
+      - site
     networks:
       - app-network
 
@@ -61,8 +62,8 @@ services:
     build: ./site
     container_name: math-site
     restart: unless-stopped
-    ports:
-      - "80:80"
+    expose:
+      - "80"
     networks:
       - app-network
 
