@@ -6,5 +6,5 @@ COPY . .
 RUN npm run build
 
 FROM httpd:latest AS runtime
-COPY --from=build /app/build /usr/local/apache2/htdocs/
+COPY --from=build /app/dist /usr/local/apache2/htdocs/
 EXPOSE 80
