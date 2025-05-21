@@ -61,6 +61,21 @@ const resources = {
       timeSecondsUnit: 'sec',
       timeMinutesUnit: 'min',
       timeHoursUnit: 'h',
+      // leaderboard
+      leaderboardPlace: 'Place',
+      leaderboardAccuracy: 'Accuracy',
+      leaderboardTasksCompleted: 'Tasks completed',
+      leaderboardAverageTime: 'Average time',
+      leaderboardTotalTime: 'Total time',
+      leaderboardTotalErrors: 'Total errors',
+      leaderboardTotalCorrectAnswers: 'Total correct answers',
+      // ratings screen
+      yourRating: 'Your rating',
+      place: 'Place',
+      accuracy: 'Accuracy',
+      tasksCompleted: 'Tasks completed',
+      averageTime: 'Average time',
+      totalTime: 'Total time',
     }
   },
   ru: {
@@ -119,6 +134,21 @@ const resources = {
       timeSecondsUnit: 'сек',
       timeMinutesUnit: 'мин',
       timeHoursUnit: 'ч',
+      // leaderboard
+      leaderboardPlace: 'Место',
+      leaderboardAccuracy: 'Точность',
+      leaderboardTasksCompleted: 'Выполнено заданий',
+      leaderboardAverageTime: 'Среднее время',
+      leaderboardTotalTime: 'Всего времени',
+      leaderboardTotalErrors: 'Всего ошибок',
+      leaderboardTotalCorrectAnswers: 'Всего правильно решено',
+      // ratings screen
+      yourRating: 'Твой рейтинг',
+      place: 'Место',
+      accuracy: 'Точность',
+      tasksCompleted: 'Выполнено заданий',
+      averageTime: 'Среднее время',
+      totalTime: 'Всего времени',
     }
   }
 };

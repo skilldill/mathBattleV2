@@ -11,6 +11,7 @@ import { SettingsDailyRatingsScreen } from '../SettingsDailyRatingsScreen/Settin
 import { RatingsScreen } from '../RatingsScreen/RatingsScreen';
 import { useTranslation } from 'react-i18next';
 import { BlockForAuthUser } from '../../components/BlockForAuthUser/BlockForAuthUser';
+import { StickyBlock } from '../../components/StickyBlock/StickyBlock';
 
 const MODAL_SCREENS = {
     aboutScreen: () => <AboutScreen />,
@@ -72,11 +73,15 @@ export const MainScreen: React.FC = () => {
 
             <IonModal isOpen={isModalOpen} onDidDismiss={() => setIsModalOpen(false)}>
                 <IonContent>
-                    <ColumnLayout withPadding style={{ backgroundColor: '#000000', height: '100%' }}>
+                    <ColumnLayout withPadding style={{ backgroundColor: '#000000', minHeight: '100%' }}>
                         {renderModalScreen()}
-                        <Button variant='clear' onClick={() => setIsModalOpen(false)}>
-                            {t('toHome')}
-                        </Button>
+                        <StickyBlock stickySide='bottom'>
+                        <div style={{ width: '100%', padding: '10px 0px' }}>
+                            <Button variant="clear"  onClick={() => setIsModalOpen(false)} fluid>
+                                {t('toHome')}
+                            </Button>
+                        </div>
+                    </StickyBlock>
                     </ColumnLayout>
                 </IonContent>
             </IonModal>

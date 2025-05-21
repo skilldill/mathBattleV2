@@ -41,8 +41,8 @@ export const PlayerScreen: React.FC = () => {
                 </ColumnLayout>
             )}
             <StickyBlock stickySide="bottom">
-                <ColumnLayout withPadding>
-                    <Button onClick={toBack}>{t('toHome')}</Button>
+                <ColumnLayout withPadding fluid style={{ paddingBottom: '20px' }}>
+                    <Button variant="clear" fluid onClick={toBack}>{t('toHome')}</Button>
                 </ColumnLayout>
             </StickyBlock>
         </ScreenLayout>

@@ -38,8 +38,8 @@ export const PuzzlesResultScreen: React.FC = () => {
                     </ColumnLayout>
                 )}
                 <StickyBlock stickySide="bottom">
-                    <ColumnLayout withPadding>
-                        <Button onClick={() => history.push('/')}>{t('toHome')}</Button>
+                    <ColumnLayout withPadding fluid style={{ paddingBottom: '20px' }}>
+                        <Button variant="clear" onClick={() => history.push('/')}>{t('toHome')}</Button>
                     </ColumnLayout>
                 </StickyBlock>
             </ColumnLayout>

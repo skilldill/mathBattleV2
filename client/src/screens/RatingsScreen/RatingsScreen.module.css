@@ -1,0 +1,118 @@
+.userStats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+}
+
+.statBlock {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.statBlock:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.statValue {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 5px 0;
+    color: #fff;
+}
+
+.statLabel {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.leaderCard {
+    padding: 15px;
+    border-radius: 12px;
+    transition: transform 0.2s ease;
+}
+
+.leaderCard:hover {
+    transform: translateY(-2px);
+}
+
+.leaderInfo {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.leaderName {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.leaderStats {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.leaderStats p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+/* Top 3 positions styling */
+.gold {
+    background: linear-gradient(135deg, #D4B100 0%, #CC8400 100%);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.silver {
+    background: linear-gradient(135deg, #C0C0C0 0%, #A9A9A9 100%);
+    box-shadow: 0 4px 15px rgba(192, 192, 192, 0.3);
+}
+
+.bronze {
+    background: linear-gradient(135deg, #CD7F32 0%, #8B4513 100%);
+    box-shadow: 0 4px 15px rgba(205, 127, 50, 0.3);
+}
+
+.regular {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.medal {
+    font-size: 1.5em;
+    margin-right: 8px;
+}
+
+.place {
+    display: flex;
+    align-items: center;
+}
+
+.placeNumber {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+p {
+    margin: 0;
+}
+
+.title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0;
+}
