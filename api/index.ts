@@ -62,7 +62,7 @@ app.get('/api/result/:id', async ({ params }) => {
 
 app.get('/api/results/:userId', async ({ params }) => {
   const { userId } = params;
-  const results = await ResultModel.find({ userId });
+  const results = await ResultModel.find({ userId }).sort({ createdAt: -1 });
   const formattedResults = results.map(result => ({
     taskCount: result.tasks.length,
     time: result.time,

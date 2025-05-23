@@ -115,6 +115,20 @@ bot.command('users', async (ctx) => {
 
   try {
     const users = await UserModel.find();
+    const results = await ResultModel.aggregate([
+      {
+        $group: {
+          _id: "$userId",
+          gamesPlayed: { $sum: 1 }
+        }
+      }
+    ]);
+
+    // Create a map of userId to games played
+    const gamesMap = results.reduce((acc, curr) => {
+      acc[curr._id] = curr.gamesPlayed;
+      return acc;
+    }, {});
 
     if (users.length === 0) {
       ctx.reply('Пока что нет математиков в боте нет 🤖');
@@ -122,8 +136,8 @@ bot.command('users', async (ctx) => {
     }
 
     ctx.reply(users.map(user =>
-      `👨‍🎓 ${user.username} ${user.firstName} ${user.lastName} ${user.language}`
-    ).join('\n'));
+      `👨‍🎓 ${user.username} ${user.firstName} ${user.lastName} ${user.language}\n🎮 Игр сыграно: ${gamesMap[user.userId] || 0}`
+    ).join('\n\n'));
   } catch (error) {
     console.error('Ошибка при получении пользователей:', error);
     ctx.reply('Ошибка при получении пользователей. Попробуйте позже!');
