@@ -31,18 +31,21 @@ const resources = {
       startTrainingGame: 'Let\'s go!',
       playerTitleScreen: 'Your personal results',
       
-
       // Rating game
+      toLeaderboard: 'To Leaderboard',
       settingRatingGameScreenTitle: '🏆 Rating Game',
       ratingGameStartButtonText: '🏆 To the top of the leaderboard!',
       topMathematiciansRatingTitle: 'Top Mathematicians 👩‍🎓',
       ratingGame: 'Rating Game',
       topMathematiciansRatingContent: '🛠 The leaderboard will be here soon...',
       ratingGameDescription: [
-        '🛠 In development... You can solve exercises, but the results will be later.',
+        '🏆 You can play once per day to compete in the leaderboard!',
         '20 exercises with different difficulty, from easy to really tough. Your goal: solve the exercises as fast as you can, but don\'t forget about accuracy!',
+        '⚡️ Your daily result will appear on the leaderboard. Come back tomorrow to improve your ranking!',
         '⚠️ If you play for the first time, try to solve the exercises from "Check Yourself" first. ⚠️',
       ],
+      alreadyPlayedToday: 'You have already played the rating game today!',
+      comeBackTomorrow: 'Come back tomorrow to improve your score!',
 
       // Result card
       resultCardTotalExercisesFieldTitle: 'Total exercises',
@@ -107,16 +110,20 @@ const resources = {
       playerTitleScreen: 'Твои личные результаты',
 
       // Rating game
+      toLeaderboard: 'В таблицу лидеров',
       settingRatingGameScreenTitle: '🏆 Рейтинговая игра',
       ratingGameStartButtonText: '🏆 На вершину рейтинга!',
       topMathematiciansRatingContent: '🛠Скоро здесь будет таблица лидеров...',
       ratingGame: 'Рейтинговая игра',
       topMathematiciansRatingTitle: 'Топ математиков 👩‍🎓',
       ratingGameDescription: [
-        '🛠 В разработке... Ты можешь решать примеры, но результаты будут позже.',
+        '🏆 Ты можешь играть один раз в день, чтобы сравниться с другими математиками!',
         '20 примеров с разной сложностью, от простых до сложных. Твоя цель: решить примеры как можно быстрее, но не забывай про точность!',
-        '⚠️ Если ты играешь первый раз, то попробуй сначала решить примеры из "Проверь себя" ⚠️',
+        '⚡️ Твой ежедневный результат будет отображаться в таблице лидеров. Вернись завтра, чтобы улучшить свое место!',
+        '⚠️ Если ты играешь впервые, попробуй сначала решить примеры из "Проверь себя" ⚠️',
       ],
+      alreadyPlayedToday: 'Ты уже сыграл рейтинговую игру сегодня!',
+      comeBackTomorrow: 'Приходи завтра, чтобы улучшить свой результат!',
 
       // Result card
       resultCardTotalExercisesFieldTitle: 'Всего примеров',

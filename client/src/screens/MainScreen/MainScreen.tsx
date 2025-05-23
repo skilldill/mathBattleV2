@@ -57,13 +57,10 @@ export const MainScreen: React.FC = () => {
                     {t('checkYourself')}
                 </Button>
                 <BlockForAuthUser>
-                    <Button color='success' onClick={() => openModal('settingsDailyRatingsScreen')}>
-                        {t('ratingGame')}
+                    <Button color='success' onClick={() => openModal('ratingsScreen')}>
+                        {t('toLeaderboard')} 🥇
                     </Button>
                 </BlockForAuthUser>
-                <Button onClick={() => openModal('ratingsScreen')}>
-                    {t('leaderboard')}
-                </Button>
                 <BlockForAuthUser>
                     <Button onClick={() => history.push('/player')}>
                         {t('playerTitleScreen')}

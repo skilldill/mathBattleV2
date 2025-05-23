@@ -4,24 +4,13 @@ import { ColumnLayout } from '../../components/ColumnLayout/ColumnLayout';
 import { useTranslation } from 'react-i18next';
 import { useLeaderBoard } from '../../hooks/useLeaderBoard';
 import { useUserStore } from '../../store/userStore';
-import { IonSpinner } from '@ionic/react';
+import { IonSpinner, IonText } from '@ionic/react';
 import { VerticalCenterLayout } from '../../components/VerticalCenterLayout/VerticalCenterLayout';
 import styles from './RatingsScreen.module.css';
 import { msToSeconds } from '../../utils/timeUtils';
+import { Button } from '../../components/Button/Button';
+import { useHistory } from 'react-router-dom';
 // import { mockLeaderboard } from '../../mocks/leaderboardMock';
-
-const getMedalEmoji = (index: number) => {
-    switch (index) {
-        case 0:
-            return '🥇';
-        case 1:
-            return '🥈';
-        case 2:
-            return '🥉';
-        default:
-            return null;
-    }
-};
 
 const getCardStyle = (index: number) => {
     switch (index) {
@@ -38,18 +27,20 @@ const getCardStyle = (index: number) => {
 
 export const RatingsScreen: React.FC = () => {
     const { t } = useTranslation();
-    const { leaderboard, loading, error, fetchLeaderboard } = useLeaderBoard();
+    const { leaderboard, loading, error, fetchLeaderboard, alreadyPlayedToday, checkAlreadyPlayedToday } = useLeaderBoard();
     const userId = useUserStore(state => state.userId);
-
+    const history = useHistory();
     useEffect(() => {
         if (userId) {
             fetchLeaderboard(userId);
+            checkAlreadyPlayedToday(userId);
         }
     }, []); 
 
     // Use mock data for development
     // const displayData = mockLeaderboard;
     const displayData = leaderboard;
+    const ratingGameDescription = t('ratingGameDescription', { returnObjects: true });
 
     if (loading) {
         return (
@@ -66,7 +57,24 @@ export const RatingsScreen: React.FC = () => {
     return (
         <ColumnLayout style={{ gap: '20px' }}>
             <h1>{t('topMathematiciansRatingTitle')}</h1>
-            
+            {alreadyPlayedToday ? (
+                <IonText>
+                    <p>{t('alreadyPlayedToday')}</p>
+                    <p>{t('comeBackTomorrow')}</p>
+                </IonText>
+            ) : (
+                <div>
+                    <IonText>
+                        {(ratingGameDescription as string[]).map((text: string) => (
+                            <p key={text}>{text}</p>
+                        ))}
+                    </IonText>
+                    <Button color='success' onClick={() => history.push('/puzzles-rating')}>
+                        {t('toLeaderboard')} 🥇
+                    </Button>
+                </div>
+            )}
+           
             {/* User's Rating Data */}
             {displayData?.userData && (
                 <Block>
