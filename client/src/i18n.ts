@@ -5,6 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 const resources = {
   en: {
     translation: {
+      play: 'Play',
       finish: 'Finish',
       actionSheetFinishTitle: 'Are you sure you want to finish the game without saving your results?',
       defaultUsername: 'математик',
@@ -83,7 +84,7 @@ const resources = {
   },
   ru: {
     translation: {
-      
+      play: 'Играть',
       finish: 'Завершить',
       actionSheetFinishTitle: 'Ты уверен, что хочешь завершить игру без сохранения результатов?',
       defaultUsername: 'математик',

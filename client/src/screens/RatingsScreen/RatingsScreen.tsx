@@ -35,7 +35,7 @@ export const RatingsScreen: React.FC = () => {
             fetchLeaderboard(userId);
             checkAlreadyPlayedToday(userId);
         }
-    }, []); 
+    }, []);
 
     // Use mock data for development
     // const displayData = mockLeaderboard;
@@ -63,18 +63,18 @@ export const RatingsScreen: React.FC = () => {
                     <p>{t('comeBackTomorrow')}</p>
                 </IonText>
             ) : (
-                <div>
+                <ColumnLayout style={{ gap: '20px' }}>
                     <IonText>
                         {(ratingGameDescription as string[]).map((text: string) => (
                             <p key={text}>{text}</p>
                         ))}
                     </IonText>
-                    <Button color='success' onClick={() => history.push('/puzzles-rating')}>
-                        {t('toLeaderboard')} 🥇
+                    <Button fluid color='success' onClick={() => history.push('/puzzles-rating')}>
+                        {t('play')} 🥇
                     </Button>
-                </div>
+                </ColumnLayout>
             )}
-           
+
             {/* User's Rating Data */}
             {displayData?.userData && (
                 <Block>
@@ -107,17 +107,17 @@ export const RatingsScreen: React.FC = () => {
                 {displayData?.top10.map((player, index) => (
                     <div key={player.userId} className={`${styles.leaderCard} ${getCardStyle(index)}`}>
                         <ColumnLayout style={{ gap: '8px' }}>
-                        <div className={styles.place}>
-                            <span className={styles.placeNumber}>{index + 1}</span>
-                            <p className={styles.leaderName}>{player.username || player.firstName || t('defaultUsername')}</p>
-                        </div>
-                        <div className={styles.leaderInfo}>
-                            <div className={styles.leaderStats}>
-                                <p>{t('accuracy')}: {(player.accuracy * 100).toFixed(1)}%</p>
-                                <p>{t('tasksCompleted')}: {player.tasksResolvedCount}/{player.tasksCount}</p>
-                                <p>{t('totalTime')}: {msToSeconds(player.totalTime)} {t('timeSecondsUnit')}</p>
+                            <div className={styles.place}>
+                                <span className={styles.placeNumber}>{index + 1}</span>
+                                <p className={styles.leaderName}>{player.username || player.firstName || t('defaultUsername')}</p>
                             </div>
-                        </div>
+                            <div className={styles.leaderInfo}>
+                                <div className={styles.leaderStats}>
+                                    <p>{t('accuracy')}: {(player.accuracy * 100).toFixed(1)}%</p>
+                                    <p>{t('tasksCompleted')}: {player.tasksResolvedCount}/{player.tasksCount}</p>
+                                    <p>{t('totalTime')}: {msToSeconds(player.totalTime)} {t('timeSecondsUnit')}</p>
+                                </div>
+                            </div>
                         </ColumnLayout>
                     </div>
                 ))}
