@@ -281,13 +281,20 @@ app.post('/api/result/:id/share', async ({ params }) => {
     throw new Error('Result not found');
   }
 
+  // Check if tasks collection already exists
+  const existingCollection = await TasksCollection.findById(id);
+  if (existingCollection) {
+    return { id: existingCollection.id };
+  }
+
   // Convert tasks to TasksCollection format
   const readableTasks = result.tasks.map(task => ({ task: task.task, result: task.result }));
 
   const tasks = mathService.getTasksFromReadable(readableTasks);
 
-  // Create new TasksCollection
+  // Create new TasksCollection with the same ID as the result
   const tasksCollection = new TasksCollection({
+    _id: id,
     tasks
   });
 
