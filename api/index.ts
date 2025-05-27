@@ -2,6 +2,7 @@ import { Elysia } from 'elysia'
 import { connectDB } from './config/database'
 import { mathService, DIFFICULTIES_LIST } from './services/mathService'
 import { ResultModel } from './models/resultSchema'
+import TasksCollection from './models/tasksSharingSchema'
 
 // Connect to MongoDB
 connectDB()
@@ -269,6 +270,38 @@ app.get('/api/leaderboard', async () => {
   const top10 = fullResults.slice(0, 10);
 
   return top10;
+})
+
+app.post('/api/result/:id/share', async ({ params }) => {
+  const { id } = params;
+  
+  // Find the result by ID
+  const result = await ResultModel.findById(id);
+  if (!result) {
+    throw new Error('Result not found');
+  }
+
+  // Convert tasks to TasksCollection format
+  const readableTasks = result.tasks.map(task => ({ task: task.task, result: task.result }));
+
+  const tasks = mathService.getTasksFromReadable(readableTasks);
+
+  // Create new TasksCollection
+  const tasksCollection = new TasksCollection({
+    tasks
+  });
+
+  // Save the collection
+  const savedCollection = await tasksCollection.save();
+
+  // Return the ID of the created collection
+  return { id: savedCollection.id };
+})
+
+app.get('/api/tasks-collection/:id', async ({ params }) => {
+  const { id } = params;
+  const tasksCollection = await TasksCollection.findById(id);
+  return tasksCollection?.tasks || [];
 })
 
 const port = process.env.PORT ? parseInt(process.env.PORT) : 3000

@@ -32,4 +32,9 @@ export class ApiService {
         const response = await httpClient.get(`/api/daily-rating/${userId}`);
         return response.data;
     }
+
+    static async shareResult(id: string): Promise<{ id: string }> {
+        const response = await httpClient.post(`/api/result/${id}/share`);
+        return response.data;
+    }
 }
