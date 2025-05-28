@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ApiService } from '../api/ApiService';
 import { MathTaskDto, MathTaskResultDto } from '../types/MathTaskDto';
 import { useTimer } from './useTimer';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { Answer } from '../types/common.types';
 import { combineTasksWithAnswers } from '../utils/combineTasksWithAnswers';
 import { useUserStore } from '../store/userStore';
@@ -17,6 +17,7 @@ export const useMathTasks = () => {
     const [isRating, setIsRating] = useState<boolean>(false);
     const history = useHistory();
     const userId = useUserStore((state) => state.userId);
+    const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
         if (tasks.length > 0 && answers.length === tasks.length) {
@@ -26,8 +27,25 @@ export const useMathTasks = () => {
 
     const { startTimer, getTime } = useTimer();
 
+    const fetchTasksCollection = async (id: string) => {
+        try {
+            const data = await ApiService.getTasksCollection(id);
+            setTasks(data);
+            startTimer();
+        } catch (err) {
+            setError('Failed to fetch tasks collection');
+        } finally {
+            setLoading(false);
+        }
+    }
+
     const fetchTasks = async (count: number, difficulty: string) => {
         try {
+            if (id) {
+                await fetchTasksCollection(id);
+                return;
+            }
+
             setLoading(true);
             setDifficulty(difficulty);
             const data = await ApiService.getMathTasks(count, difficulty);

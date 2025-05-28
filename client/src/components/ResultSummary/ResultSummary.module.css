@@ -1,13 +1,17 @@
 .resultText {
-    font-size: 20px;
-    font-weight: 500;
-    color: #ffffffaa;
     margin: 0;
-    padding: 0;
-} 
+    font-size: 16px;
+    color: var(--text-color);
+}
 
 .resultTextValue {
-    font-size: 20px;
-    font-weight: 500;
-    color: #ffffff;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.shareLink {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--success-color);
+    text-align: center;
 }

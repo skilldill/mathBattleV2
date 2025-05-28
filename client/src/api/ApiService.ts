@@ -37,4 +37,9 @@ export class ApiService {
         const response = await httpClient.post(`/api/result/${id}/share`);
         return response.data;
     }
+
+    static async getTasksCollection(id: string): Promise<MathTaskDto[]> {
+        const response = await httpClient.get(`/api/tasks-collection/${id}`);
+        return response.data;
+    }
 }

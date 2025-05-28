@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
 import { Telegraf } from 'telegraf';
-import { START_MESSAGE_MAP, QUESTION_MESSAGE_MAP, BUTTON_MESSAGE_MAP, MESSAGE_BUTTON_TEXT } from './constants';
+import { START_MESSAGE_MAP, QUESTION_MESSAGE_MAP, BUTTON_MESSAGE_MAP, MESSAGE_BUTTON_TEXT, SHARED_TASKS_MESSAGE_MAP } from './constants';
 import mongoose from 'mongoose';
 import { ResultModel } from './db/ResultModel';
 import { UserModel } from './db/UserModel';
@@ -31,6 +31,7 @@ export function connectDB() {
 connectDB();
 
 const getUrlWebApp = (userId, username) => `https://app.math-battle.ru?u91x=${userId}&x_3z9=${username}`;
+const getUrlWithSharedTasks = (userId, username, sharedTasksId) => `https://app.math-battle.ru/#/shared-puzzles/${sharedTasksId}?u91x=${userId}&x_3z9=${username}`;
 
 const openWebApp = async (ctx) => {
   if (!ctx || !ctx.from) return getUrlWebApp('', '');
@@ -61,6 +62,22 @@ const openWebApp = async (ctx) => {
 }
 
 bot.start(async (ctx) => {
+  // шаблон для payload - id,time,tasksCount,correctAnswersCount
+  const sharedTasksId = ctx.payload;
+  
+  // Ссылкой поделились с задачей
+  if (sharedTasksId) {
+    return ctx.reply(SHARED_TASKS_MESSAGE_MAP[ctx.from.language_code] || SHARED_TASKS_MESSAGE_MAP['en'], {
+      reply_markup: {
+        inline_keyboard: [[{
+          text: MESSAGE_BUTTON_TEXT[ctx.from.language_code] || MESSAGE_BUTTON_TEXT['en'],
+          web_app: { url: getUrlWithSharedTasks(ctx.from.id, ctx.from.username, sharedTasksId) }
+        }]],
+        resize_keyboard: true
+      }
+    });
+  }
+
   const message = START_MESSAGE_MAP[ctx.from.language_code] || START_MESSAGE_MAP['en'];
   const url = await openWebApp(ctx);
 
@@ -93,14 +110,14 @@ bot.start(async (ctx) => {
     const questionMessage = QUESTION_MESSAGE_MAP[ctx.from.language_code] || QUESTION_MESSAGE_MAP['en'];
     const buttonMessage = BUTTON_MESSAGE_MAP[ctx.from.language_code] || BUTTON_MESSAGE_MAP['en'];
 
-  ctx.reply(questionMessage, {
-    reply_markup: {
-      keyboard: [[{
-        text: buttonMessage,
-        web_app: { url }
-      }]],
-      resize_keyboard: true
-      }
+    ctx.reply(questionMessage, {
+      reply_markup: {
+        keyboard: [[{
+          text: buttonMessage,
+          web_app: { url }
+        }]],
+        resize_keyboard: true
+        }
     })
   }, 3000)
 })

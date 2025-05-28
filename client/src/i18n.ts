@@ -31,7 +31,8 @@ const resources = {
       solvingExercisesTitle: 'Solving exercises',
       startTrainingGame: 'Let\'s go!',
       playerTitleScreen: 'Your personal results',
-      
+      share: 'Share',
+      successCopiedToClipboard: 'Successfully copied to clipboard ✅',
       // Rating game
       toLeaderboard: 'To Leaderboard',
       settingRatingGameScreenTitle: '🏆 Rating Game',
@@ -109,7 +110,8 @@ const resources = {
       solvingExercisesTitle: 'Решение примеров',
       startTrainingGame: 'Полетели!',
       playerTitleScreen: 'Твои личные результаты',
-
+      share: 'Поделиться',
+      successCopiedToClipboard: 'Успешно скопировано в буфер обмена ✅',
       // Rating game
       toLeaderboard: 'В таблицу лидеров',
       settingRatingGameScreenTitle: '🏆 Рейтинговая игра',

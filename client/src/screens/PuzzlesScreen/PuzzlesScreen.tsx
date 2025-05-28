@@ -32,7 +32,6 @@ export const PuzzlesScreen: React.FC<PuzzlesScreenProps> = ({ isRating }) => {
 
   useEffect(() => {
     setIsRating(isRating);
-    console.log('isRating', isRating);
   }, [isRating]);
 
   useEffect(() => {
