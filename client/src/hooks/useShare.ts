@@ -1,8 +1,11 @@
-import { useState } from "react";
 import { ApiService } from "../api/ApiService";
+import { useIonToast } from "@ionic/react";
+import { useTranslation } from "react-i18next";
+
 
 export const useShare = () => {
-    const [success, setSuccess] = useState(false);
+    const [presentToast] = useIonToast();
+    const { t } = useTranslation();
 
     const handleShare = async (resultId: string) => {
         try {
@@ -10,11 +13,16 @@ export const useShare = () => {
             const sharedLink = `${import.meta.env.VITE_BOT_LINK}?start=${id}`;
 
             await navigator.clipboard.writeText(sharedLink);
-            setSuccess(true)
+            presentToast({
+                message: t('successCopiedToClipboard'),
+                duration: 2000,
+                color: 'success',
+                position: 'top',
+            });
         } catch (error) {
             console.error('Failed to share:', error);
         }
     }
 
-    return { handleShare, success, setSuccess };
+    return { handleShare };
 }
