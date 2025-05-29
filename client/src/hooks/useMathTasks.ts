@@ -15,6 +15,7 @@ export const useMathTasks = () => {
     const [answers, setAnswers] = useState<Answer[]>([]);
     const [difficulty, setDifficulty] = useState<string>('easy');
     const [isRating, setIsRating] = useState<boolean>(false);
+    const [tasksCollectionId, setTasksCollectionId] = useState<string>();
     const history = useHistory();
     const userId = useUserStore((state) => state.userId);
     const { id } = useParams<{ id: string }>();
@@ -29,8 +30,10 @@ export const useMathTasks = () => {
 
     const fetchTasksCollection = async (id: string) => {
         try {
-            const data = await ApiService.getTasksCollection(id);
-            setTasks(data);
+            const tasksCollection = await ApiService.getTasksCollection(id);
+            setTasks(tasksCollection.tasks);
+            setTasksCollectionId(tasksCollection.id);
+            setDifficulty(tasksCollection.difficulty);
             startTimer();
         } catch (err) {
             setError('Failed to fetch tasks collection');
@@ -81,7 +84,8 @@ export const useMathTasks = () => {
             userId: userId || 'common',
             time: getTime(),
             difficulty,
-            isRating
+            isRating,
+            tasksCollectionId
         });
 
         try {

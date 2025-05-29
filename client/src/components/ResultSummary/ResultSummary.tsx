@@ -56,3 +56,5 @@ export const ResultSummary: React.FC<ResultSummaryProps> = ({ result }) => {
         </Block>
     );
 };
+
+// https://t.me/MathlyBattleBot?start=683777fd58803f04e98dbf9d

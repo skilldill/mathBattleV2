@@ -1,5 +1,5 @@
 import { httpClient } from './httpClient';
-import { MathTaskDto, ResultDto, ResultListDto, SaveResultDto } from '../types/MathTaskDto';
+import { MathTaskDto, ResultDto, ResultListDto, SaveResultDto, TasksCollectionDto } from '../types/MathTaskDto';
 import { LeaderboardResponseDto } from '../types/common.types';
 
 export class ApiService {
@@ -38,7 +38,7 @@ export class ApiService {
         return response.data;
     }
 
-    static async getTasksCollection(id: string): Promise<MathTaskDto[]> {
+    static async getTasksCollection(id: string): Promise<TasksCollectionDto> {
         const response = await httpClient.get(`/api/tasks-collection/${id}`);
         return response.data;
     }

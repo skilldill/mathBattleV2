@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useMathTasks } from '../../hooks/useMathTasks';
 import { ColumnLayout, ProgressBar, ScreenLayout } from '../../components';
-import { IonActionSheet, IonButton, IonSpinner } from '@ionic/react';
+import { IonActionSheet, IonSpinner } from '@ionic/react';
 import { VerticalCenterLayout } from '../../components/VerticalCenterLayout/VerticalCenterLayout';
 import { MathTaskCard } from '../../components/MathTaskCard/MathTaskCard';
 import { useHistory } from 'react-router';

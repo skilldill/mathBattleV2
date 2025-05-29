@@ -55,7 +55,8 @@ const TasksCollectionSchema: Schema = new Schema({
   updatedAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  difficulty: { type: String, required: true }, // Например: "easy", "medium", "hard"
 }, {
   timestamps: true,
   versionKey: false,
