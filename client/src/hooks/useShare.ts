@@ -3,6 +3,7 @@ import { useIonToast } from "@ionic/react";
 import { useTranslation } from "react-i18next";
 import { ResultDto } from "../types/MathTaskDto";
 import { useState } from "react";
+import { msToSeconds } from "../utils/timeUtils";
 
 export const useShare = (result: ResultDto) => {
     const [tasksCollectionId, setTasksCollectionId] = useState<string>();
@@ -22,7 +23,7 @@ export const useShare = (result: ResultDto) => {
         const url = `${import.meta.env.VITE_BOT_LINK}?start=${result.id}`;
         const text = `${t('textForShare', {
             tasksCount: result.tasks.length,
-            time: result.time,
+            time: msToSeconds(result.time),
         })}\n${url}`;
         const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
 
