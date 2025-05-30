@@ -1,18 +1,24 @@
 import { ApiService } from "../api/ApiService";
 import { useIonToast } from "@ionic/react";
 import { useTranslation } from "react-i18next";
+import { ResultDto } from "../types/MathTaskDto";
 
-
-export const useShare = () => {
+export const useShare = (result: ResultDto) => {
     const [presentToast] = useIonToast();
     const { t } = useTranslation();
 
-    const handleShare = async (resultId: string) => {
+    const handleShare = async () => {
         try {
-            const { id } = await ApiService.shareResult(resultId);
+            const { id } = await ApiService.shareResult(result.id);
             const sharedLink = `${import.meta.env.VITE_BOT_LINK}?start=${id}`;
+            const sharedText = t('textForShare', {
+                tasksCount: result.tasks.length,
+                time: result.time,
+            });
 
-            await navigator.clipboard.writeText(sharedLink);
+            const massageForShare = `${sharedText}\n${sharedLink}`;
+
+            await navigator.clipboard.writeText(massageForShare);
             presentToast({
                 message: t('successCopiedToClipboard'),
                 duration: 2000,

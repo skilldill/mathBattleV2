@@ -81,6 +81,11 @@ const resources = {
       tasksCompleted: 'Tasks completed',
       averageTime: 'Average time',
       totalTime: 'Total time',
+
+      // tasks share block
+      tasksShareBlockButtonText: 'Share tasks',
+      tasksShareBlockDescription: 'Share the tasks with your friends to challenge them!',
+      textForShare: 'I solved {{tasksCount}} math puzzles in @MathlyBattleBot in {{time}} seconds. Try to beat my score!',
     }
   },
   ru: {
@@ -159,6 +164,10 @@ const resources = {
       tasksCompleted: 'Выполнено заданий',
       averageTime: 'Среднее время',
       totalTime: 'Всего времени',
+      // tasks share block
+      tasksShareBlockButtonText: 'Поделиться примерами',
+      tasksShareBlockDescription: 'Поделись примерами с друзьями, чтобы они тоже могли попробовать их решить!',
+      textForShare: 'Я решил {{tasksCount}} математических примеров в @MathlyBattleBot за {{time}} секунд. Попробуй решить быстрее!',
     }
   }
 };

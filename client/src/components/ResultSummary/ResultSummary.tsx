@@ -5,7 +5,6 @@ import { ResultDto } from '../../types/MathTaskDto';
 import { ColumnLayout } from '../ColumnLayout/ColumnLayout';
 import { calculateAverageTimePerTask, msToSeconds } from '../../utils/timeUtils';
 import { useTranslation } from 'react-i18next';
-import { ButtonShareTasks } from '../ButtonShareTasks/ButtonShareTasks';
 
 interface ResultSummaryProps {
     result: ResultDto;
@@ -13,7 +12,6 @@ interface ResultSummaryProps {
 
 export const ResultSummary: React.FC<ResultSummaryProps> = ({ result }) => {
     const { t } = useTranslation();
-    
 
     return (
         <Block>
@@ -33,12 +31,7 @@ export const ResultSummary: React.FC<ResultSummaryProps> = ({ result }) => {
                 <p className={styles.resultText}>
                     {t('resultCardAverageTimeFieldTitle')}: <span className={styles.resultTextValue}>{calculateAverageTimePerTask(result.time, result.tasks.length)} {t('timeSecondsUnit')}</span>
                 </p>
-                <div style={{ marginTop: '10px' }}>
-                    <ButtonShareTasks resultId={result.id} />
-                </div>
             </ColumnLayout>
         </Block>
     );
 };
-
-// https://t.me/MathlyBattleBot?start=683777fd58803f04e98dbf9d
