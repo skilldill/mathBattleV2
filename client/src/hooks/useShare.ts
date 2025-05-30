@@ -19,6 +19,8 @@ export const useShare = (result: ResultDto) => {
     }
 
     const nativeShare = async () => {
+        if (!tasksCollectionId) await fetchTasksCollectionId();
+
         const url = `${import.meta.env.VITE_BOT_LINK}?start=${tasksCollectionId}`;
         const text = `${t('textForShare', {
             tasksCount: result.tasks.length,

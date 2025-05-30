@@ -31,7 +31,7 @@ export function connectDB() {
 connectDB();
 
 const getUrlWebApp = (userId, username) => `https://app.math-battle.ru?u91x=${userId}&x_3z9=${username}`;
-const getUrlWithSharedTasks = (userId, username, sharedTasksId) => `https://app.math-battle.ru/#/shared-puzzles/${sharedTasksId}?u91x=${userId}&x_3z9=${username}`;
+const getUrlWithSharedTasks = (userId, username, sharedTasksId) => `https://app.math-battle.ru?u91x=${userId}&x_3z9=${username}#/shared-puzzles/${sharedTasksId}`;
 
 const openWebApp = async (ctx) => {
   if (!ctx || !ctx.from) return getUrlWebApp('', '');
