@@ -4,7 +4,7 @@ import { START_MESSAGE_MAP, QUESTION_MESSAGE_MAP, BUTTON_MESSAGE_MAP, MESSAGE_BU
 import mongoose from 'mongoose';
 import { ResultModel } from './db/ResultModel';
 import { UserModel } from './db/UserModel';
-
+import { initApi } from './initApi';
 config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -29,6 +29,7 @@ export function connectDB() {
 }
 // Вызываем функцию подключения
 connectDB();
+const botApi = initApi();
 
 const getUrlWebApp = (userId, username) => `https://app.math-battle.ru?u91x=${userId}&x_3z9=${username}`;
 const getUrlWithSharedTasks = (userId, username, sharedTasksId) => `https://app.math-battle.ru?u91x=${userId}&x_3z9=${username}#/shared-puzzles/${sharedTasksId}`;
@@ -160,6 +161,13 @@ bot.command('users', async (ctx) => {
     ctx.reply('Ошибка при получении пользователей. Попробуйте позже!');
   }
 })
+
+// Send message to user
+botApi.post('/send-message', async (req, res) => {
+  const { userId, message } = req.body;
+  await bot.telegram.sendMessage(userId, message);
+  res.json({ success: true });
+});
 
 // bot.command('users', async (ctx) => {
 //   if (`${ctx.from.id}` !== `${ADMIN_ID}`) return;

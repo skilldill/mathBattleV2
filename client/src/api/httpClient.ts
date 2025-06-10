@@ -6,3 +6,10 @@ export const httpClient = axios.create({
         'Content-Type': 'application/json',
     },
 });
+
+export const botHttpClient = axios.create({
+    baseURL: '/bot',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});

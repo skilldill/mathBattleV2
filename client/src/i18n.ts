@@ -88,6 +88,7 @@ const resources = {
       textForShare: 'I solved {{tasksCount}} math puzzles in @MathlyBattleBot in {{time}} seconds. Try to beat my score!',
       textSharePointerForHandleCopy: 'Just copy this message 👇 and send it to your friend in Telegram:',
       noTasksAvailable: 'No tasks available',
+      attentionCheckSharingMessage: 'Check your bot\'s chat, there\'s a message you can send to your friend to try solving the puzzles!',
     }
   },
   ru: {
@@ -172,6 +173,7 @@ const resources = {
       textForShare: 'Я решил {{tasksCount}} математических примеров в @MathlyBattleBot за {{time}} секунд. Попробуй решить быстрее!',
       textSharePointerForHandleCopy: 'Просто скопируй это сообщение 👇 и кинь другу в Телеграм:',
       noTasksAvailable: 'Нет доступных заданий',
+      attentionCheckSharingMessage: 'Проверь свой чат с ботом, там сообщение, которое ты можешь отправить другу, чтобы он тоже смог попробовать решить примеры!',
     }
   }
 };

@@ -53,10 +53,13 @@ services:
     restart: unless-stopped
     environment:
       - MONGODB_URI=mongodb://mongodb:27017/math
+      - BOT_API_PORT=4828
     depends_on:
       - mongodb
     networks:
       - app-network
+    ports:
+      - "4828:4828"
 
   site:
     build: ./site

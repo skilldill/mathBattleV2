@@ -1,4 +1,4 @@
-import { httpClient } from './httpClient';
+import { botHttpClient, httpClient } from './httpClient';
 import { MathTaskDto, ResultDto, ResultListDto, SaveResultDto, TasksCollectionDto } from '../types/MathTaskDto';
 import { LeaderboardResponseDto } from '../types/common.types';
 
@@ -40,6 +40,11 @@ export class ApiService {
 
     static async getTasksCollection(id: string): Promise<TasksCollectionDto> {
         const response = await httpClient.get(`/api/tasks-collection/${id}`);
+        return response.data;
+    }
+
+    static async botSendMessage(userId: string, message: string): Promise<void> {
+        const response = await botHttpClient.post('/send-message', { userId, message });
         return response.data;
     }
 }

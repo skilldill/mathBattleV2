@@ -6,10 +6,12 @@ import { ApiService } from "../../api/ApiService";
 import { useIonModal, useIonToast } from "@ionic/react";
 import { msToSeconds } from "../../utils/timeUtils";
 import { TextareaShare } from "./TextareaShare";
+import { useBotApi } from "../../hooks/useBotApi";
 
 export const ButtonShareTasks: FC<{ result: ResultDto }> = ({ result }) => {
     const { t } = useTranslation();
     const [presentToast] = useIonToast();
+    const { sendMessage } = useBotApi();
     
     const fetchTasksCollectionId = async (): Promise<string | undefined> => {
         try {
@@ -56,7 +58,15 @@ export const ButtonShareTasks: FC<{ result: ResultDto }> = ({ result }) => {
             });
         } catch (error) {
             console.error('Failed to share:', error);
-            presentModal({ breakpoints: [0, 0.5], initialBreakpoint: 0.5 });
+
+            await sendMessage(result.userId, getFallbackShareText());
+            presentToast({
+                message: t('attentionCheckSharingMessage'),
+                duration: 2000,
+                color: 'success',
+                position: 'top',
+            });
+            // presentModal({ breakpoints: [0, 0.5], initialBreakpoint: 0.5 });
         }
     }
     
