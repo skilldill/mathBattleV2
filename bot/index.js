@@ -62,6 +62,70 @@ const openWebApp = async (ctx) => {
   return getUrlWebApp(ctx.from.id, ctx.from.username);
 }
 
+// TODO: remove this function later
+// Now this message very big for telegram
+const sendUsers_DEPRECATED = async (ctx) => {
+  if (`${ctx.from.id}` !== `${ADMIN_ID}`) return;
+
+  try {
+    const users = await UserModel.find();
+    const results = await ResultModel.aggregate([
+      {
+        $group: {
+          _id: "$userId",
+          gamesPlayed: { $sum: 1 }
+        }
+      }
+    ]);
+
+    // Create a map of userId to games played
+    const gamesMap = results.reduce((acc, curr) => {
+      acc[curr._id] = curr.gamesPlayed;
+      return acc;
+    }, {});
+
+    if (users.length === 0) {
+      ctx.reply('Пока что нет математиков в боте нет 🤖');
+      return;
+    }
+
+    ctx.reply(users.map(user =>
+      `👨‍🎓 ${user.username} ${user.firstName} ${user.lastName} ${user.language}\n🎮 Игр сыграно: ${gamesMap[user.userId] || 0}`
+    ).join('\n\n'));
+  } catch (error) {
+    console.error('Ошибка при получении пользователей:', error);
+    ctx.reply('Ошибка при получении пользователей. Попробуйте позже!');
+  }
+}
+
+const sendInfoAboutUsers = async (ctx) => {
+  if (`${ctx.from.id}` !== `${ADMIN_ID}`) return;
+  
+  try {
+    // Get total users count
+    const totalUsers = await UserModel.countDocuments();
+
+    // Get total games played
+    const gamesResult = await ResultModel.aggregate([
+      {
+        $group: {
+          _id: null,
+          totalGames: { $sum: 1 }
+        }
+      }
+    ]);
+
+    const totalGames = gamesResult[0]?.totalGames || 0;
+
+    await ctx.reply(
+      `📊 Статистика:\n\n👥 Всего пользователей: ${totalUsers}\n🎮 Всего игр сыграно: ${totalGames}`
+    );
+  } catch (error) {
+    console.error('Ошибка при получении статистики:', error);
+    await ctx.reply('Ошибка при получении статистики. Попробуйте позже!');
+  }
+}
+
 bot.start(async (ctx) => {
   // шаблон для payload - id,time,tasksCount,correctAnswersCount
   const sharedTasksId = ctx.payload;
@@ -129,37 +193,7 @@ bot.command('health', (ctx) => {
 })
 
 bot.command('users', async (ctx) => {
-  if (`${ctx.from.id}` !== `${ADMIN_ID}`) return;
-
-  try {
-    const users = await UserModel.find();
-    const results = await ResultModel.aggregate([
-      {
-        $group: {
-          _id: "$userId",
-          gamesPlayed: { $sum: 1 }
-        }
-      }
-    ]);
-
-    // Create a map of userId to games played
-    const gamesMap = results.reduce((acc, curr) => {
-      acc[curr._id] = curr.gamesPlayed;
-      return acc;
-    }, {});
-
-    if (users.length === 0) {
-      ctx.reply('Пока что нет математиков в боте нет 🤖');
-      return;
-    }
-
-    ctx.reply(users.map(user =>
-      `👨‍🎓 ${user.username} ${user.firstName} ${user.lastName} ${user.language}\n🎮 Игр сыграно: ${gamesMap[user.userId] || 0}`
-    ).join('\n\n'));
-  } catch (error) {
-    console.error('Ошибка при получении пользователей:', error);
-    ctx.reply('Ошибка при получении пользователей. Попробуйте позже!');
-  }
+  await sendInfoAboutUsers(ctx);
 })
 
 // Send message to user
@@ -168,33 +202,6 @@ botApi.post('/send-message', async (req, res) => {
   await bot.telegram.sendMessage(userId, message);
   res.json({ success: true });
 });
-
-// bot.command('users', async (ctx) => {
-//   if (`${ctx.from.id}` !== `${ADMIN_ID}`) return;
-
-//   try {
-//     const uniquePlayers = await ResultModel.aggregate([
-//       {
-//         $group: { _id: "$userId" }
-//       },
-//       {
-//         $project: { _id: 0, userId: "$_id" }
-//       },
-//       { $sort: { userId: 1 } } // сортируем по алфавиту (опционально)
-//     ]);
-
-//     if (uniquePlayers.length === 0) {
-//       return ctx.reply('Пока что нет игроков.');
-//     }
-
-//     const usersList = uniquePlayers.map((u, idx) => `${idx + 1}. ${u.userId}`).join('\n');
-
-//     await ctx.reply(`👥 Уникальные игроки:\n\n${usersList}`);
-//   } catch (error) {
-//     console.error('Ошибка при получении уникальных игроков:', error);
-//     await ctx.reply('Ошибка при получении списка игроков. Попробуйте позже!');
-//   }
-// })
 
 bot.launch()
 console.log('🤖 Math Battle Bot работает!')
