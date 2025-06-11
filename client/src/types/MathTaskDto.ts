@@ -21,6 +21,7 @@ export type SaveResultDto = {
     time: number;
     difficulty: string;
     isRating: boolean;
+    tasksCollectionId?: string;
 }
 
 export type ResultDto = {
@@ -41,4 +42,10 @@ export type ResultListDto = {
     totalErrors: number;
     totalCorrectAnswers: number;
     isRating: boolean;
+}
+
+export type TasksCollectionDto = {
+    id: string;
+    tasks: MathTaskDto[];
+    difficulty: string;
 }

@@ -6,10 +6,11 @@ import { IonSpinner, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCh
 import { VerticalCenterLayout } from "../../components/VerticalCenterLayout/VerticalCenterLayout";
 import { Button } from "../../components/Button/Button";
 import { ResultTaskCard } from "../../components/ResultTaskCard/ResultTaskCard";
-import { Block } from "../../components/Glass/Block";
+
 import { ResultSummary } from "../../components/ResultSummary/ResultSummary";
 import { useTranslation } from 'react-i18next';
 import { StickyBlock } from "../../components/StickyBlock/StickyBlock";
+import { TasksShareBlock } from "../../components/TasksShareBlock/TasksShareBlock";
 
 export const PuzzlesResultScreen: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -32,6 +33,7 @@ export const PuzzlesResultScreen: React.FC = () => {
                     <ColumnLayout>
                         <h1>{t('results')}</h1>
                         <ResultSummary result={result} />
+                        <TasksShareBlock result={result} />
                         {result.tasks.map((task) => (
                             <ResultTaskCard key={task.task} task={task} />
                         ))}

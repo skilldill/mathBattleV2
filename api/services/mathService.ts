@@ -5,6 +5,13 @@ export const MATH_DIVISION = '/';
 
 export const SIMPLE_ACTIONS_NAMES_LIST = ['plus', 'minus'];
 export const ALL_ACTIONS_NAMES_LIST = ['plus', 'minus', 'multiply', 'divide'];
+export const ACTIONS_SYMBOL_TO_NAME_MAP = {
+    '+': ALL_ACTIONS_NAMES_LIST[0],
+    '-': ALL_ACTIONS_NAMES_LIST[1],
+    '*': ALL_ACTIONS_NAMES_LIST[2],
+    '/': ALL_ACTIONS_NAMES_LIST[3],
+};
+
 type Difficulty = 'easy' | 'medium' | 'hard' | 'combo' | 'easy-light';
 
 export const DIFFICULTIES_LIST = ['easy', 'medium', 'hard', 'combo', 'easy-light'];
@@ -213,6 +220,60 @@ export class MathTasksService {
                     tasks.push(task);
                 }
                 break;
+        }
+
+        return tasks;
+    }
+
+    getTasksFromReadable(simpleTasks: { task: string, result: number }[]): MathTask[] {
+        const tasks: MathTask[] = [];
+
+        for (const simpleTask of simpleTasks) {
+            // Remove all spaces
+            const cleanTask = simpleTask.task.replace(/\s+/g, '');
+            
+            // Extract numbers and operators while preserving parentheses
+            const numbers: number[] = [];
+            const operators: string[] = [];
+            
+            let currentNumber = '';
+            let inParentheses = false;
+            
+            for (let i = 0; i < cleanTask.length; i++) {
+                const char = cleanTask[i];
+                
+                if (char === '(') {
+                    inParentheses = true;
+                    continue;
+                }
+                
+                if (char === ')') {
+                    inParentheses = false;
+                    continue;
+                }
+                
+                if ('+-*/'.includes(char)) {
+                    if (currentNumber) {
+                        numbers.push(Number(currentNumber));
+                        currentNumber = '';
+                    }
+                    operators.push(char);
+                } else {
+                    currentNumber += char;
+                }
+            }
+            
+            if (currentNumber) {
+                numbers.push(Number(currentNumber));
+            }
+
+            tasks.push({
+                taskArgs: numbers,
+                taskActions: operators.map(operator => ACTIONS_SYMBOL_TO_NAME_MAP[operator as keyof typeof ACTIONS_SYMBOL_TO_NAME_MAP]),
+                readableTask: simpleTask.task,
+                result: simpleTask.result,
+                variants: this.getResultVariants(simpleTask.result)
+            });
         }
 
         return tasks;

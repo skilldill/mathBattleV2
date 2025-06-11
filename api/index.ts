@@ -2,6 +2,7 @@ import { Elysia } from 'elysia'
 import { connectDB } from './config/database'
 import { mathService, DIFFICULTIES_LIST } from './services/mathService'
 import { ResultModel } from './models/resultSchema'
+import TasksCollection from './models/tasksSharingSchema'
 
 // Connect to MongoDB
 connectDB()
@@ -25,14 +26,15 @@ app.post('/api/math-tasks', ({ body }) => {
 })
 
 app.post('/api/result', async ({ body }) => {
-  const { tasks, time, userId, difficulty, isRating } = body;
-  console.log(tasks, time, userId, difficulty);
+  const { tasks, time, userId, difficulty, isRating, tasksCollectionId } = body;
+
   const result = new ResultModel({
     tasks,
     time,
     userId,
     difficulty,
-    isRating
+    isRating,
+    tasksCollectionId: tasksCollectionId || null
   });
   const savedResult = await result.save();
 
@@ -269,6 +271,47 @@ app.get('/api/leaderboard', async () => {
   const top10 = fullResults.slice(0, 10);
 
   return top10;
+})
+
+app.post('/api/result/:id/share', async ({ params }) => {
+  const { id } = params;
+  
+  // Find the result by ID
+  const result = await ResultModel.findById(id);
+  if (!result) {
+    throw new Error('Result not found');
+  }
+
+  // Check if tasks collection already exists
+  const existingCollection = await TasksCollection.findById(id);
+  if (existingCollection) {
+    return { id: existingCollection.id };
+  }
+
+  // Convert tasks to TasksCollection format
+  const readableTasks = result.tasks.map(task => ({ task: task.task, result: task.result }));
+
+  const tasks = mathService.getTasksFromReadable(readableTasks);
+
+  // Create new TasksCollection with the same ID as the result
+  const tasksCollection = new TasksCollection({
+    _id: id,
+    tasks,
+    difficulty: result.difficulty
+  });
+
+  // Save the collection
+  const savedCollection = await tasksCollection.save();
+
+  // Return the ID of the created collection
+  return { id: savedCollection.id };
+})
+
+app.get('/api/tasks-collection/:id', async ({ params }) => {
+  const { id } = params;
+  const tasksCollection = await TasksCollection.findById(id);
+  console.log(tasksCollection?.difficulty);
+  return tasksCollection;
 })
 
 const port = process.env.PORT ? parseInt(process.env.PORT) : 3000

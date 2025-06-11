@@ -26,6 +26,7 @@ const ResultSchema = new mongoose.Schema({
   time: { type: Number, required: true }, // Общее время сессии
   difficulty: { type: String, required: true }, // Например: "easy", "medium", "hard"
   createdAt: { type: Date, default: Date.now },
+  tasksCollectionId: { type: String, required: false }
 }, {
   versionKey: false,
   toJSON: {
