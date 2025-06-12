@@ -119,8 +119,13 @@ import "../assets/theme.css";
 		transition: all 0.3s ease;
 		box-sizing: border-box;
 		background-color: var(--glass-button-bg);
-		border: 1px solid var(--glass-border);
+		
 		color: var(--glass-text);
+	}
+
+	[data-theme="dark"] .telegramButton {
+		border-top: 1px solid var(--glass-border);
+		border-right: 1px solid var(--glass-border);
 	}
 
 	.telegramButton:hover {
