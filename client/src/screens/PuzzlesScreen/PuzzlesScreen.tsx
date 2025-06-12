@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useMathTasks } from '../../hooks/useMathTasks';
 import { ColumnLayout, ProgressBar, ScreenLayout } from '../../components';
-import { IonActionSheet, IonButton, IonSpinner } from '@ionic/react';
+import { IonActionSheet, IonSpinner } from '@ionic/react';
 import { VerticalCenterLayout } from '../../components/VerticalCenterLayout/VerticalCenterLayout';
 import { MathTaskCard } from '../../components/MathTaskCard/MathTaskCard';
 import { useHistory } from 'react-router';
@@ -32,7 +32,6 @@ export const PuzzlesScreen: React.FC<PuzzlesScreenProps> = ({ isRating }) => {
 
   useEffect(() => {
     setIsRating(isRating);
-    console.log('isRating', isRating);
   }, [isRating]);
 
   useEffect(() => {
@@ -66,37 +65,48 @@ export const PuzzlesScreen: React.FC<PuzzlesScreenProps> = ({ isRating }) => {
         <VerticalCenterLayout>
           <IonSpinner></IonSpinner>
         </VerticalCenterLayout>
-        ) : (
+      ) : tasks.length === 0 ? (
+        <VerticalCenterLayout>
+          <ColumnLayout>
+            <h2>{t('noTasksAvailable')} 🤷‍♂️</h2>
+            <Button variant='outline' onClick={() => history.push('/')}>
+              {t('toHome')}
+            </Button>
+          </ColumnLayout>
+        </VerticalCenterLayout>
+      ) : (
+        <>
           <ColumnLayout withPadding>
             <ProgressBar progress={currentTaskId / tasks.length * 100} />
             <MathTaskCard task={tasks[currentTaskId]} onVariantClick={handleVariantClick} />
           </ColumnLayout>
-        )}
-        <ColumnLayout withPadding>
-          <Button variant='outline' color='danger' onClick={() => setIsActionSheetOpen(true)}>{t('finish')}</Button>
-        </ColumnLayout>
-        <IonActionSheet
-          isOpen={isActionSheetOpen}
-          header={t('actionSheetFinishTitle')}
-          buttons={[
-            {
-              text: t('finish'),
-              role: 'destructive',
-              data: {
-                action: 'close',
-              },
+          <ColumnLayout withPadding>
+            <Button variant='outline' color='danger' onClick={() => setIsActionSheetOpen(true)}>{t('finish')}</Button>
+          </ColumnLayout>
+        </>
+      )}
+      <IonActionSheet
+        isOpen={isActionSheetOpen}
+        header={t('actionSheetFinishTitle')}
+        buttons={[
+          {
+            text: t('finish'),
+            role: 'destructive',
+            data: {
+              action: 'close',
             },
-            {
-              text: t('continueSolving'),
-              role: 'cancel',
-              data: {
-                action: 'cancel',
-              },
+          },
+          {
+            text: t('continueSolving'),
+            role: 'cancel',
+            data: {
+              action: 'cancel',
             },
-          ]}
-          onDidDismiss={handleActionClick}
-          onWillDismiss={() => setIsActionSheetOpen(false)}
-        ></IonActionSheet>
+          },
+        ]}
+        onDidDismiss={handleActionClick}
+        onWillDismiss={() => setIsActionSheetOpen(false)}
+      ></IonActionSheet>
     </ScreenLayout>
   );
 };

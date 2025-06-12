@@ -58,3 +58,26 @@ export const MESSAGE_BUTTON_TEXT = {
     'ru': 'ПОЛЕТЕЛИ!',
     'en': 'LET\'S GO!',
 }
+
+export const SHARED_TASKS_MESSAGE_RU = `
+Тебе кинули вызов! 
+Кто-то решил примеры очень быстро и думает, что ты с ними не справишься!
+
+Ты можешь проверить это и доказать, что ты математик!
+
+Жми кнопку ниже и вступай в игру!
+`;
+
+export const SHARED_TASKS_MESSAGE_EN = `
+You've been challenged!
+Someone solved the exercises very quickly and thinks you can't handle them!
+
+You can check this and prove that you are a mathematician!
+
+Click the button below to join the game!
+`;
+
+export const SHARED_TASKS_MESSAGE_MAP = {
+    'ru': SHARED_TASKS_MESSAGE_RU,
+    'en': SHARED_TASKS_MESSAGE_EN,
+}

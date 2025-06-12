@@ -26,14 +26,15 @@ app.post('/api/math-tasks', ({ body }) => {
 })
 
 app.post('/api/result', async ({ body }) => {
-  const { tasks, time, userId, difficulty, isRating } = body;
-  console.log(tasks, time, userId, difficulty);
+  const { tasks, time, userId, difficulty, isRating, tasksCollectionId } = body;
+
   const result = new ResultModel({
     tasks,
     time,
     userId,
     difficulty,
-    isRating
+    isRating,
+    tasksCollectionId: tasksCollectionId || null
   });
   const savedResult = await result.save();
 
@@ -295,7 +296,8 @@ app.post('/api/result/:id/share', async ({ params }) => {
   // Create new TasksCollection with the same ID as the result
   const tasksCollection = new TasksCollection({
     _id: id,
-    tasks
+    tasks,
+    difficulty: result.difficulty
   });
 
   // Save the collection
@@ -308,7 +310,8 @@ app.post('/api/result/:id/share', async ({ params }) => {
 app.get('/api/tasks-collection/:id', async ({ params }) => {
   const { id } = params;
   const tasksCollection = await TasksCollection.findById(id);
-  return tasksCollection?.tasks || [];
+  console.log(tasksCollection?.difficulty);
+  return tasksCollection;
 })
 
 const port = process.env.PORT ? parseInt(process.env.PORT) : 3000

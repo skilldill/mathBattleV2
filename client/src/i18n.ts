@@ -31,7 +31,8 @@ const resources = {
       solvingExercisesTitle: 'Solving exercises',
       startTrainingGame: 'Let\'s go!',
       playerTitleScreen: 'Your personal results',
-      
+      share: 'Share',
+      successCopiedToClipboard: 'Successfully copied to clipboard ✅',
       // Rating game
       toLeaderboard: 'To Leaderboard',
       settingRatingGameScreenTitle: '🏆 Rating Game',
@@ -80,6 +81,14 @@ const resources = {
       tasksCompleted: 'Tasks completed',
       averageTime: 'Average time',
       totalTime: 'Total time',
+
+      // tasks share block
+      tasksShareBlockButtonText: 'Share tasks',
+      tasksShareBlockDescription: 'Share the tasks with your friends to challenge them!',
+      textForShare: 'I solved {{tasksCount}} math puzzles in @MathlyBattleBot in {{time}} seconds. Try to beat my score!',
+      textSharePointerForHandleCopy: 'Just copy this message 👇 and send it to your friend in Telegram:',
+      noTasksAvailable: 'No tasks available',
+      attentionCheckSharingMessage: 'Check your bot\'s chat, there\'s a message you can send to your friend to try solving the puzzles!',
     }
   },
   ru: {
@@ -109,7 +118,8 @@ const resources = {
       solvingExercisesTitle: 'Решение примеров',
       startTrainingGame: 'Полетели!',
       playerTitleScreen: 'Твои личные результаты',
-
+      share: 'Поделиться',
+      successCopiedToClipboard: 'Успешно скопировано в буфер обмена ✅',
       // Rating game
       toLeaderboard: 'В таблицу лидеров',
       settingRatingGameScreenTitle: '🏆 Рейтинговая игра',
@@ -157,6 +167,13 @@ const resources = {
       tasksCompleted: 'Выполнено заданий',
       averageTime: 'Среднее время',
       totalTime: 'Всего времени',
+      // tasks share block
+      tasksShareBlockButtonText: 'Поделиться примерами',
+      tasksShareBlockDescription: 'Поделись примерами с друзьями, чтобы они тоже могли попробовать их решить!',
+      textForShare: 'Я решил {{tasksCount}} математических примеров в @MathlyBattleBot за {{time}} секунд. Попробуй решить быстрее!',
+      textSharePointerForHandleCopy: 'Просто скопируй это сообщение 👇 и кинь другу в Телеграм:',
+      noTasksAvailable: 'Нет доступных заданий',
+      attentionCheckSharingMessage: 'Проверь свой чат с ботом, там сообщение, которое ты можешь отправить другу, чтобы он тоже смог попробовать решить примеры!',
     }
   }
 };
