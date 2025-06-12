@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import "../assets/theme.css";
 ---
 
 <Layout>
@@ -10,18 +11,28 @@ import Layout from "../layouts/Layout.astro";
 			<div class="glassBlockContent">
 				<h1 class="title">Math battle</h1>
 				<p class="description">
-					Math battle — это увлекательная игра, в которой каждый игрок проверяет свои знания и навыки в захватывающем математическом поединке. Испытай себя, прокачай логику и стань лучшим в мире математики!
+					Math battle — это увлекательная игра, в которой каждый игрок
+					проверяет свои знания и навыки в захватывающем
+					математическом поединке. Испытай себя, прокачай логику и
+					стань лучшим в мире математики!
 				</p>
 				<div class="telegramButtonsContainer">
-					<a href="https://t.me/MathlyBattleBot" class="telegramButton">Открыть в Telegram</a>
-					<a href="https://app.math-battle.ru" class="telegramButton browserButton">Открыть в браузере</a>
+					<a
+						href="https://t.me/MathlyBattleBot"
+						class="telegramButton">Открыть в Telegram</a
+					>
+					<a
+						href="https://app.math-battle.ru"
+						class="telegramButton browserButton"
+						>Открыть в браузере</a
+					>
 				</div>
 			</div>
 		</div>
 	</div>
 </Layout>
 
-<style>
+<style is:global>
 	.container {
 		display: flex;
 		flex-direction: column;
@@ -35,18 +46,20 @@ import Layout from "../layouts/Layout.astro";
 	.title {
 		font-size: 4rem;
 		font-weight: 700;
-		color: rgba(255, 255, 255, 0.9);
 		text-align: center;
 		margin-top: 0px;
 		margin-bottom: 20px;
+		color: var(--glass-text);
+		transition: color 0.3s ease;
 	}
 
 	.description {
 		font-size: 1.5rem;
 		font-weight: 400;
-		color: rgba(255, 255, 255, 0.7);
 		text-align: center;
 		line-height: 1.5;
+		color: var(--glass-text-secondary);
+		transition: color 0.3s ease;
 	}
 
 	.glassBlock {
@@ -55,8 +68,9 @@ import Layout from "../layouts/Layout.astro";
 		max-width: 600px;
 		position: relative;
 		border-radius: 36px;
-		background-color: #273141;
 		overflow: hidden;
+		background-color: var(--glass-bg);
+		transition: background-color 0.3s ease;
 	}
 
 	.glassBlockContent {
@@ -66,7 +80,6 @@ import Layout from "../layouts/Layout.astro";
 		bottom: 1px;
 		right: 1px;
 		border-radius: 36px;
-		background-color: #07090c99;
 		z-index: 2;
 		display: flex;
 		flex-direction: column;
@@ -74,6 +87,8 @@ import Layout from "../layouts/Layout.astro";
 		justify-content: center;
 		padding: 40px 40px;
 		box-sizing: border-box;
+		background-color: var(--glass-content-bg);
+		transition: background-color 0.3s ease;
 	}
 
 	.light {
@@ -81,10 +96,11 @@ import Layout from "../layouts/Layout.astro";
 		width: 300px;
 		height: 300px;
 		border-radius: 100%;
-		background-color: rgba(255, 255, 255, 0.3);
 		filter: blur(100px);
 		webkit-filter: blur(100px);
 		z-index: 1;
+		background-color: var(--glass-light);
+		transition: background-color 0.3s ease;
 	}
 
 	.telegramButton {
@@ -97,19 +113,19 @@ import Layout from "../layouts/Layout.astro";
 		padding: 16px 32px;
 		font-size: 1.25rem;
 		font-weight: 600;
-		color: rgba(255, 255, 255, 0.9);
 		text-decoration: none;
-		background-color: #273141;
-		border: 1px solid rgba(255, 255, 255, 0.1);
 		border-radius: 16px;
 		backdrop-filter: blur(10px);
 		transition: all 0.3s ease;
 		box-sizing: border-box;
+		background-color: var(--glass-button-bg);
+		border: 1px solid var(--glass-border);
+		color: var(--glass-text);
 	}
 
 	.telegramButton:hover {
-		background-color: #2f3b4d;
 		transform: translateY(-2px);
+		background-color: var(--glass-button-hover);
 	}
 
 	.telegramButtonsContainer {
@@ -120,11 +136,11 @@ import Layout from "../layouts/Layout.astro";
 	}
 
 	.browserButton {
-		background-color: #2f4d3981;
+		background-color: var(--glass-button-browser-bg);
 	}
 
 	.browserButton:hover {
-		background-color: #2f4d39;
+		background-color: var(--glass-button-browser-hover);
 		transform: translateY(-2px);
 	}
 
@@ -140,5 +156,50 @@ import Layout from "../layouts/Layout.astro";
 		.description {
 			font-size: 1.25rem;
 		}
+	}
+
+	.card {
+		background-color: var(--card-bg);
+		border: 1px solid var(--border);
+	}
+
+	/* Glass block styles */
+	.glassBlock {
+		background-color: var(--glass-bg) !important;
+		transition: background-color 0.3s ease;
+	}
+
+	.glassBlockContent {
+		background-color: var(--glass-content-bg) !important;
+		transition: background-color 0.3s ease;
+	}
+
+	.title {
+		color: var(--glass-text) !important;
+		transition: color 0.3s ease;
+	}
+
+	.description {
+		color: var(--glass-text-secondary) !important;
+		transition: color 0.3s ease;
+	}
+
+	.telegramButton {
+		background-color: var(--glass-button-bg) !important;
+		border-color: var(--glass-border) !important;
+		color: var(--glass-text) !important;
+		transition: all 0.3s ease;
+	}
+
+	.telegramButton:hover {
+		background-color: var(--glass-button-hover) !important;
+	}
+
+	.browserButton {
+		background-color: var(--glass-button-browser-bg) !important;
+	}
+
+	.browserButton:hover {
+		background-color: var(--glass-button-browser-hover) !important;
 	}
 </style>
