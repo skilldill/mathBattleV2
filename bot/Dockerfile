@@ -11,5 +11,8 @@ RUN npm install
 # Копируем исходный код
 COPY . .
 
+# Порт для API
+EXPOSE 4828
+
 # Команда запуска
 CMD ["npm", "start"]

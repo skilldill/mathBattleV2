@@ -5,6 +5,7 @@ import { ResultDto } from '../../types/MathTaskDto';
 import { ColumnLayout } from '../ColumnLayout/ColumnLayout';
 import { calculateAverageTimePerTask, msToSeconds } from '../../utils/timeUtils';
 import { useTranslation } from 'react-i18next';
+
 interface ResultSummaryProps {
     result: ResultDto;
 }
