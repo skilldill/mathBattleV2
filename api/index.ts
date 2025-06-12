@@ -3,6 +3,7 @@ import { connectDB } from './config/database'
 import { mathService, DIFFICULTIES_LIST } from './services/mathService'
 import { ResultModel } from './models/resultSchema'
 import TasksCollection from './models/tasksSharingSchema'
+import { UserModel } from './models/userSchemas'
 
 // Connect to MongoDB
 connectDB()
@@ -17,6 +18,27 @@ app.get('/api/health', () => ({
 
 app.get('/api/math-tasks-difficulties', () => {
   return DIFFICULTIES_LIST;
+})
+
+// TODO: кэшировать данные
+// считать таймстамп, если данные устарели, то пересчитать
+app.get('/api/common/stats', async () => {
+  const totalUsers = await UserModel.countDocuments();
+  const totalResults = await ResultModel.countDocuments(); // всего партий
+  const totalTasks = await ResultModel.aggregate([
+    {
+      $group: {
+        _id: null,
+        total: { $sum: { $size: "$tasks" } }
+      }
+    }
+  ]).then(result => result[0]?.total || 0);
+  
+  return {
+    totalUsers,
+    totalResults,
+    totalTasks,
+  }
 })
 
 app.post('/api/math-tasks', ({ body }) => {
