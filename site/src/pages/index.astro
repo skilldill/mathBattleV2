@@ -58,11 +58,12 @@ const statsData = await fetchStatsData();
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		height: 100%;
 		box-sizing: border-box;
 		padding: 20px;
+		padding-top: 40px;
 		max-width: 600px;
 		margin: 0 auto;
+		overflow-y: auto;
 	}
 
 	.title {
@@ -188,6 +189,7 @@ const statsData = await fetchStatsData();
 	@media (max-width: 768px) {
 		.container {
 			padding: 10px;
+			padding-top: 40px;
 		}
 
 		.title {
@@ -246,6 +248,7 @@ const statsData = await fetchStatsData();
 	.poster {
 		width: 100%;
 		height: 100%;
+		min-height: 170px;
 		max-height: 210px;
 		max-width: 600px;
 		background-image: var(--poster-url);
