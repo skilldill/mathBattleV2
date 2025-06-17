@@ -4,7 +4,7 @@ import "../assets/theme.css";
 
 async function fetchStatsData() {
 	try {
-		const response = await fetch("https://math-battle.ru/api/api/common/stats");
+		const response = await fetch("https://app.math-battle.ru/api/api/common/stats");
 		const data = await response.json();
 		return data;
 	} catch (error) {
@@ -95,12 +95,12 @@ const statsData = await fetchStatsData();
 		border: 1px solid var(--glass-border);
 		padding: auto;
 		flex: 1;
-		padding: 20px;
+		padding: 12px;
 		text-align: center;
 	}
 
 	.statsValue {
-		font-size: 2.5rem;
+		font-size: 2rem;
 		font-weight: 700;
 		color: var(--glass-text-secondary);
 		margin: 0px;
@@ -252,5 +252,6 @@ const statsData = await fetchStatsData();
 		background-size: contain;
 		background-repeat: no-repeat;
 		background-position: center;
+		margin-bottom: 20px;
 	}
 </style>
