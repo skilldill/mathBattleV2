@@ -9,20 +9,21 @@
   --card-bg: #f9fafb;
   
   /* Glass block specific */
-  --glass-bg: #f0f4f8;
+  --glass-bg: #f0f4f849;
   --glass-content-bg: rgba(255, 255, 255, 0.7);
   --glass-text: #394d6a;
   --glass-text-secondary: #4b5563;
-  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-border: rgba(0, 0, 0, 0.048);
   --glass-button-bg: #5278ff5c;
   --glass-button-hover: #5278ff69;
   --glass-button-browser-bg: rgba(168, 190, 255, 0.188);
   --glass-button-browser-hover: rgba(168, 190, 255, 0.232);
   --glass-light: #3b82f65e;
+  --poster-url: url('./poster-light.png');
 }
 
 [data-theme="dark"] {
-  --background: #1a1a1a;
+  --background: #121212;
   --text: #ffffff;
   --primary: #3b82f6;
   --secondary: #9ca3af;
@@ -31,16 +32,17 @@
   --card-bg: #2d2d2d;
   
   /* Glass block specific */
-  --glass-bg: #273141;
+  --glass-bg: #27314170;
   --glass-content-bg: rgba(7, 9, 12, 0.6);
   --glass-text: rgba(255, 255, 255, 0.9);
   --glass-text-secondary: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.035);
   --glass-button-bg: #273141;
   --glass-button-hover: #2f3b4d;
   --glass-button-browser-bg: rgba(47, 77, 57, 0.5);
   --glass-button-browser-hover: #2f4d39;
   --glass-light: rgba(164, 184, 255, 0.3);
+  --poster-url: url('./poster-dark.png');
 }
 
 /* Apply theme variables */
