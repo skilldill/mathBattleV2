@@ -152,11 +152,23 @@ app.get('/api/daily-rating/:userId', async ({ params }) => {
         rating: {
           $round: [
             {
-              $multiply: [
-                1000,
-                { $divide: ["$tasksResolvedCount", "$tasksCount"] },
-                { $divide: [15, { $divide: ["$time", "$tasksCount"] }] }
-              ]
+              $cond: {
+                if: { $lt: [{ $divide: ["$tasksResolvedCount", "$tasksCount"] }, 0.75] },
+                then: {
+                  $multiply: [
+                    100,
+                    { $divide: ["$tasksResolvedCount", "$tasksCount"] },
+                    { $divide: [15, { $divide: ["$time", "$tasksCount"] }] }
+                  ]
+                },
+                else: {
+                  $multiply: [
+                    1000,
+                    { $divide: ["$tasksResolvedCount", "$tasksCount"] },
+                    { $divide: [15, { $divide: ["$time", "$tasksCount"] }] }
+                  ]
+                }
+              }
             },
             0
           ]
@@ -256,11 +268,23 @@ app.get('/api/leaderboard', async () => {
         rating: {
           $round: [
             {
-              $multiply: [
-                1000,
-                { $divide: ["$tasksResolvedCount", "$tasksCount"] },
-                { $divide: [15, { $divide: ["$time", "$tasksCount"] }] }
-              ]
+              $cond: {
+                if: { $lt: [{ $divide: ["$tasksResolvedCount", "$tasksCount"] }, 0.75] },
+                then: {
+                  $multiply: [
+                    100,
+                    { $divide: ["$tasksResolvedCount", "$tasksCount"] },
+                    { $divide: [15, { $divide: ["$time", "$tasksCount"] }] }
+                  ]
+                },
+                else: {
+                  $multiply: [
+                    1000,
+                    { $divide: ["$tasksResolvedCount", "$tasksCount"] },
+                    { $divide: [15, { $divide: ["$time", "$tasksCount"] }] }
+                  ]
+                }
+              }
             },
             0
           ]
