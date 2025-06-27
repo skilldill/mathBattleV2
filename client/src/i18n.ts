@@ -30,11 +30,13 @@ const resources = {
       continueSolving: 'Continue solving exercises',
       solvingExercisesTitle: 'Solving exercises',
       startTrainingGame: 'Let\'s go!',
-      playerTitleScreen: 'Your personal results',
+      playerTitleScreen: '📊 Your personal results',
       share: 'Share',
       successCopiedToClipboard: 'Successfully copied to clipboard ✅',
       // Rating game
       toLeaderboard: 'To Leaderboard',
+      ratingGameButtonText: '🏆 Rating Game',
+      trainingGameButtonText: '👩‍🏫 Training Game',
       settingRatingGameScreenTitle: '🏆 Rating Game',
       ratingGameStartButtonText: '🏆 To the top of the leaderboard!',
       topMathematiciansRatingTitle: 'Top Mathematicians 👩‍🎓',
@@ -122,6 +124,8 @@ const resources = {
       successCopiedToClipboard: 'Успешно скопировано в буфер обмена ✅',
       // Rating game
       toLeaderboard: 'В таблицу лидеров',
+      ratingGameButtonText: '🏆 Рейтинговая игра',
+      trainingGameButtonText: '👩‍🏫 Тренировочная игра',
       settingRatingGameScreenTitle: '🏆 Рейтинговая игра',
       ratingGameStartButtonText: '🏆 На вершину рейтинга!',
       topMathematiciansRatingContent: '🛠Скоро здесь будет таблица лидеров...',

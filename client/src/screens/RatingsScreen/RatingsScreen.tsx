@@ -58,17 +58,21 @@ export const RatingsScreen: React.FC = () => {
         <ColumnLayout style={{ gap: '20px' }}>
             <h1>{t('topMathematiciansRatingTitle')}</h1>
             {alreadyPlayedToday ? (
-                <IonText>
-                    <p>{t('alreadyPlayedToday')}</p>
-                    <p>{t('comeBackTomorrow')}</p>
-                </IonText>
+                <Block>
+                    <IonText>
+                        <p style={{ marginBottom: '14px' }}>{t('alreadyPlayedToday')}</p>
+                        <p>{t('comeBackTomorrow')}</p>
+                    </IonText>
+                </Block>
             ) : (
                 <ColumnLayout style={{ gap: '20px' }}>
-                    <IonText>
-                        {(ratingGameDescription as string[]).map((text: string) => (
-                            <p key={text}>{text}</p>
-                        ))}
-                    </IonText>
+                    <Block>
+                        <IonText>
+                            {(ratingGameDescription as string[]).map((text: string) => (
+                                <p key={text} style={{ marginBottom: '14px' }}>{text}</p>
+                            ))}
+                        </IonText>
+                    </Block>
                     <Button fluid color='success' onClick={() => history.push('/puzzles-rating')}>
                         {t('play')} 🥇
                     </Button>
