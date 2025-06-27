@@ -119,7 +119,7 @@ const resources = {
       continueSolving: 'Продолжить решать примеры',
       solvingExercisesTitle: 'Решение примеров',
       startTrainingGame: 'Полетели!',
-      playerTitleScreen: 'Твои личные результаты',
+      playerTitleScreen: '📊 Твои личные результаты',
       share: 'Поделиться',
       successCopiedToClipboard: 'Успешно скопировано в буфер обмена ✅',
       // Rating game
