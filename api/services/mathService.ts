@@ -88,6 +88,10 @@ export class MathTasksService {
         const resultIndex = getRandomPositiveInt(variants.length - 1);
         variants[resultIndex] = result;
 
+        // If result is negative, ensure one wrong answer is also negative
+        let hasNegativeVariant = false;
+        let forcedNegativeVariantIndex = getRandomPositiveInt(6);
+
         for (let i = 0; i < variants.length; i++) {
             if (!isNaN(variants[i])) continue;
 
@@ -105,6 +109,18 @@ export class MathTasksService {
             if (isDecimal) {
                 variant += Math.random();
                 variant = parseFloat(variant.toFixed(2));
+            }
+
+            // If result is negative and we haven't added a negative variant yet,
+            // make this variant negative
+            if (result < 0 && !hasNegativeVariant && variant > 0) {
+                variant = -variant;
+                hasNegativeVariant = true;
+            }
+
+            if (result > 0 && i === forcedNegativeVariantIndex && result !== -variant) {
+                variant = -variant;
+                hasNegativeVariant = true;
             }
 
             variants[i] = variant;
