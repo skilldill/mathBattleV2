@@ -71,6 +71,16 @@ services:
     networks:
       - app-network
 
+  # TODO: add ai
+  # ai:
+  #   build: ./apiAI
+  #   container_name: math-ai
+  #   restart: unless-stopped
+  #   environment:
+  #     - PORT=5000
+  #   networks:
+  #     - app-network
+
 networks:
   app-network:
     driver: bridge
