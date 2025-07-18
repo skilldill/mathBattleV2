@@ -8,10 +8,10 @@
     box-shadow: 0 0px 20px #3b83f630;
     text-align: center;
     border: none;
-    border-top: 4px solid #ffffff15;
-    border-right: 4px solid #ffffff15;
-    border-bottom: 4px solid #ffffff08;
-    border-left: 4px solid #ffffff08;
+    border-top: 4px solid #ffffff10;
+    /* border-right: 4px solid #ffffff15; */
+    border-bottom: 4px solid #00000020;
+    /* border-left: 4px solid #ffffff08; */
     transition: all 0.3s ease;
     font-family: 'Nunito', sans-serif;
     font-weight: 900;

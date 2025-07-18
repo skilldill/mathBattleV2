@@ -9,6 +9,8 @@ import { useTimer } from '../../hooks/useTimer';
 import { useTasksStore } from '../../store/tasksStore';
 import { Button } from '../../components/Button/Button';
 import { useTranslation } from 'react-i18next';
+import { MathTaskDto } from '../../types/MathTaskDto';
+import { TasksCarousel } from '../../components/TasksCarousel/TasksCarousel';
 
 
 type PuzzlesScreenProps = {
@@ -78,15 +80,7 @@ export const PuzzlesScreen: React.FC<PuzzlesScreenProps> = ({ isRating }) => {
         <>
           <ColumnLayout withPadding>
             <ProgressBar progress={currentTaskId / tasks.length * 100} />
-            <div style={{  overflow: 'hidden', width: '100%',  }}>
-              <div style={{ display: 'flex', gap: '20px', flexWrap: 'nowrap', transform: `translateX(-${(currentTaskId * 100)}%)` }}>
-                {tasks.map((task, index) => (
-                  <div key={index} style={{ width: '100%', flexShrink: 0 }}>
-                    <MathTaskCard task={task} onVariantClick={handleVariantClick} />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <TasksCarousel items={tasks} currentIndex={currentTaskId} renderItem={(item: MathTaskDto) => <MathTaskCard task={item} onVariantClick={handleVariantClick} />} />
           </ColumnLayout>
           <ColumnLayout withPadding>
             <Button variant='outline' color='danger' onClick={() => setIsActionSheetOpen(true)}>{t('finish')}</Button>
