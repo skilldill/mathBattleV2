@@ -2,17 +2,19 @@
     background: linear-gradient(135deg, #3b83f62d, #3b82f666);
     color: #ffffffdd;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 28px;
     padding: 20px 24px;
     border-radius: 14px;
     box-shadow: 0 0px 20px #3b83f630;
     text-align: center;
     border: none;
-    border-top: 1px solid #ffffff20;
-    border-right: 1px solid #ffffff20;
+    border-top: 4px solid #ffffff15;
+    border-right: 4px solid #ffffff15;
+    border-bottom: 4px solid #ffffff08;
+    border-left: 4px solid #ffffff08;
     transition: all 0.3s ease;
     font-family: 'Nunito', sans-serif;
-    font-weight: 600;
+    font-weight: 900;
 }
 
 .button:hover {

@@ -78,7 +78,15 @@ export const PuzzlesScreen: React.FC<PuzzlesScreenProps> = ({ isRating }) => {
         <>
           <ColumnLayout withPadding>
             <ProgressBar progress={currentTaskId / tasks.length * 100} />
-            <MathTaskCard task={tasks[currentTaskId]} onVariantClick={handleVariantClick} />
+            <div style={{  overflow: 'hidden', width: '100%',  }}>
+              <div style={{ display: 'flex', gap: '20px', flexWrap: 'nowrap', transform: `translateX(-${(currentTaskId * 100)}%)` }}>
+                {tasks.map((task, index) => (
+                  <div key={index} style={{ width: '100%', flexShrink: 0 }}>
+                    <MathTaskCard task={task} onVariantClick={handleVariantClick} />
+                  </div>
+                ))}
+              </div>
+            </div>
           </ColumnLayout>
           <ColumnLayout withPadding>
             <Button variant='outline' color='danger' onClick={() => setIsActionSheetOpen(true)}>{t('finish')}</Button>
