@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonButton, IonText } from '@ionic/react';
+import { IonText } from '@ionic/react';
 import { ColumnLayout } from '../ColumnLayout/ColumnLayout';
 import { Button } from '../Button/Button';
 import { useTranslation } from 'react-i18next';
