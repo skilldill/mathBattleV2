@@ -19,6 +19,7 @@
 
 .prevItem {
     opacity: 0;
+    transform: scale(.8);
 }
 
 .nextItem {
