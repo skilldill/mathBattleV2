@@ -4,6 +4,7 @@
     color: #ffffffaa;
     margin: 0;
     margin-bottom: 20px;
+    font-family: 'Nunito', sans-serif;
 }
 
 .taskAnswer {
@@ -12,6 +13,8 @@
     color: #ffffffdd;
     margin: 0;
     padding: 0;
+    font-weight: 900;
+    font-family: 'Nunito', sans-serif;
 }
 
 .taskTime {
@@ -20,6 +23,8 @@
     color: #ffffffaa;
     margin: 0;
     padding: 0;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
 }
 
 .errorAnswer {

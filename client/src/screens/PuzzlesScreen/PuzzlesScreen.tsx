@@ -9,6 +9,8 @@ import { useTimer } from '../../hooks/useTimer';
 import { useTasksStore } from '../../store/tasksStore';
 import { Button } from '../../components/Button/Button';
 import { useTranslation } from 'react-i18next';
+import { MathTaskDto } from '../../types/MathTaskDto';
+import { TasksCarousel } from '../../components/TasksCarousel/TasksCarousel';
 
 
 type PuzzlesScreenProps = {
@@ -78,7 +80,7 @@ export const PuzzlesScreen: React.FC<PuzzlesScreenProps> = ({ isRating }) => {
         <>
           <ColumnLayout withPadding>
             <ProgressBar progress={currentTaskId / tasks.length * 100} />
-            <MathTaskCard task={tasks[currentTaskId]} onVariantClick={handleVariantClick} />
+            <TasksCarousel items={tasks} currentIndex={currentTaskId} renderItem={(item: MathTaskDto) => <MathTaskCard task={item} onVariantClick={handleVariantClick} />} />
           </ColumnLayout>
           <ColumnLayout withPadding>
             <Button variant='outline' color='danger' onClick={() => setIsActionSheetOpen(true)}>{t('finish')}</Button>

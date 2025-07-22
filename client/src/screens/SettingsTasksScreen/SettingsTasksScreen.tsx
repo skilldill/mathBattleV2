@@ -4,6 +4,7 @@ import { useTasksStore } from "../../store/tasksStore";
 import { Button } from "../../components/Button/Button";
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
+import { AnimatedActiveBlock } from "../../components/AnimatedActiveBlock/AnimatedActiveBlock";
 
 export const SettingsTasksScreen: React.FC = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState(false);
@@ -22,9 +23,11 @@ export const SettingsTasksScreen: React.FC = () => {
   return (
     <ColumnLayout>
       <TasksSetting onClick={handleClick} />
-      <Button color='success' onClick={handleStart} disabled={!selectedDifficulty}>
-        {selectedDifficulty ? t('startTrainingGame') : t('chooseDifficulty')}
-      </Button>
+      <AnimatedActiveBlock isActive={false}>
+        <Button style={{ width: '100%' }} color='success' onClick={handleStart} disabled={!selectedDifficulty}>
+          {selectedDifficulty ? t('startTrainingGame') : t('chooseDifficulty')}
+        </Button>
+      </AnimatedActiveBlock>
     </ColumnLayout>
   );
 };
