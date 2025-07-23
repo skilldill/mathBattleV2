@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import styles from './CountdownScreen.module.css';
 
 interface CountdownScreenProps {
   seconds: number;
-  onFinish: () => void;
+  onFinish?: () => void;
   children: React.ReactNode;
+  title?: string;
 }
 
-export const CountdownScreen: React.FC<CountdownScreenProps> = ({ seconds, onFinish, children }) => {
+export const CountdownScreen: React.FC<CountdownScreenProps> = ({ seconds, onFinish, children, title }) => {
   const [currentSecond, setCurrentSecond] = useState<number>(seconds);
   const [isFinished, setIsFinished] = useState<boolean>(false);
 
@@ -16,7 +18,7 @@ export const CountdownScreen: React.FC<CountdownScreenProps> = ({ seconds, onFin
         if (prevSecond <= 1) {
           clearInterval(interval);
           setIsFinished(true);
-          onFinish();
+          onFinish?.();
           return 0;
         }
         return prevSecond - 1;
@@ -31,8 +33,9 @@ export const CountdownScreen: React.FC<CountdownScreenProps> = ({ seconds, onFin
   }
 
   return (
-    <div style={{ fontSize: '48px', textAlign: 'center' }}>
-      {currentSecond}
+    <div className={styles.countdownScreen}>
+      <h1 className={styles.title}>{title}</h1>
+      <h1 className={styles.countdown}>{currentSecond}</h1>
     </div>
   );
 };

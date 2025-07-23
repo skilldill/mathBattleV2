@@ -9,8 +9,10 @@ import { MathTaskCard } from "../../components/MathTaskCard/MathTaskCard";
 import { useTimer } from "../../hooks/useTimer";
 import { Schoolboy } from "../../components/Schoolboy/Schoolboy";
 import styles from './SchoolExamScreen.module.css';
+import { CountdownScreen } from "../../components/CountdownScreen/CountdownScreen";
+import cn from "classnames";
 
-export const SchoolExamScreen = () => {
+export const SchoolExamScene = () => {
   const { t } = useTranslation();
   const { fetchTasks, tasks, checkAnswer, saveResult } = useMathTasks('/school-exam-result/');
   const { getTime, startTimer } = useTimer();
@@ -60,12 +62,13 @@ export const SchoolExamScreen = () => {
   return (
     <ScreenLayout title={t('')}>
       <ColumnLayout withPadding>
-        <LinearTimer seconds={600} onFinish={handleFinish} onTick={handleTick} />
+        <LinearTimer seconds={30} onFinish={handleFinish} onTick={handleTick} />
       </ColumnLayout>
       <ColumnLayout withPadding>
-        <div className={styles.classroom}>
+        <div className={cn(styles.classroom, styles[schoolboyEmotion])}>
           <div className={styles.schoolboy}>
             <Schoolboy emotion={schoolboyEmotion} />
+            {/* <Schoolboy emotion={'nervous'} /> */}
           </div>
         </div>
       </ColumnLayout>
@@ -78,5 +81,15 @@ export const SchoolExamScreen = () => {
         />
       </ColumnLayout>
     </ScreenLayout>
+  );
+};
+
+export const SchoolExamScreen = () => {
+  const { t } = useTranslation();
+
+  return (
+    <CountdownScreen seconds={3} onFinish={() => {}} title={t('schoolExamStart')}>
+      <SchoolExamScene />
+    </CountdownScreen>
   );
 };

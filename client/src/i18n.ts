@@ -94,6 +94,7 @@ const resources = {
 
       // school exam
       schoolExamButtonText: '🏫 School Exam',
+      schoolExamStart: 'School exam starts in',
     }
   },
   ru: {
@@ -183,7 +184,8 @@ const resources = {
       attentionCheckSharingMessage: 'Проверь свой чат с ботом, там сообщение, которое ты можешь отправить другу, чтобы он тоже смог попробовать решить примеры!',
 
       // school exam
-      schoolExamButtonText: '🏫 Школьная олимпиада',
+      schoolExamButtonText: '🏫 Школьный экзамен',
+      schoolExamStart: 'Экзамен начнется через',
     }
   }
 };

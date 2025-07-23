@@ -1,19 +1,58 @@
-.schoolboy {
+/* .schoolboy {
   width: 120px;
   height: 250px;
-  background-image: url('../../assets/student_emotions.png');
+  background-image: url('../../assets/schoolboy.png');
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 
-.normal {
+/* .normal {
   background-position: -14px 0;
 }
 
 .nervous {
   background-position: -134px 0;
+} */
+
+.schoolboy {
+  width: 120px;
+  height: 250px;
+  background-image: url('../../assets/schoolboy.png');
+  background-repeat: no-repeat;
+  background-size: cover
+}
+
+.normal {
+  background-position: 10px 0;
+}
+
+.nervous {
+  transform: rotateY(180deg);
+  background-position: -109px 0;
+}
+
+
+@keyframes nervous {
+  0% {
+    transform: translateX(-2px) rotate(-2deg);
+  }
+  33% {
+    transform: translateX(2px) rotate(1deg);
+  }
+  66% {
+    transform: translateX(-2px) rotate(2deg);
+  }
+  99% {
+    transform: translateX(2px) rotate(-1deg);
+  }
+  100% {
+    transform: translateX(-2px) rotate(-2deg);
+  }
 }
 
 .veryNervous {
-  background-position: -250px 0;
+  background-position: -234px 0;
+  width: 150px;
+  animation: nervous 0.3s infinite;
+  filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(300deg);
 }

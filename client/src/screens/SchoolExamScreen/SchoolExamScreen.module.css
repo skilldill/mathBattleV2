@@ -11,7 +11,33 @@
 
 .schoolboy {
   position: absolute;
-  bottom: -70px;
+  bottom: -60px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+@keyframes nervous {
+    0% {
+      transform: translateX(-1px) rotate(-.5deg);
+    }
+    33% {
+      transform: translateX(1px) rotate(.5deg);
+    }
+    66% {
+      transform: translateX(-1px) rotate(.5deg);
+    }
+    99% {
+      transform: translateX(1px) rotate(-.5deg);
+    }
+    100% {
+      transform: translateX(-1px) rotate(-.5deg);
+    }
+  }
+
+.classroom.nervous {
+  animation: nervous 0.5s infinite;
+}
+
+.classroom.veryNervous {
+  animation: nervous 0.1s infinite;
 }
