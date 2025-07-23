@@ -71,16 +71,12 @@ export const useMathTasks = (resultPageUrl: string = '/puzzles-result/') => {
     };
 
     const checkAnswer = (answer: Answer) => {
-        // console.log('answer', answer);
         setAnswers((answers) => [...answers, answer]);
     }
 
     const saveResult = async (isRating: boolean = false) => {
         setLoading(true);
-        console.log('tasks', tasks);
-        console.log('answers', answers);
         const resultForSave = combineTasksWithAnswers(tasks, answers);
-        console.log('resultForSave', resultForSave);
         const data = await ApiService.saveResult({
             tasks: resultForSave,
             userId: userId || 'common',
