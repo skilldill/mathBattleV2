@@ -91,6 +91,9 @@ const resources = {
       textSharePointerForHandleCopy: 'Just copy this message 👇 and send it to your friend in Telegram:',
       noTasksAvailable: 'No tasks available',
       attentionCheckSharingMessage: 'Check your bot\'s chat, there\'s a message you can send to your friend to try solving the puzzles!',
+
+      // school exam
+      schoolExamButtonText: '🏫 School Exam',
     }
   },
   ru: {
@@ -178,6 +181,9 @@ const resources = {
       textSharePointerForHandleCopy: 'Просто скопируй это сообщение 👇 и кинь другу в Телеграм:',
       noTasksAvailable: 'Нет доступных заданий',
       attentionCheckSharingMessage: 'Проверь свой чат с ботом, там сообщение, которое ты можешь отправить другу, чтобы он тоже смог попробовать решить примеры!',
+
+      // school exam
+      schoolExamButtonText: '🏫 Школьная олимпиада',
     }
   }
 };

@@ -6,3 +6,5 @@ export * from './ProfileStatisticsScreen/ProfileStatisticsScreen';
 export * from './PuzzlesResultScreen/PuzzlesResultScreen';
 export * from './TechDevScreen';
 export * from './PlayerScreen/PlayerScreen';
+export * from './SchoolExamScreen/SchoolExamScreen';
+export * from './SchoolExamResultsScreen/SchoolExamResultsScreen';

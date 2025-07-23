@@ -58,6 +58,9 @@ export const MainScreen: React.FC = () => {
                         {t('ratingGameButtonText')}
                     </Button>
                 </BlockForAuthUser>
+                <Button color='success' onClick={() => history.push('/school-exam')}>
+                    {t('schoolExamButtonText')}
+                </Button>
                 <Button onClick={() => openModal('settingsScreen')}>
                     {t('trainingGameButtonText')}
                 </Button>
