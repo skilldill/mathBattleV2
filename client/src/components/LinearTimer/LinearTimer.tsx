@@ -4,6 +4,7 @@ import styles from './LinearTimer.module.css';
 type LinearTimerProps = {
     seconds: number;
     onFinish: () => void;
+    onTick?: (currentSecond: number, percentageElapsed: number) => void;
 }
 
 /**
@@ -11,12 +12,19 @@ type LinearTimerProps = {
  * которая содержит динамические параметрыъ
  * иначе из-за React они не будут обновляться
  */
-export const LinearTimer = ({ seconds, onFinish }: LinearTimerProps) => {
+export const LinearTimer = ({ seconds, onFinish, onTick }: LinearTimerProps) => {
   useEffect(() => {
-    const timer = setTimeout(() => {
-      onFinish();
-    }, seconds * 1000)
-    return () => clearTimeout(timer);
+    let currentSecond = seconds;
+    const interval = setInterval(() => {
+      currentSecond -= 1;
+      const percentageElapsed = ((seconds - currentSecond) / seconds) * 100;
+      if (onTick) onTick(currentSecond, percentageElapsed);
+      if (currentSecond <= 0) {
+        clearInterval(interval);
+        onFinish();
+      }
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   return (

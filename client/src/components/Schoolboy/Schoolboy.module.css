@@ -1,0 +1,19 @@
+.schoolboy {
+  width: 120px;
+  height: 250px;
+  background-image: url('../../assets/student_emotions.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.normal {
+  background-position: -14px 0;
+}
+
+.nervous {
+  background-position: -134px 0;
+}
+
+.veryNervous {
+  background-position: -250px 0;
+}
