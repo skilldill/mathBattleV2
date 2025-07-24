@@ -34,7 +34,6 @@
     height: 180px;
     background-size: 360px;
     background-position: -120px 0px;
-    animation: nervous 0.5s infinite alternate-reverse;
 }
 
 .boy_veryNervous {
@@ -72,7 +71,6 @@
     height: 180px;
     background-size: 360px;
     background-position: -120px -360px;
-    animation: nervous 0.5s infinite alternate-reverse;
 }
 
 .girl_veryNervous {
@@ -110,7 +108,6 @@
     height: 180px;
     background-size: 360px;
     background-position: -120px -720px;
-    animation: nervous 0.5s infinite alternate-reverse;
 }
 
 .professor_veryNervous {
