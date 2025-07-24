@@ -7,7 +7,6 @@ import { TasksCarousel } from "../../components/TasksCarousel/TasksCarousel";
 import { MathTaskDto } from "../../types/MathTaskDto";
 import { MathTaskCard } from "../../components/MathTaskCard/MathTaskCard";
 import { useTimer } from "../../hooks/useTimer";
-import { Schoolboy } from "../../components/Schoolboy/Schoolboy";
 import styles from './SchoolExamScreen.module.css';
 import { CountdownScreen } from "../../components/CountdownScreen/CountdownScreen";
 import cn from "classnames";
@@ -19,10 +18,10 @@ export const SchoolExamScene = () => {
   const { getTime, startTimer } = useTimer();
   const [currentTaskId, setCurrentTaskId] = useState<number>(0);
   const [isFinished, setIsFinished] = useState<boolean>(false);
-  const [schoolboyEmotion, setSchoolboyEmotion] = useState<string>('normal');
+  const [emotion, setEmotion] = useState<string>('normal');
 
   const tasksReady = async () => {
-    await fetchTasks(100, 'easy');
+    await fetchTasks(10, 'easy');
     startTimer();
   }
 
@@ -43,7 +42,7 @@ export const SchoolExamScene = () => {
   }, []);
 
   useEffect(() => {
-    if (isFinished) saveResult(false);
+    if (isFinished) setEmotion('sad');
   }, [isFinished]);
 
   const handleFinish = () => {
@@ -53,10 +52,10 @@ export const SchoolExamScene = () => {
   const handleTick = (_: number, percentageElapsed: number) => {
     console.log(percentageElapsed);
     if (percentageElapsed >= 50) {
-      setSchoolboyEmotion('nervous');
+      setEmotion('nervous');
     }
     if (percentageElapsed >= 75) {
-      setSchoolboyEmotion('veryNervous');
+      setEmotion('veryNervous');
     }
   }
 
@@ -66,9 +65,9 @@ export const SchoolExamScene = () => {
         <LinearTimer seconds={20} onFinish={handleFinish} onTick={handleTick} />
       </ColumnLayout>
       <ColumnLayout withPadding>
-        <div className={cn(styles.classroom, styles[schoolboyEmotion])}>
+        <div className={cn(styles.classroom, styles[emotion])}>
           <div className={styles.schoolboy}>
-            <PersonSprite emotion={schoolboyEmotion} person="professor" />
+            <PersonSprite emotion={emotion} person="girl" />
           </div>
         </div>
       </ColumnLayout>
