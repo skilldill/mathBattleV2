@@ -14,7 +14,7 @@ import { PersonSprite } from "../../components/PersonSprite/PersonSprite";
 
 export const SchoolExamScene = () => {
   const { t } = useTranslation();
-  const { fetchTasks, tasks, checkAnswer, saveResult } = useMathTasks('/school-exam-result/');
+  const { fetchTasks, tasks, checkAnswer } = useMathTasks('/school-exam-result/');
   const { getTime, startTimer } = useTimer();
   const [currentTaskId, setCurrentTaskId] = useState<number>(0);
   const [isFinished, setIsFinished] = useState<boolean>(false);
