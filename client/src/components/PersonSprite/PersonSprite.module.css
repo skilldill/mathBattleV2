@@ -1,0 +1,137 @@
+.person {
+    width: 120px;
+    height: 180px;
+    background-image: url('../../assets/persons.png');
+    background-repeat: no-repeat;
+}
+
+@keyframes nervous {
+    0% {
+      transform: translateX(-2px) rotate(-2deg);
+    }
+    33% {
+      transform: translateX(2px) rotate(1deg);
+    }
+    66% {
+      transform: translateX(-2px) rotate(2deg);
+    }
+    99% {
+      transform: translateX(2px) rotate(-1deg);
+    }
+    100% {
+      transform: translateX(-2px) rotate(-2deg);
+    }
+  }
+
+.boy_normal {
+    width: 120px;
+    height: 180px;
+    background-size: 360px
+}
+
+.boy_nervous {
+    width: 120px;
+    height: 180px;
+    background-size: 360px;
+    background-position: -120px 0px;
+    animation: nervous 0.5s infinite alternate-reverse;
+}
+
+.boy_veryNervous {
+    width: 120px;
+    height: 180px;
+    background-size: 360px;
+    background-position: -240px 0px;
+    filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(300deg);
+    animation: nervous 0.1s infinite alternate-reverse;
+}
+
+.boy_happy {
+    width: 172px;
+    height: 180px;
+    background-size: 360px;
+    background-position: 0px -180px;
+}
+
+.boy_sad {
+    width: 128px;
+    height: 180px;
+    background-size: 360px;
+    background-position: -196px -180px;
+}
+
+.girl_normal {
+    width: 120px;
+    height: 180px;
+    background-size: 360px;
+    background-position: 0px -360px;
+}
+
+.girl_nervous {
+    width: 110px;
+    height: 180px;
+    background-size: 360px;
+    background-position: -120px -360px;
+    animation: nervous 0.5s infinite alternate-reverse;
+}
+
+.girl_veryNervous {
+    width: 120px;
+    height: 180px;
+    background-size: 360px;
+    background-position: -225px -360px;
+    filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(300deg);
+    animation: nervous 0.1s infinite alternate-reverse;
+}
+
+.girl_happy {
+    width: 172px;
+    height: 180px;
+    background-size: 360px;
+    background-position: 0px -540px;
+}
+
+.girl_sad {
+    width: 132px;
+    height: 180px;
+    background-size: 360px;
+    background-position: -196px -540px;
+}
+
+.professor_normal {
+    width: 120px;
+    height: 180px;
+    background-size: 360px;
+    background-position: 0px -720px;
+}
+
+.professor_nervous {
+    width: 105px;
+    height: 180px;
+    background-size: 360px;
+    background-position: -120px -720px;
+    animation: nervous 0.5s infinite alternate-reverse;
+}
+
+.professor_veryNervous {
+    width: 132px;
+    height: 180px;
+    background-size: 360px;
+    background-position: -224px -720px;
+    filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(300deg);
+    animation: nervous 0.1s infinite alternate-reverse;
+}
+
+.professor_happy {
+    width: 172px;
+    height: 170px;
+    background-size: 360px;
+    background-position: 0px -906px;
+}
+
+.professor_sad {
+    width: 142px;
+    height: 180px;
+    background-size: 360px;
+    background-position: -192px -906px;
+}

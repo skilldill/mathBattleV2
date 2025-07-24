@@ -11,6 +11,7 @@ import { Schoolboy } from "../../components/Schoolboy/Schoolboy";
 import styles from './SchoolExamScreen.module.css';
 import { CountdownScreen } from "../../components/CountdownScreen/CountdownScreen";
 import cn from "classnames";
+import { PersonSprite } from "../../components/PersonSprite/PersonSprite";
 
 export const SchoolExamScene = () => {
   const { t } = useTranslation();
@@ -62,13 +63,12 @@ export const SchoolExamScene = () => {
   return (
     <ScreenLayout title={t('')}>
       <ColumnLayout withPadding>
-        <LinearTimer seconds={30} onFinish={handleFinish} onTick={handleTick} />
+        <LinearTimer seconds={20} onFinish={handleFinish} onTick={handleTick} />
       </ColumnLayout>
       <ColumnLayout withPadding>
         <div className={cn(styles.classroom, styles[schoolboyEmotion])}>
           <div className={styles.schoolboy}>
-            <Schoolboy emotion={schoolboyEmotion} />
-            {/* <Schoolboy emotion={'nervous'} /> */}
+            <PersonSprite emotion={schoolboyEmotion} person="professor" />
           </div>
         </div>
       </ColumnLayout>
