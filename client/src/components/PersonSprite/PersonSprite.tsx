@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 type PersonSpriteProps = {
   emotion: string; // 'normal' | 'nervous' | 'veryNervous' | 'happy' | 'sad';
-  person: string; // 'boy' | 'girl' | 'professor';
+  person: string; // 'boy' | 'girl' | 'professor' | 'ninja' | 'pencil' | 'dragon' | 'goose';
 }
 
 export const PersonSprite = ({ emotion, person }: PersonSpriteProps) => {
