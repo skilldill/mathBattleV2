@@ -1,0 +1,26 @@
+[
+  {"level": 1, "difficulty": "easy-light", "questionCount": 5, "timeSeconds": 10, "maxMistakes": 0},
+  {"level": 2, "difficulty": "easy-light", "questionCount": 10, "timeSeconds": 20, "maxMistakes": 0},
+  {"level": 3, "difficulty": "easy-light", "questionCount": 15, "timeSeconds": 25, "maxMistakes": 1},
+  
+  {"level": 4, "difficulty": "easy", "questionCount": 20, "timeSeconds": 30, "maxMistakes": 1},
+  {"level": 5, "difficulty": "easy", "questionCount": 25, "timeSeconds": 30, "maxMistakes": 2},
+
+  {"level": 6, "difficulty": "medium", "questionCount": 14, "timeSeconds": 85, "maxMistakes": 1},
+  {"level": 7, "difficulty": "medium", "questionCount": 18, "timeSeconds": 110, "maxMistakes": 2},
+
+  {"level": 8, "difficulty": "combo", "questionCount": 12, "timeSeconds": 75, "maxMistakes": 1},
+  {"level": 9, "difficulty": "combo", "questionCount": 14, "timeSeconds": 90, "maxMistakes": 1},
+  {"level": 10, "difficulty": "combo", "questionCount": 16, "timeSeconds": 105, "maxMistakes": 2},
+  {"level": 11, "difficulty": "combo", "questionCount": 18, "timeSeconds": 115, "maxMistakes": 2},
+  {"level": 12, "difficulty": "combo", "questionCount": 20, "timeSeconds": 125, "maxMistakes": 2},
+  {"level": 13, "difficulty": "combo", "questionCount": 22, "timeSeconds": 135, "maxMistakes": 3},
+  {"level": 14, "difficulty": "combo", "questionCount": 24, "timeSeconds": 145, "maxMistakes": 3},
+  {"level": 15, "difficulty": "combo", "questionCount": 25, "timeSeconds": 150, "maxMistakes": 3},
+
+  {"level": 16, "difficulty": "hard", "questionCount": 10, "timeSeconds": 80, "maxMistakes": 0},
+  {"level": 17, "difficulty": "hard", "questionCount": 12, "timeSeconds": 95, "maxMistakes": 1},
+  {"level": 18, "difficulty": "hard", "questionCount": 14, "timeSeconds": 110, "maxMistakes": 2},
+  {"level": 19, "difficulty": "hard", "questionCount": 16, "timeSeconds": 130, "maxMistakes": 2},
+  {"level": 20, "difficulty": "hard", "questionCount": 18, "timeSeconds": 145, "maxMistakes": 3}
+]

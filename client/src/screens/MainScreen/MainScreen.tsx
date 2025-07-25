@@ -12,12 +12,14 @@ import { RatingsScreen } from '../RatingsScreen/RatingsScreen';
 import { useTranslation } from 'react-i18next';
 import { BlockForAuthUser } from '../../components/BlockForAuthUser/BlockForAuthUser';
 import { StickyBlock } from '../../components/StickyBlock/StickyBlock';
+import { SchoolExamSettingsScreen } from '../SchoolExamSettingsScreen/SchoolExamSettingsScreen';
 
 const MODAL_SCREENS = {
     aboutScreen: () => <AboutScreen />,
     settingsScreen: () => <SettingsTasksScreen />,
     settingsDailyRatingsScreen: () => <SettingsDailyRatingsScreen />,
     ratingsScreen: () => <RatingsScreen />,
+    schoolExamSettingsScreen: () => <SchoolExamSettingsScreen />,
 }
 
 export const MainScreen: React.FC = () => {
@@ -53,14 +55,17 @@ export const MainScreen: React.FC = () => {
             </IonText>
 
             <ColumnLayout withPadding>
+                <Button color='success' onClick={() => openModal('schoolExamSettingsScreen')}>
+                    {t('schoolExamButtonText')}
+                </Button>
                 <BlockForAuthUser>
                     <Button color='success' onClick={() => openModal('ratingsScreen')}>
                         {t('ratingGameButtonText')}
                     </Button>
                 </BlockForAuthUser>
-                <Button color='success' onClick={() => history.push('/school-exam')}>
+                {/* <Button color='success' onClick={() => history.push('/school-exam')}>
                     {t('schoolExamButtonText')}
-                </Button>
+                </Button> */}
                 <Button onClick={() => openModal('settingsScreen')}>
                     {t('trainingGameButtonText')}
                 </Button>

@@ -11,6 +11,7 @@ import styles from './SchoolExamScreen.module.css';
 import { CountdownScreen } from "../../components/CountdownScreen/CountdownScreen";
 import cn from "classnames";
 import { PersonSprite } from "../../components/PersonSprite/PersonSprite";
+import { useExamsLevelsStore } from "../../store/examsLevelsStore";
 
 export const SchoolExamScene = () => {
   const { t } = useTranslation();
@@ -19,10 +20,13 @@ export const SchoolExamScene = () => {
   const [currentTaskId, setCurrentTaskId] = useState<number>(0);
   const [isFinished, setIsFinished] = useState<boolean>(false);
   const [emotion, setEmotion] = useState<string>('normal');
+  const { selectedExamLevel } = useExamsLevelsStore();
 
   const tasksReady = async () => {
-    await fetchTasks(10, 'easy');
-    startTimer();
+    if (selectedExamLevel) {
+      await fetchTasks(selectedExamLevel.questionCount, selectedExamLevel.difficulty);
+      startTimer();
+    }
   }
 
   const handleVariantClick = (variant: number) => {
@@ -62,7 +66,7 @@ export const SchoolExamScene = () => {
   return (
     <ScreenLayout title={t('')}>
       <ColumnLayout withPadding>
-        <LinearTimer seconds={20} onFinish={handleFinish} onTick={handleTick} />
+        <LinearTimer seconds={selectedExamLevel?.timeSeconds || 20} onFinish={handleFinish} onTick={handleTick} />
       </ColumnLayout>
       <ColumnLayout withPadding>
         <div className={cn(styles.classroom, styles[emotion])}>

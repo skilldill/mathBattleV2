@@ -95,6 +95,8 @@ const resources = {
       // school exam
       schoolExamButtonText: '🏫 School Exam',
       schoolExamStart: 'School exam starts in',
+      exam: 'Exam',
+      schoolExam: 'School Exam',
     }
   },
   ru: {
@@ -186,6 +188,8 @@ const resources = {
       // school exam
       schoolExamButtonText: '🏫 Школьный экзамен',
       schoolExamStart: 'Экзамен начнется через',
+      exam: 'Экзамен',
+      schoolExam: 'Школьный экзамен',
     }
   }
 };
