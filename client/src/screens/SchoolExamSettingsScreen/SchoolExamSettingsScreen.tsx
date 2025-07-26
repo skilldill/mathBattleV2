@@ -1,5 +1,5 @@
 import { useExamsLevels } from "../../hooks/useExamsLevels";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button, ColumnLayout,  ScreenLayout,  VerticalCenterLayout } from "../../components";
 import { IonSpinner } from "@ionic/react";
 import { ExamLevelDto } from "../../types/ExamsLevelsDto";
@@ -10,6 +10,7 @@ import { PersonsSelect } from "../../components/PersonsSelect/PersonsSelect";
 import { PersonsAvatar } from "../../components/PersonsAvatar/PersonsAvatar";
 import { StickyBlock } from "../../components/StickyBlock/StickyBlock";
 import { useUserStore } from "../../store/userStore";
+import { findCurrentExamLevel } from "../../utils/checkAvailableExamLevel";
 
 
 export const SchoolExamSettingsScreen = () => {
@@ -18,6 +19,10 @@ export const SchoolExamSettingsScreen = () => {
     const { setSelectedExamLevel, selectedPerson, setSelectedPerson, clearSelectedPerson } = useExamsLevelsStore();
     const { t } = useTranslation();
     const { userId } = useUserStore();
+
+    const currentExamLevel = useMemo(() => {
+        return findCurrentExamLevel(examLevelPlayed);
+    }, [examLevelPlayed]);
 
     useEffect(() => {
         fetchExamsLevels();
@@ -66,7 +71,7 @@ export const SchoolExamSettingsScreen = () => {
                         <h2>{t(`selectExamLevel`)}</h2>
                     </ColumnLayout>
                     {examsLevels.map((examLevel, id) => (
-                        <Button color={examLevelPlayed[id] ? 'success' : 'primary'} key={examLevel.level} onClick={() => handleSelectExamLevel(examLevel)}>
+                        <Button color={(id + 1) < currentExamLevel ? 'success' : 'primary'} disabled={(id + 1) > currentExamLevel} key={examLevel.level} onClick={() => handleSelectExamLevel(examLevel)}>
                             {t(`exam`)} {examLevel.level}
                         </Button>
                     ))}

@@ -103,6 +103,7 @@ const resources = {
       timeIsUp: 'Time is up!',
       didntPassExam: "You didn't pass the exam.",
       toLeave: 'To leave',
+      passedExam: 'You passed the exam!',
     }
   },
   ru: {
@@ -202,6 +203,7 @@ const resources = {
       timeIsUp: 'Время вышло!',
       didntPassExam: 'Вы не сдали экзамен.',
       toLeave: 'Уйти',
+      passedExam: 'Вы сдали экзамен!',
     }
   }
 };
