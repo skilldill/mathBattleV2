@@ -10,6 +10,12 @@
     overflow: hidden;
 }
 
+@media (max-width: 460px) {
+    .classroomScene {
+        height: 180px;
+    }
+}
+
 .astronomy {
     background-position: 0px 20%;
 }
