@@ -13,6 +13,9 @@ import { useTranslation } from 'react-i18next';
 import { BlockForAuthUser } from '../../components/BlockForAuthUser/BlockForAuthUser';
 import { StickyBlock } from '../../components/StickyBlock/StickyBlock';
 import { SchoolExamSettingsScreen } from '../SchoolExamSettingsScreen/SchoolExamSettingsScreen';
+import { ClassroomScene } from '../../components/ClassroomScene/ClassroomScene';
+import { PersonSprite } from '../../components/PersonSprite/PersonSprite';
+import styles from './MainScreen.module.css';
 
 const MODAL_SCREENS = {
     aboutScreen: () => <AboutScreen />,
@@ -44,8 +47,18 @@ export const MainScreen: React.FC = () => {
             <IonText>
                 <h1>{t('mathBattle')}</h1>
             </IonText>
-            <ColumnLayout withPadding style={{ alignItems: 'center' }}>
-                <IonImg src={MathBattleCoverPng} style={{ width: '280px' }} />
+            <ColumnLayout withPadding>
+                <ClassroomScene scene="secret">
+                    <div className={styles.professor}>
+                        <PersonSprite person="professor" emotion="normal" />
+                    </div>
+                    <div className={styles.boy}>
+                        <PersonSprite person="boy" emotion="nervous" />
+                    </div>
+                    <div className={styles.girl}>
+                        <PersonSprite person="girl" emotion="nervous" />
+                    </div>
+                </ClassroomScene>
             </ColumnLayout>
             <IonText>
                 <h2>
@@ -54,7 +67,7 @@ export const MainScreen: React.FC = () => {
             </IonText>
 
             <ColumnLayout withPadding>
-                <Button color='success' onClick={() => history.push('/settings-school-exam')}>
+                <Button color='accent' onClick={() => history.push('/settings-school-exam')}>
                     {t('schoolExamButtonText')}
                 </Button>
                 <BlockForAuthUser>

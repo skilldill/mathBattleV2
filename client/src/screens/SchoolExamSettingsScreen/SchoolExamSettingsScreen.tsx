@@ -1,7 +1,7 @@
 import { useExamsLevels } from "../../hooks/useExamsLevels";
 import { useEffect, useMemo, useState } from "react";
 import { Button, ColumnLayout,  ScreenLayout,  VerticalCenterLayout } from "../../components";
-import { IonSpinner } from "@ionic/react";
+import { IonContent, IonModal, IonSpinner } from "@ionic/react";
 import { ExamLevelDto } from "../../types/ExamsLevelsDto";
 import { useExamsLevelsStore } from "../../store/examsLevelsStore";
 import { useHistory } from "react-router-dom";
@@ -20,6 +20,15 @@ export const SchoolExamSettingsScreen = () => {
     const { setSelectedExamLevel, selectedPerson, setSelectedPerson, clearSelectedPerson, setSelectedScene } = useExamsLevelsStore();
     const { t } = useTranslation();
     const { userId } = useUserStore();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(() => {
+        const viewedDescription = localStorage.getItem('viewedDescription');
+        if (!viewedDescription) {
+            setIsModalOpen(true);
+            localStorage.setItem('viewedDescription', 'true');
+        }
+    }, []);
 
     const currentExamLevel = useMemo(() => {
         return findCurrentExamLevel(examLevelPlayed);
@@ -61,6 +70,14 @@ export const SchoolExamSettingsScreen = () => {
                         <Button variant="clear" fluid onClick={() => history.push('/')}>{t('toHome')}</Button>
                     </ColumnLayout>
                 </StickyBlock>
+
+                <IonModal initialBreakpoint={0.25} isOpen={isModalOpen} onDidDismiss={() => setIsModalOpen(false)}>
+                    <IonContent>
+                        <ColumnLayout withPadding>
+                            <p>{t(`schoolExamDescription`)}</p>
+                        </ColumnLayout>
+                    </IonContent>
+                </IonModal>
             </ScreenLayout>
         )
     }

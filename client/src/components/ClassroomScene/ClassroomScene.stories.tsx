@@ -20,3 +20,5 @@ export const Hogwarts = () => <ClassroomScene scene="hogwarts" />
 export const Nervous = () => <ClassroomScene scene="ninja" emotion="nervous" />
 
 export const VeryNervous = () => <ClassroomScene emotion="veryNervous" />
+
+export const Secret = () => <ClassroomScene scene="secret" />

@@ -104,6 +104,10 @@ const resources = {
       didntPassExam: "You didn't pass the exam.",
       toLeave: 'To leave',
       passedExam: 'You passed the exam!',
+      schoolExamDescription: `🎓 Help MathBattle students pass math exams!
+You have limited time and a list of exercises to solve without errors.
+Each exam is a challenge: the further you go, the harder it gets!
+Pass exams, earn stars and unlock new heroes! ✨`,
     }
   },
   ru: {
@@ -204,6 +208,10 @@ const resources = {
       didntPassExam: 'Вы не сдали экзамен.',
       toLeave: 'Уйти',
       passedExam: 'Вы сдали экзамен!',
+      schoolExamDescription: `🎓 Помоги студентам MathBattle сдать экзамены по математике!
+        У тебя есть ограниченное время и список примеров, которые нужно решить без ошибок.
+        Каждый экзамен — это вызов: чем дальше, тем сложнее!
+        Сдавай экзамены, зарабатывай звёзды и открывай новых героев! ✨`,
     }
   }
 };
