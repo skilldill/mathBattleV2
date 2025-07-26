@@ -4,15 +4,21 @@ import { MathTaskDto, MathTaskResultDto } from "../types/MathTaskDto";
 
 export const combineTasksWithAnswers = (tasks: MathTaskDto[], answers: Answer[]): MathTaskResultDto[] => {
     console.log(tasks, answers);
-    return tasks.map((task, index) => {
-        const { readableTask, result } = task;
-        const { answer, time } = answers[index];
+    const mergedTasks: MathTaskResultDto[] = [];
 
-        return {
+    for (let i in tasks) {
+        if (!answers[i]) break;
+        
+        const { readableTask, result } = tasks[i];
+        const { answer, time } = answers[i];
+
+        mergedTasks.push({
             task: readableTask,
             result,
             answer,
             time
-        };
-    });
+        });
+    }
+
+    return mergedTasks;
 }

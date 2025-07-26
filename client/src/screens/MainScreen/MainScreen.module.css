@@ -1,0 +1,40 @@
+@keyframes professorAppear {
+    0% {
+      right: -140px;
+    }
+    100% {
+      right: -40px;
+    }
+  }
+  
+  .professor {
+    position: absolute;
+    bottom: -15px;
+    right: -40px;
+    transform: rotateY(180deg);
+    animation: professorAppear 2s ease-in-out;
+  }
+
+  @keyframes studentAppear {
+    0% {
+      opacity: 0;
+      transform: scale(2);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  .boy {
+    position: absolute;
+    bottom: -20px;
+    left: 15%;
+    animation: studentAppear 1s ease-in-out;
+  }
+
+  .girl {
+    position: absolute;
+    bottom: -20px;
+    left: 40%;
+    animation: studentAppear .5s ease-in-out;
+  }

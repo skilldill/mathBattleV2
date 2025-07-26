@@ -91,6 +91,23 @@ const resources = {
       textSharePointerForHandleCopy: 'Just copy this message 👇 and send it to your friend in Telegram:',
       noTasksAvailable: 'No tasks available',
       attentionCheckSharingMessage: 'Check your bot\'s chat, there\'s a message you can send to your friend to try solving the puzzles!',
+
+      // school exam
+      schoolExamButtonText: '🏫 School Exam',
+      schoolExamStart: 'School exam starts in',
+      exam: 'Exam',
+      schoolExam: 'School Exam',
+      selectPerson: 'Select person',
+      selectExamLevel: 'Select exam level',
+      toSelectPerson: 'To select person',
+      timeIsUp: 'Time is up!',
+      didntPassExam: "You didn't pass the exam.",
+      toLeave: 'To leave',
+      passedExam: 'You passed the exam!',
+      schoolExamDescription: `🎓 Help MathBattle students pass math exams!
+You have limited time and a list of exercises to solve without errors.
+Each exam is a challenge: the further you go, the harder it gets!
+Pass exams, earn stars and unlock new heroes! ✨`,
     }
   },
   ru: {
@@ -178,6 +195,23 @@ const resources = {
       textSharePointerForHandleCopy: 'Просто скопируй это сообщение 👇 и кинь другу в Телеграм:',
       noTasksAvailable: 'Нет доступных заданий',
       attentionCheckSharingMessage: 'Проверь свой чат с ботом, там сообщение, которое ты можешь отправить другу, чтобы он тоже смог попробовать решить примеры!',
+
+      // school exam
+      schoolExamButtonText: '🏫 Школьный экзамен',
+      schoolExamStart: 'Экзамен начнется через',
+      exam: 'Экзамен',
+      schoolExam: 'Школьный экзамен',
+      selectPerson: 'Выбери персонажа',
+      selectExamLevel: 'Выбери экзамен',
+      toSelectPerson: 'Выбрать персонажа',
+      timeIsUp: 'Время вышло!',
+      didntPassExam: 'Вы не сдали экзамен.',
+      toLeave: 'Уйти',
+      passedExam: 'Вы сдали экзамен!',
+      schoolExamDescription: `🎓 Помоги студентам MathBattle сдать экзамены по математике!
+        У тебя есть ограниченное время и список примеров, которые нужно решить без ошибок.
+        Каждый экзамен — это вызов: чем дальше, тем сложнее!
+        Сдавай экзамены, зарабатывай звёзды и открывай новых героев! ✨`,
     }
   }
 };

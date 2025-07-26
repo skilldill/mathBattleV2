@@ -7,7 +7,7 @@ import { Answer } from '../types/common.types';
 import { combineTasksWithAnswers } from '../utils/combineTasksWithAnswers';
 import { useUserStore } from '../store/userStore';
 
-export const useMathTasks = () => {
+export const useMathTasks = (resultPageUrl: string = '/puzzles-result/') => {
     const [tasks, setTasks] = useState<MathTaskDto[]>([]);
     const [difficulties, setDifficulties] = useState<string[]>([]);
     const [error, setError] = useState<string | null>(null);
@@ -71,14 +71,12 @@ export const useMathTasks = () => {
     };
 
     const checkAnswer = (answer: Answer) => {
-        console.log('answer', answer);
         setAnswers((answers) => [...answers, answer]);
     }
 
     const saveResult = async (isRating: boolean = false) => {
         setLoading(true);
         const resultForSave = combineTasksWithAnswers(tasks, answers);
-
         const data = await ApiService.saveResult({
             tasks: resultForSave,
             userId: userId || 'common',
@@ -89,7 +87,7 @@ export const useMathTasks = () => {
         });
 
         try {
-            history.push('/puzzles-result/' + data.id);
+            history.push(resultPageUrl + data.id);
         } catch (err) {
             setError('Failed to save result');
         } finally {

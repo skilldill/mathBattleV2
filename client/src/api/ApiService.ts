@@ -1,6 +1,7 @@
 import { botHttpClient, httpClient } from './httpClient';
 import { MathTaskDto, ResultDto, ResultListDto, SaveResultDto, TasksCollectionDto } from '../types/MathTaskDto';
 import { LeaderboardResponseDto } from '../types/common.types';
+import { ExamLevelDto, ExamLevelPlayedDto } from '../types/ExamsLevelsDto';
 
 export class ApiService {
     static async getMathTasks(count: number, difficulty: string): Promise<MathTaskDto[]> {
@@ -45,6 +46,21 @@ export class ApiService {
 
     static async botSendMessage(userId: string, message: string): Promise<void> {
         const response = await botHttpClient.post('/send-message', { userId, message });
+        return response.data;
+    }
+
+    static async getExamsLevels(): Promise<ExamLevelDto[]> {
+        const response = await httpClient.get('/api/exams-levels');
+        return response.data;
+    }
+
+    static async getExamLevelPlayed(userId: string): Promise<ExamLevelPlayedDto[]> {
+        const response = await httpClient.get(`/api/exam-level-played/${userId}`);
+        return response.data;
+    }
+
+    static async saveExamLevelPlayed(examLevelPlayed: ExamLevelPlayedDto): Promise<ExamLevelPlayedDto> {
+        const response = await httpClient.post('/api/exam-level-played', examLevelPlayed);
         return response.data;
     }
 }

@@ -1,0 +1,29 @@
+@keyframes timerLine {
+    0% {
+        width: 100%;
+        background:  #10b98166;
+    }
+    50% {
+        background: #d5a711ce;
+    }
+    100% {
+        width: 0;
+        background: #b91010ec;
+    }
+}
+
+.linearTimerIndicator {
+    animation: timerLine 10s linear;
+    width: 0%;
+    height: 100%;
+    background-color: #000;
+
+}
+
+.linearTimer {
+    width: 100%;
+    height: 30px;
+    background-color: #000;
+    overflow: hidden;
+    border-radius: 10px;
+}

@@ -2,7 +2,7 @@ import cn from 'classnames';
 import styles from './Button.module.css';
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    color?: 'primary' | 'success' | 'danger';
+    color?: 'primary' | 'success' | 'danger' | 'accent';
     variant?: 'solid' | 'outline' | 'clear';
     size?: 'small' | 'medium';
     fluid?: boolean;

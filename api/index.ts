@@ -4,7 +4,9 @@ import { mathService, DIFFICULTIES_LIST } from './services/mathService'
 import { ResultModel } from './models/resultSchema'
 import TasksCollection from './models/tasksSharingSchema'
 import { UserModel } from './models/userSchemas'
-
+import fs from 'fs'
+import path from 'path'
+import { ExamLevelModel } from './models/examLevelSchema'
 // Connect to MongoDB
 connectDB()
 
@@ -358,6 +360,26 @@ app.get('/api/tasks-collection/:id', async ({ params }) => {
   const tasksCollection = await TasksCollection.findById(id);
   console.log(tasksCollection?.difficulty);
   return tasksCollection;
+})
+
+app.get('/api/exams-levels', async () => {
+  const examsLevelsFileData = Bun.file("./filesConfigs/examsLevels.json");
+  const examsLevels = await examsLevelsFileData.json();
+  return examsLevels;
+})
+
+app.get('/api/exam-level-played/:userId', async ({ params }) => {
+  const { userId } = params;
+  const examLevel = await ExamLevelModel.find({ userId });
+  return examLevel;
+})
+
+app.post('/api/exam-level-played', async ({ body }) => {
+  console.log(body);
+  const { userId, level, difficulty, questionCount, timeSeconds, maxMistakes, totalTimeSeconds, totalMistakes } = body;
+  const examLevel = new ExamLevelModel({ userId, level, difficulty, questionCount, timeSeconds, maxMistakes, totalTimeSeconds, totalMistakes });
+  const savedExamLevel = await examLevel.save();
+  return savedExamLevel;
 })
 
 const port = process.env.PORT ? parseInt(process.env.PORT) : 3000

@@ -1,5 +1,5 @@
 import { IonApp, setupIonicReact } from '@ionic/react';
-import { MainScreen, PuzzlesScreen, ProfileStatisticsScreen, PuzzlesResultScreen, TechDevScreen, PlayerScreen } from './screens';
+import { MainScreen, PuzzlesScreen, ProfileStatisticsScreen, PuzzlesResultScreen, TechDevScreen, PlayerScreen, SchoolExamScreen, SchoolExamResultsScreen } from './screens';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 /* Core CSS required for Ionic components to work properly */
@@ -31,6 +31,7 @@ import '@ionic/react/css/palettes/dark.always.css';
 /* Theme variables */
 import './theme/variables.css';
 import { useTgUserInfo } from './hooks/useTgUserInfo';
+import { SchoolExamSettingsScreen } from './screens/SchoolExamSettingsScreen/SchoolExamSettingsScreen';
 
 setupIonicReact();
 
@@ -41,6 +42,9 @@ const App: React.FC = () => {
     <IonApp>
       <Router>
         <Switch>
+          <Route path="/settings-school-exam" component={SchoolExamSettingsScreen} />
+          <Route path="/school-exam" component={SchoolExamScreen} />
+          <Route path="/school-exam-result/:id" component={SchoolExamResultsScreen} />
           <Route path="/puzzles/" component={() => <PuzzlesScreen isRating={false} />} />
           <Route path="/shared-puzzles/:id" component={() => <PuzzlesScreen isRating={false} />} />
           <Route path="/puzzles-rating" component={() => <PuzzlesScreen isRating={true} />} />

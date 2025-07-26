@@ -1,0 +1,61 @@
+.classroomScene {
+    background-image: url('../../assets/classrooms.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    max-width: 560px;
+    height: 280px;
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.astronomy {
+    background-position: 0px 20%;
+}
+
+.ninja {
+    background-position: 0px 40%;
+}
+
+.space {
+    background-position: 0px 60%;
+}
+
+.chemistry {
+    background-position: 0px 80%;
+}
+
+.hogwarts {
+    background-position: 0px 100%;
+}
+
+.secret {
+  background-image: url('../../assets/secretClass.png');
+}
+
+@keyframes nervous {
+    0% {
+      transform: translateX(-1px) rotate(-.5deg);
+    }
+    33% {
+      transform: translateX(1px) rotate(.5deg);
+    }
+    66% {
+      transform: translateX(-1px) rotate(.5deg);
+    }
+    99% {
+      transform: translateX(1px) rotate(-.5deg);
+    }
+    100% {
+      transform: translateX(-1px) rotate(-.5deg);
+    }
+  }
+
+.classroomScene.nervous {
+  animation: nervous 0.5s infinite;
+}
+
+.classroomScene.veryNervous {
+  animation: nervous 0.1s infinite;
+}

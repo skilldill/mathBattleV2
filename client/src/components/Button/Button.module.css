@@ -29,6 +29,19 @@
     box-shadow: 0 0px 20px #10b98130;
 }
 
+.accent {
+    background: linear-gradient(135deg, #f5840b2d, #f5840b66);
+    box-shadow: 0 0px 20px #f5840b30;
+}
+
+.accent:hover {
+    box-shadow: 0 0px 20px #f5840b40;
+}
+
+.accent:active {
+    box-shadow: 0 0px 20px #f59e0b50;
+}
+
 .success:hover {
     box-shadow: 0 0px 20px #10b98140;
 }
