@@ -1,17 +1,18 @@
 import { useExamsLevels } from "../../hooks/useExamsLevels";
 import { useEffect, useState } from "react";
-import { Button, ColumnLayout,  VerticalCenterLayout } from "../../components";
+import { Button, ColumnLayout,  ScreenLayout,  VerticalCenterLayout } from "../../components";
 import { IonSpinner } from "@ionic/react";
 import { ExamLevelDto } from "../../types/ExamsLevelsDto";
 import { useExamsLevelsStore } from "../../store/examsLevelsStore";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { PersonsSelect } from "../../components/PersonsSelect/PersonsSelect";
-import { PersonSprite } from "../../components/PersonSprite/PersonSprite";
+import { PersonsAvatar } from "../../components/PersonsAvatar/PersonsAvatar";
+import { StickyBlock } from "../../components/StickyBlock/StickyBlock";
 export const SchoolExamSettingsScreen = () => {
     const history = useHistory();
     const { examsLevels, examLevelPlayed, loading, fetchExamsLevels } = useExamsLevels();
-    const { setSelectedExamLevel, selectedPerson, setSelectedPerson } = useExamsLevelsStore();
+    const { setSelectedExamLevel, selectedPerson, setSelectedPerson, clearSelectedPerson } = useExamsLevelsStore();
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -33,25 +34,42 @@ export const SchoolExamSettingsScreen = () => {
 
     if (!selectedPerson) {
         return (
-            <ColumnLayout>
-                <h1>{t(`schoolExam`)}</h1>
-                <h2>{t(`selectPerson`)}</h2>
-                <PersonsSelect onSelect={setSelectedPerson} />
-            </ColumnLayout>
+            <ScreenLayout title={t('schoolExam')}>
+                <ColumnLayout>
+                    <h2>{t(`selectPerson`)}</h2>
+                    <PersonsSelect onSelect={setSelectedPerson} />
+                </ColumnLayout>
+                <StickyBlock stickySide="bottom">
+                    <ColumnLayout withPadding fluid style={{ paddingBottom: '20px' }}>
+                        <Button variant="clear" fluid onClick={() => history.push('/')}>{t('toHome')}</Button>
+                    </ColumnLayout>
+                </StickyBlock>
+            </ScreenLayout>
         )
     }
 
     return (
-        <ColumnLayout>
-            <h1>{t(`schoolExam`)}</h1>
-            <ColumnLayout withPadding>
-                <PersonSprite person={selectedPerson} emotion="normal" />
-                {examsLevels.map((examLevel, id) => (
-                    <Button color={examLevelPlayed[id] ? 'success' : 'primary'} key={examLevel.level} onClick={() => handleSelectExamLevel(examLevel)}>
-                        {t(`exam`)} {examLevel.level}
-                    </Button>
-                ))}
+        <ScreenLayout title={t('schoolExam')}>
+            <ColumnLayout>
+                <ColumnLayout withPadding>
+                    <ColumnLayout>
+                        <VerticalCenterLayout>
+                            <PersonsAvatar person={selectedPerson} />
+                        </VerticalCenterLayout>
+                        <h2>{t(`selectExamLevel`)}</h2>
+                    </ColumnLayout>
+                    {examsLevels.map((examLevel, id) => (
+                        <Button color={examLevelPlayed[id] ? 'success' : 'primary'} key={examLevel.level} onClick={() => handleSelectExamLevel(examLevel)}>
+                            {t(`exam`)} {examLevel.level}
+                        </Button>
+                    ))}
+                </ColumnLayout>
             </ColumnLayout>
-        </ColumnLayout>
+            <StickyBlock stickySide="bottom">
+                <ColumnLayout withPadding fluid style={{ paddingBottom: '20px' }}>
+                    <Button variant="clear" fluid onClick={clearSelectedPerson}>{t('toSelectPerson')}</Button>
+                </ColumnLayout>
+            </StickyBlock>
+        </ScreenLayout>
     );
 }

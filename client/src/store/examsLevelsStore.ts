@@ -6,6 +6,7 @@ type ExamsLevelsStore = {
     setSelectedExamLevel: (selectedExamLevel: ExamLevelDto) => void;
     selectedPerson: string | null;
     setSelectedPerson: (selectedPerson: string) => void;
+    clearSelectedPerson: () => void;
 }
 
 export const useExamsLevelsStore = create<ExamsLevelsStore>((set) => ({
@@ -13,4 +14,5 @@ export const useExamsLevelsStore = create<ExamsLevelsStore>((set) => ({
     setSelectedExamLevel: (selectedExamLevel: ExamLevelDto) => set({ selectedExamLevel }),
     selectedPerson: null,
     setSelectedPerson: (selectedPerson: string) => set({ selectedPerson }),
+    clearSelectedPerson: () => set({ selectedPerson: null }),
 }));

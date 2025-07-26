@@ -97,6 +97,9 @@ const resources = {
       schoolExamStart: 'School exam starts in',
       exam: 'Exam',
       schoolExam: 'School Exam',
+      selectPerson: 'Select person',
+      selectExamLevel: 'Select exam level',
+      toSelectPerson: 'To select person',
     }
   },
   ru: {
@@ -190,6 +193,9 @@ const resources = {
       schoolExamStart: 'Экзамен начнется через',
       exam: 'Экзамен',
       schoolExam: 'Школьный экзамен',
+      selectPerson: 'Выбери персонажа',
+      selectExamLevel: 'Выбери экзамен',
+      toSelectPerson: 'Выбрать персонажа',
     }
   }
 };
