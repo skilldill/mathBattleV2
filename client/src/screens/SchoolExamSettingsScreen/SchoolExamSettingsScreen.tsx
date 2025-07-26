@@ -11,12 +11,13 @@ import { PersonsAvatar } from "../../components/PersonsAvatar/PersonsAvatar";
 import { StickyBlock } from "../../components/StickyBlock/StickyBlock";
 import { useUserStore } from "../../store/userStore";
 import { findCurrentExamLevel } from "../../utils/checkAvailableExamLevel";
+import { getClassroomScene } from "../../utils/getClassroomScene";
 
 
 export const SchoolExamSettingsScreen = () => {
     const history = useHistory();
     const { examsLevels, examLevelPlayed, loading, fetchExamsLevels, fetchExamLevelPlayed } = useExamsLevels();
-    const { setSelectedExamLevel, selectedPerson, setSelectedPerson, clearSelectedPerson } = useExamsLevelsStore();
+    const { setSelectedExamLevel, selectedPerson, setSelectedPerson, clearSelectedPerson, setSelectedScene } = useExamsLevelsStore();
     const { t } = useTranslation();
     const { userId } = useUserStore();
 
@@ -24,6 +25,10 @@ export const SchoolExamSettingsScreen = () => {
         return findCurrentExamLevel(examLevelPlayed);
     }, [examLevelPlayed]);
 
+    useEffect(() => {
+        setSelectedScene(getClassroomScene(examLevelPlayed));
+    }, [examLevelPlayed]);
+    
     useEffect(() => {
         fetchExamsLevels();
         if (userId) {

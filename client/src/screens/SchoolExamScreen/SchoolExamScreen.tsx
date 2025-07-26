@@ -9,11 +9,11 @@ import { MathTaskCard } from "../../components/MathTaskCard/MathTaskCard";
 import { useTimer } from "../../hooks/useTimer";
 import styles from './SchoolExamScreen.module.css';
 import { CountdownScreen } from "../../components/CountdownScreen/CountdownScreen";
-import cn from "classnames";
 import { PersonSprite } from "../../components/PersonSprite/PersonSprite";
 import { useExamsLevelsStore } from "../../store/examsLevelsStore";
 import { IonActionSheet } from "@ionic/react";
 import { useHistory } from 'react-router';
+import { ClassroomScene } from "../../components/ClassroomScene/ClassroomScene";
 
 export const SchoolExamScene = () => {
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ export const SchoolExamScene = () => {
   const [currentTaskId, setCurrentTaskId] = useState<number>(0);
   const [isFinished, setIsFinished] = useState<boolean>(false);
   const [emotion, setEmotion] = useState<string>('normal');
-  const { selectedExamLevel, selectedPerson } = useExamsLevelsStore();
+  const { selectedExamLevel, selectedPerson, selectedScene } = useExamsLevelsStore();
   const [isActionSheetOpen, setIsActionSheetOpen] = useState<boolean>(false);
   const history = useHistory();
   
@@ -82,7 +82,7 @@ export const SchoolExamScene = () => {
         <LinearTimer seconds={selectedExamLevel?.timeSeconds || 20} onFinish={handleFinish} onTick={handleTick} />
       </ColumnLayout>
       <ColumnLayout withPadding>
-        <div className={cn(styles.classroom, styles[emotion])}>
+        <ClassroomScene scene={selectedScene} emotion={emotion}>
           <div className={styles.schoolboy}>
             <PersonSprite emotion={emotion} person={selectedPerson || 'girl'} />
           </div>
@@ -92,7 +92,7 @@ export const SchoolExamScene = () => {
               <PersonSprite person={selectedPerson !== 'professor' ? 'professor' : 'goose'} emotion="normal" />
             </div>
           )}
-        </div>
+        </ClassroomScene>
       </ColumnLayout>
 
       {!isFinished && (

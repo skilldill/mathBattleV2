@@ -4,11 +4,11 @@ import { PersonsAvatar } from "../PersonsAvatar/PersonsAvatar";
 const PERSONS = [
     "girl",
     "boy",
-    "professor",
-    "ninja",
     "pencil",
-    "goose",
     "dragon",
+    "ninja",
+    "goose",
+    "professor",
 ];
 
 interface PersonsSelectProps {
