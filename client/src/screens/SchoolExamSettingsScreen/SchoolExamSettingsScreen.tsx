@@ -12,6 +12,7 @@ import { StickyBlock } from "../../components/StickyBlock/StickyBlock";
 import { useUserStore } from "../../store/userStore";
 import { findCurrentExamLevel } from "../../utils/checkAvailableExamLevel";
 import { getClassroomScene } from "../../utils/getClassroomScene";
+import { getDisabledPersonsForExam } from "../../utils/getDisabledPersonsForExam";
 
 
 export const SchoolExamSettingsScreen = () => {
@@ -29,6 +30,10 @@ export const SchoolExamSettingsScreen = () => {
             localStorage.setItem('viewedDescription', 'true');
         }
     }, []);
+
+    const disabledPersons = useMemo(() => {
+        return getDisabledPersonsForExam(examLevelPlayed);
+    }, [examLevelPlayed]);
 
     const currentExamLevel = useMemo(() => {
         return findCurrentExamLevel(examLevelPlayed);
@@ -63,7 +68,7 @@ export const SchoolExamSettingsScreen = () => {
             <ScreenLayout title={t('schoolExam')}>
                 <ColumnLayout>
                     <h2>{t(`selectPerson`)}</h2>
-                    <PersonsSelect onSelect={setSelectedPerson} disabledPersons={['professor', 'goose', 'dragon', 'ninja', 'pencil']} />
+                    <PersonsSelect onSelect={setSelectedPerson} disabledPersons={disabledPersons} />
                 </ColumnLayout>
                 <StickyBlock stickySide="bottom">
                     <ColumnLayout withPadding fluid style={{ paddingBottom: '20px' }}>
