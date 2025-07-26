@@ -9,17 +9,22 @@ import { useTranslation } from "react-i18next";
 import { PersonsSelect } from "../../components/PersonsSelect/PersonsSelect";
 import { PersonsAvatar } from "../../components/PersonsAvatar/PersonsAvatar";
 import { StickyBlock } from "../../components/StickyBlock/StickyBlock";
+import { useUserStore } from "../../store/userStore";
 
 
 export const SchoolExamSettingsScreen = () => {
     const history = useHistory();
-    const { examsLevels, examLevelPlayed, loading, fetchExamsLevels } = useExamsLevels();
+    const { examsLevels, examLevelPlayed, loading, fetchExamsLevels, fetchExamLevelPlayed } = useExamsLevels();
     const { setSelectedExamLevel, selectedPerson, setSelectedPerson, clearSelectedPerson } = useExamsLevelsStore();
     const { t } = useTranslation();
+    const { userId } = useUserStore();
 
     useEffect(() => {
         fetchExamsLevels();
-    }, []);
+        if (userId) {
+            fetchExamLevelPlayed(userId);
+        }
+    }, [userId]);
 
     const handleSelectExamLevel = (examLevel: ExamLevelDto) => {
         setSelectedExamLevel(examLevel);

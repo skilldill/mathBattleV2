@@ -3,6 +3,7 @@ export type ExamLevelDto = {
     difficulty: string;
     questionCount: number;
     timeSeconds: number;
+    maxMistakes: number;
 }
 
 export type ExamLevelPlayedDto = {

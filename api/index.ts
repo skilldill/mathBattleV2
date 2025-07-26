@@ -375,8 +375,9 @@ app.get('/api/exam-level-played/:userId', async ({ params }) => {
 })
 
 app.post('/api/exam-level-played', async ({ body }) => {
-  const { userId, level, difficulty, questionCount, timeSeconds, maxMistakes } = body;
-  const examLevel = new ExamLevelModel({ userId, level, difficulty, questionCount, timeSeconds, maxMistakes });
+  console.log(body);
+  const { userId, level, difficulty, questionCount, timeSeconds, maxMistakes, totalTimeSeconds, totalMistakes } = body;
+  const examLevel = new ExamLevelModel({ userId, level, difficulty, questionCount, timeSeconds, maxMistakes, totalTimeSeconds, totalMistakes });
   const savedExamLevel = await examLevel.save();
   return savedExamLevel;
 })
