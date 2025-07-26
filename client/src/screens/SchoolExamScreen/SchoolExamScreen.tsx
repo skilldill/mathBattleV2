@@ -20,7 +20,7 @@ export const SchoolExamScene = () => {
   const [currentTaskId, setCurrentTaskId] = useState<number>(0);
   const [isFinished, setIsFinished] = useState<boolean>(false);
   const [emotion, setEmotion] = useState<string>('normal');
-  const { selectedExamLevel } = useExamsLevelsStore();
+  const { selectedExamLevel, selectedPerson } = useExamsLevelsStore();
 
   const tasksReady = async () => {
     if (selectedExamLevel) {
@@ -71,7 +71,7 @@ export const SchoolExamScene = () => {
       <ColumnLayout withPadding>
         <div className={cn(styles.classroom, styles[emotion])}>
           <div className={styles.schoolboy}>
-            <PersonSprite emotion={emotion} person="girl" />
+            <PersonSprite emotion={emotion} person={selectedPerson || 'girl'} />
           </div>
         </div>
       </ColumnLayout>

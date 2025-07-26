@@ -19,7 +19,6 @@ const MODAL_SCREENS = {
     settingsScreen: () => <SettingsTasksScreen />,
     settingsDailyRatingsScreen: () => <SettingsDailyRatingsScreen />,
     ratingsScreen: () => <RatingsScreen />,
-    schoolExamSettingsScreen: () => <SchoolExamSettingsScreen />,
 }
 
 export const MainScreen: React.FC = () => {
@@ -55,7 +54,7 @@ export const MainScreen: React.FC = () => {
             </IonText>
 
             <ColumnLayout withPadding>
-                <Button color='success' onClick={() => openModal('schoolExamSettingsScreen')}>
+                <Button color='success' onClick={() => history.push('/settings-school-exam')}>
                     {t('schoolExamButtonText')}
                 </Button>
                 <BlockForAuthUser>
@@ -63,9 +62,6 @@ export const MainScreen: React.FC = () => {
                         {t('ratingGameButtonText')}
                     </Button>
                 </BlockForAuthUser>
-                {/* <Button color='success' onClick={() => history.push('/school-exam')}>
-                    {t('schoolExamButtonText')}
-                </Button> */}
                 <Button onClick={() => openModal('settingsScreen')}>
                     {t('trainingGameButtonText')}
                 </Button>

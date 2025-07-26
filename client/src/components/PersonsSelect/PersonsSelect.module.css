@@ -1,0 +1,19 @@
+.personsSelect {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    
+}
+
+.personItem {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #f19797, #733bd9);
+    box-sizing: border-box;
+}
