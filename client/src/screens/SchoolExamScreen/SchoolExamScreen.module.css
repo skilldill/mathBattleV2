@@ -41,3 +41,35 @@
 .classroom.veryNervous {
   animation: nervous 0.1s infinite;
 }
+
+@keyframes professorAppear {
+  0% {
+    right: -140px;
+  }
+  100% {
+    right: -40px;
+  }
+}
+
+.finisedProfessor {
+  position: absolute;
+  bottom: -15px;
+  right: -40px;
+  transform: rotateY(180deg);
+  animation: professorAppear 1s ease-in-out;
+}
+
+@keyframes textAppear {
+  0% {
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.finishedText {
+  animation: textAppear .5s ease-in-out;
+}

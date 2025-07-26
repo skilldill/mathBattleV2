@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { ColumnLayout, ScreenLayout } from "../../components";
+import { Button, ColumnLayout, ScreenLayout } from "../../components";
 import { LinearTimer } from "../../components/LinearTimer/LinearTimer";
 import { useMathTasks } from "../../hooks/useMathTasks";
 import { useEffect, useState } from "react";
@@ -12,6 +12,8 @@ import { CountdownScreen } from "../../components/CountdownScreen/CountdownScree
 import cn from "classnames";
 import { PersonSprite } from "../../components/PersonSprite/PersonSprite";
 import { useExamsLevelsStore } from "../../store/examsLevelsStore";
+import { IonActionSheet } from "@ionic/react";
+import { useHistory } from 'react-router';
 
 export const SchoolExamScene = () => {
   const { t } = useTranslation();
@@ -21,7 +23,9 @@ export const SchoolExamScene = () => {
   const [isFinished, setIsFinished] = useState<boolean>(false);
   const [emotion, setEmotion] = useState<string>('normal');
   const { selectedExamLevel, selectedPerson } = useExamsLevelsStore();
-
+  const [isActionSheetOpen, setIsActionSheetOpen] = useState<boolean>(false);
+  const history = useHistory();
+  
   const tasksReady = async () => {
     if (selectedExamLevel) {
       await fetchTasks(selectedExamLevel.questionCount, selectedExamLevel.difficulty);
@@ -63,8 +67,17 @@ export const SchoolExamScene = () => {
     }
   }
 
+  const handleActionClick = (event: any) => {
+    if (event.detail.data.action === 'close') {
+      history.push('/settings-school-exam');
+    }
+    if (event.detail.data.action === 'cancel') {
+      setIsActionSheetOpen(false);
+    }
+  }
+
   return (
-    <ScreenLayout title={t('')}>
+    <ScreenLayout title={t('schoolExam')}>
       <ColumnLayout withPadding>
         <LinearTimer seconds={selectedExamLevel?.timeSeconds || 20} onFinish={handleFinish} onTick={handleTick} />
       </ColumnLayout>
@@ -73,16 +86,64 @@ export const SchoolExamScene = () => {
           <div className={styles.schoolboy}>
             <PersonSprite emotion={emotion} person={selectedPerson || 'girl'} />
           </div>
+
+          {isFinished && (
+            <div className={styles.finisedProfessor}>
+              <PersonSprite person={selectedPerson !== 'professor' ? 'professor' : 'goose'} emotion="normal" />
+            </div>
+          )}
         </div>
       </ColumnLayout>
+
+      {!isFinished && (
+        <ColumnLayout withPadding>
+          <TasksCarousel 
+            items={tasks} 
+            currentIndex={currentTaskId} 
+            renderItem={(item: MathTaskDto) => 
+              <MathTaskCard task={item} onVariantClick={handleVariantClick} />} 
+          />
+        </ColumnLayout>
+      )}
+
+      {isFinished && (
+          <ColumnLayout withPadding>
+            <h1>{t('timeIsUp')}</h1>
+            <div className={styles.finishedText}>
+              <h4>{t('didntPassExam')}</h4>
+            </div>
+          </ColumnLayout>
+        )}
       <ColumnLayout withPadding>
-        <TasksCarousel 
-          items={tasks} 
-          currentIndex={currentTaskId} 
-          renderItem={(item: MathTaskDto) => 
-            <MathTaskCard task={item} onVariantClick={handleVariantClick} />} 
-        />
+        {!isFinished && (
+          <Button variant='outline' color='danger' onClick={() => setIsActionSheetOpen(true)}>{t('finish')}</Button>
+        )}
+        {isFinished && (
+          <Button variant='outline' color='danger' onClick={() => history.push('/settings-school-exam')}>{t('toLeave')}</Button>
+        )}
       </ColumnLayout>
+      <IonActionSheet
+        isOpen={isActionSheetOpen}
+        header={t('actionSheetFinishTitle')}
+        buttons={[
+          {
+            text: t('finish'),
+            role: 'destructive',
+            data: {
+              action: 'close',
+            },
+          },
+          {
+            text: t('continueSolving'),
+            role: 'cancel',
+            data: {
+              action: 'cancel',
+            },
+          },
+        ]}
+        onDidDismiss={handleActionClick}
+        onWillDismiss={() => setIsActionSheetOpen(false)}
+      ></IonActionSheet>
     </ScreenLayout>
   );
 };

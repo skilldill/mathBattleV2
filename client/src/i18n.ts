@@ -100,6 +100,9 @@ const resources = {
       selectPerson: 'Select person',
       selectExamLevel: 'Select exam level',
       toSelectPerson: 'To select person',
+      timeIsUp: 'Time is up!',
+      didntPassExam: "You didn't pass the exam.",
+      toLeave: 'To leave',
     }
   },
   ru: {
@@ -196,6 +199,9 @@ const resources = {
       selectPerson: 'Выбери персонажа',
       selectExamLevel: 'Выбери экзамен',
       toSelectPerson: 'Выбрать персонажа',
+      timeIsUp: 'Время вышло!',
+      didntPassExam: 'Вы не сдали экзамен.',
+      toLeave: 'Уйти',
     }
   }
 };

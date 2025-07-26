@@ -9,6 +9,8 @@ import { useTranslation } from "react-i18next";
 import { PersonsSelect } from "../../components/PersonsSelect/PersonsSelect";
 import { PersonsAvatar } from "../../components/PersonsAvatar/PersonsAvatar";
 import { StickyBlock } from "../../components/StickyBlock/StickyBlock";
+
+
 export const SchoolExamSettingsScreen = () => {
     const history = useHistory();
     const { examsLevels, examLevelPlayed, loading, fetchExamsLevels } = useExamsLevels();
@@ -37,7 +39,7 @@ export const SchoolExamSettingsScreen = () => {
             <ScreenLayout title={t('schoolExam')}>
                 <ColumnLayout>
                     <h2>{t(`selectPerson`)}</h2>
-                    <PersonsSelect onSelect={setSelectedPerson} />
+                    <PersonsSelect onSelect={setSelectedPerson} disabledPersons={['professor', 'goose', 'dragon', 'ninja', 'pencil']} />
                 </ColumnLayout>
                 <StickyBlock stickySide="bottom">
                     <ColumnLayout withPadding fluid style={{ paddingBottom: '20px' }}>
