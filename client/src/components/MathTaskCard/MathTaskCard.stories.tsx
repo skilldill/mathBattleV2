@@ -16,7 +16,7 @@ Default.args = {
         taskArgs: [2, 2],
         taskActions: ['+'],
         result: 4,
-        readableTask: '2 + 2',
+        readableTask: '200 + 20',
         variants: [3, 4, 5, 6],
     },
     onVariantClick: (variant: number) => alert(`Variant clicked: ${variant}`),
@@ -25,4 +25,6 @@ Default.args = {
 export const WithCurrentNumber = Template.bind({});
 WithCurrentNumber.args = {
     ...Default.args,
+    // currentNumber: 1,
+    // allTasksCount: 10,
 };
