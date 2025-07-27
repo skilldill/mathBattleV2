@@ -25,6 +25,4 @@ Default.args = {
 export const WithCurrentNumber = Template.bind({});
 WithCurrentNumber.args = {
     ...Default.args,
-    currentNumber: 1,
-    allTasksCount: 10,
 };
