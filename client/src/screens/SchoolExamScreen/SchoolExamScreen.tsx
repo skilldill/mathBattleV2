@@ -101,7 +101,7 @@ export const SchoolExamScene = () => {
             items={tasks} 
             currentIndex={currentTaskId} 
             renderItem={(item: MathTaskDto) => 
-              <MathTaskCard task={item} onVariantClick={handleVariantClick} />} 
+              <MathTaskCard task={item} onVariantClick={handleVariantClick} currentNumber={currentTaskId + 1} allTasksCount={tasks.length} />} 
           />
         </ColumnLayout>
       )}

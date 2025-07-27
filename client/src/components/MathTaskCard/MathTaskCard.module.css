@@ -1,3 +1,7 @@
+.mathTaskCard {
+    position: relative;
+}
+
 .variants {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -9,5 +13,19 @@
     font-size: 46px;
     font-weight: 900;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.currentTaskNumberLabel {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    color: #ffffff50;
+}
+
+.currentTaskNumber {
+    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
 }
