@@ -108,6 +108,7 @@ const resources = {
 You have limited time and a list of exercises to solve without errors.
 Each exam is a challenge: the further you go, the harder it gets!
 Pass exams, earn stars and unlock new heroes! ✨`,
+      examRetry: 'To retake the exam',
     }
   },
   ru: {
@@ -212,6 +213,7 @@ Pass exams, earn stars and unlock new heroes! ✨`,
         У тебя есть ограниченное время и список примеров, которые нужно решить без ошибок.
         Каждый экзамен — это вызов: чем дальше, тем сложнее!
         Сдавай экзамены, зарабатывай звёзды и открывай новых героев! ✨`,
+      examRetry: 'Пересдать экзамен',
     }
   }
 };

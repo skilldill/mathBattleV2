@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Button, ColumnLayout, ScreenLayout } from "../../components";
 import { LinearTimer } from "../../components/LinearTimer/LinearTimer";
 import { useMathTasks } from "../../hooks/useMathTasks";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { TasksCarousel } from "../../components/TasksCarousel/TasksCarousel";
 import { MathTaskDto } from "../../types/MathTaskDto";
 import { MathTaskCard } from "../../components/MathTaskCard/MathTaskCard";
@@ -15,7 +15,11 @@ import { IonActionSheet } from "@ionic/react";
 import { useHistory } from 'react-router';
 import { ClassroomScene } from "../../components/ClassroomScene/ClassroomScene";
 
-export const SchoolExamScene = () => {
+interface SchoolExamSceneProps {
+  onRefresh: () => void;
+}
+
+export const SchoolExamScene: FC<SchoolExamSceneProps> = ({ onRefresh }) => {
   const { t } = useTranslation();
   const { fetchTasks, tasks, checkAnswer } = useMathTasks('/school-exam-result/');
   const { getTime, startTimer } = useTimer();
@@ -76,6 +80,10 @@ export const SchoolExamScene = () => {
     }
   }
 
+  const handleRetry = () => {
+    onRefresh();
+  }
+
   return (
     <ScreenLayout title={t('schoolExam')}>
       <ColumnLayout withPadding>
@@ -119,7 +127,10 @@ export const SchoolExamScene = () => {
           <Button variant='outline' color='danger' onClick={() => setIsActionSheetOpen(true)}>{t('finish')}</Button>
         )}
         {isFinished && (
-          <Button variant='outline' color='danger' onClick={() => history.push('/settings-school-exam')}>{t('toLeave')}</Button>
+          <>
+            <Button variant='outline' color="warning" onClick={handleRetry}>{t('examRetry')}</Button>
+            <Button variant='outline' color='danger' onClick={() => history.push('/settings-school-exam')}>{t('toLeave')}</Button>
+          </>
         )}
       </ColumnLayout>
       <IonActionSheet
@@ -151,9 +162,17 @@ export const SchoolExamScene = () => {
 export const SchoolExamScreen = () => {
   const { t } = useTranslation();
 
+
+  // Это необходимо для того, чтобы перезагрузить сцену при нажатии на кнопку "Пересдать экзамен"
+  const [sceneKey, setSceneKey] = useState<number>(0);
+
+  const handleRefresh = () => {
+    setSceneKey((sceneKey) => sceneKey + 1);
+  }
+
   return (
-    <CountdownScreen seconds={3} onFinish={() => {}} title={t('schoolExamStart')}>
-      <SchoolExamScene />
+    <CountdownScreen key={sceneKey} seconds={3} onFinish={() => {}} title={t('schoolExamStart')}>
+      <SchoolExamScene onRefresh={handleRefresh} />
     </CountdownScreen>
   );
 };

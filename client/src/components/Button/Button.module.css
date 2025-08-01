@@ -50,6 +50,20 @@
     box-shadow: 0 0px 20px #10b98150;
 }
 
+.warning {
+    background: linear-gradient(135deg, #f5840b2d, #ffa6005e) !important;
+    color: #FFA500 !important;
+    box-shadow: 0 0px 20px #ffa6005e !important;
+}
+
+.warning:hover {
+    box-shadow: 0 0px 20px #ffa6005e !important;
+}
+
+.warning:active {
+    box-shadow: 0 0px 20px #ffa6005e !important;
+}
+
 .outline {
     background: transparent;
     /* border: 1px solid #ffffff01; */
