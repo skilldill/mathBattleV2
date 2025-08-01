@@ -8,7 +8,10 @@ type ColumnLayoutProps = {
 }
 export const ColumnLayout: React.FC<PropsWithChildren<ColumnLayoutProps>> = ({ children, withPadding = false, fluid = false, style }) => {
   return (
-    <div className={styles.columnLayout} style={{ padding: withPadding ? '20px' : '0px', width: fluid ? '100%' : 'auto', ...style }}>
+    <div 
+      className={`${styles.columnLayout} ${fluid ? styles.fluid : ''}`} 
+      style={{ padding: withPadding ? '20px' : '0px', ...style }}
+    >
       {children}
     </div>
   );

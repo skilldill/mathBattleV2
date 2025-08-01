@@ -62,7 +62,8 @@ export const SchoolExamResultsScreen = () => {
         {result && <ResultSummary result={result} />}
       </ColumnLayout>
       <StickyBlock stickySide="bottom">
-        <ColumnLayout withPadding fluid style={{ paddingBottom: '20px' }}>
+        <ColumnLayout withPadding fluid style={{ paddingBottom: '20px', width: '100%' }}>
+          <Button variant='outline' fluid color="warning" onClick={() => history.push('/school-exam')}>{t('examRetry')}</Button>
           <Button variant="clear" fluid onClick={() => history.push('/settings-school-exam')}>{t('toLeave')}</Button>
         </ColumnLayout>
       </StickyBlock>

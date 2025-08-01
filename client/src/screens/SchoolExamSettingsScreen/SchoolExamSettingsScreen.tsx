@@ -87,6 +87,8 @@ export const SchoolExamSettingsScreen = () => {
         )
     }
 
+    
+    
     return (
         <ScreenLayout title={t('schoolExam')}>
             <ColumnLayout>

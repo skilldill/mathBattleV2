@@ -86,10 +86,10 @@ export const SchoolExamScene: FC<SchoolExamSceneProps> = ({ onRefresh }) => {
 
   return (
     <ScreenLayout title={t('schoolExam')}>
-      <ColumnLayout withPadding>
+      <ColumnLayout withPadding style={{ paddingBottom: '0px' }}>
         <LinearTimer seconds={selectedExamLevel?.timeSeconds || 20} onFinish={handleFinish} onTick={handleTick} />
       </ColumnLayout>
-      <ColumnLayout withPadding>
+      <ColumnLayout withPadding style={{ paddingTop: '10px', paddingBottom: '0px' }}>
         <ClassroomScene scene={selectedScene} emotion={emotion}>
           <div className={styles.schoolboy}>
             <PersonSprite emotion={emotion} person={selectedPerson || 'girl'} />
@@ -104,7 +104,7 @@ export const SchoolExamScene: FC<SchoolExamSceneProps> = ({ onRefresh }) => {
       </ColumnLayout>
 
       {!isFinished && (
-        <ColumnLayout withPadding>
+        <ColumnLayout withPadding style={{ paddingTop: '10px' }}>
           <TasksCarousel 
             items={tasks} 
             currentIndex={currentTaskId} 
