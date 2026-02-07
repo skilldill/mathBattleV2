@@ -94,6 +94,11 @@ const resources = {
 
       // school exam
       schoolExamButtonText: '🏫 School Exam',
+      chessButtonText: 'Chess with friends',
+      chessInfoModalTitle: 'New Online Chess',
+      chessInfoModalDescription: 'Play chess online with your friends on chesson.me! Challenge your friends and improve your chess skills together!',
+      chessInfoModalButtonText: 'Play Chess',
+      chessInfoModalCloseText: 'Close',
       schoolExamStart: 'School exam starts in',
       exam: 'Exam',
       schoolExam: 'School Exam',
@@ -104,6 +109,7 @@ const resources = {
       didntPassExam: "You didn't pass the exam.",
       toLeave: 'To leave',
       passedExam: 'You passed the exam!',
+      later: 'Later',
       schoolExamDescription: `🎓 Help MathBattle students pass math exams!
 You have limited time and a list of exercises to solve without errors.
 Each exam is a challenge: the further you go, the harder it gets!
@@ -199,6 +205,11 @@ Pass exams, earn stars and unlock new heroes! ✨`,
 
       // school exam
       schoolExamButtonText: '🏫 Школьный экзамен',
+      chessButtonText: 'Шахматы с друзьями',
+      chessInfoModalTitle: 'Новые шахматы онлайн',
+      chessInfoModalDescription: 'Играй в шахматы онлайн с друзьями на chesson.me! Бросай вызов друзьям и улучшай свои навыки игры в шахматы вместе!',
+      chessInfoModalButtonText: 'Играть в шахматы',
+      chessInfoModalCloseText: 'Закрыть',
       schoolExamStart: 'Экзамен начнется через',
       exam: 'Экзамен',
       schoolExam: 'Школьный экзамен',
@@ -208,6 +219,7 @@ Pass exams, earn stars and unlock new heroes! ✨`,
       timeIsUp: 'Время вышло!',
       didntPassExam: 'Вы не сдали экзамен.',
       toLeave: 'Уйти',
+      later: 'Позже',
       passedExam: 'Вы сдали экзамен!',
       schoolExamDescription: `🎓 Помоги студентам MathBattle сдать экзамены по математике!
         У тебя есть ограниченное время и список примеров, которые нужно решить без ошибок.

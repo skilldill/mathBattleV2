@@ -1,5 +1,4 @@
-import { IonContent, IonImg, IonText, IonModal } from '@ionic/react';
-import MathBattleCoverPng from '../../assets/MathBattleCover.png';
+import { IonContent, IonText, IonModal } from '@ionic/react';
 import { ColumnLayout, ScreenLayout } from '../../components';
 import { useState } from 'react';
 import { AboutScreen } from '../AboutScreen/AboutScreen';
@@ -12,10 +11,10 @@ import { RatingsScreen } from '../RatingsScreen/RatingsScreen';
 import { useTranslation } from 'react-i18next';
 import { BlockForAuthUser } from '../../components/BlockForAuthUser/BlockForAuthUser';
 import { StickyBlock } from '../../components/StickyBlock/StickyBlock';
-import { SchoolExamSettingsScreen } from '../SchoolExamSettingsScreen/SchoolExamSettingsScreen';
 import { ClassroomScene } from '../../components/ClassroomScene/ClassroomScene';
 import { PersonSprite } from '../../components/PersonSprite/PersonSprite';
 import styles from './MainScreen.module.css';
+import { ChessInfoModal } from '../../components/ChessInfoModal/ChessInfoModal';
 
 const MODAL_SCREENS = {
     aboutScreen: () => <AboutScreen />,
@@ -70,14 +69,15 @@ export const MainScreen: React.FC = () => {
                 <Button color='accent' onClick={() => history.push('/settings-school-exam')}>
                     {t('schoolExamButtonText')}
                 </Button>
+                <Button onClick={() => openModal('settingsScreen')}>
+                    {t('trainingGameButtonText')}
+                </Button>
+                <ChessInfoModal />
                 <BlockForAuthUser>
                     <Button color='success' onClick={() => openModal('ratingsScreen')}>
                         {t('ratingGameButtonText')}
                     </Button>
                 </BlockForAuthUser>
-                <Button onClick={() => openModal('settingsScreen')}>
-                    {t('trainingGameButtonText')}
-                </Button>
                 <BlockForAuthUser>
                     <Button onClick={() => history.push('/player')}>
                         {t('playerTitleScreen')}
