@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ApiService } from "../api/ApiService";
 import { ExamLevelDto, ExamLevelPlayedDto } from "../types/ExamsLevelsDto";
+import { getStoredExamLevelPlayed, isTelegramGameSession, saveStoredExamLevelPlayed } from "../utils/examProgressStorage";
 
 export const useExamsLevels = () => {
     const [examsLevels, setExamsLevels] = useState<ExamLevelDto[]>([]);
@@ -19,8 +20,13 @@ export const useExamsLevels = () => {
         }
     }
 
-    const fetchExamLevelPlayed = async (userId: string) => {
+    const fetchExamLevelPlayed = async (userId?: string) => {
         try {
+            if (!isTelegramGameSession() || !userId) {
+                setExamLevelPlayed(getStoredExamLevelPlayed());
+                return;
+            }
+
             const examLevelPlayed = await ApiService.getExamLevelPlayed(userId);
             setExamLevelPlayed(examLevelPlayed);
         } catch (error) {
@@ -32,6 +38,11 @@ export const useExamsLevels = () => {
 
     const saveExamLevelPlayed = async (examLevelPlayed: ExamLevelPlayedDto) => {
         try {
+            if (!isTelegramGameSession()) {
+                setExamLevelPlayed(saveStoredExamLevelPlayed(examLevelPlayed));
+                return;
+            }
+
             await ApiService.saveExamLevelPlayed(examLevelPlayed);
         } catch (error) {
             console.error(error);

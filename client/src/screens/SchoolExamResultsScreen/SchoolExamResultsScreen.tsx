@@ -10,6 +10,7 @@ import { ResultSummary } from "../../components/ResultSummary/ResultSummary";
 import { checkExamPassed } from "../../utils/checkExamPassed";
 import { useExamsLevels } from "../../hooks/useExamsLevels";
 import { useUserStore } from "../../store/userStore";
+import { LOCAL_BROWSER_EXAM_USER_ID } from "../../utils/examProgressStorage";
 import styles from './SchoolExamResultsScreen.module.css';
 
 export const SchoolExamResultsScreen = () => {
@@ -33,9 +34,9 @@ export const SchoolExamResultsScreen = () => {
   }, [result]);
 
   useEffect(() => {
-    if (userId && isPassed && result && selectedExamLevel) {
+    if (isPassed && result && selectedExamLevel) {
       saveExamLevelPlayed({
-        userId,
+        userId: userId || LOCAL_BROWSER_EXAM_USER_ID,
         totalTimeSeconds: result.time,
         totalMistakes: result.tasks.filter((task) => task.result !== task.answer).length,
         ...selectedExamLevel,
