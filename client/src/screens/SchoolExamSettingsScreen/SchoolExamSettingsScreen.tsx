@@ -45,9 +45,7 @@ export const SchoolExamSettingsScreen = () => {
     
     useEffect(() => {
         fetchExamsLevels();
-        if (userId) {
-            fetchExamLevelPlayed(userId);
-        }
+        fetchExamLevelPlayed(userId);
     }, [userId]);
 
     const handleSelectExamLevel = (examLevel: ExamLevelDto) => {
