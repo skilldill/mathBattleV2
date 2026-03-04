@@ -1,260 +1,538 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import "../assets/theme.css";
 
 async function fetchStatsData() {
 	try {
 		const response = await fetch("https://app.math-battle.ru/api/api/common/stats");
 		const data = await response.json();
 		return data;
-	} catch (error) {
-		console.error("Error fetching stats data:", error);
+	} catch {
 		return null;
 	}
 }
 
 const statsData = await fetchStatsData();
+const totalUsers = statsData?.totalUsers ?? "10K+";
+const totalTasks = statsData?.totalTasks ?? "250K+";
 ---
 
 <Layout>
-	<div class="container">
-		<h1 class="title">Math battle</h1>
-		<div class="poster"></div>
-		{!!statsData && (
-			<div class="row">
-				<div class="glassBlock">
-					<p class="statsValue">{statsData.totalUsers}</p>
-					<p class="statsLabel">Игроков</p>
-				</div>
-				<div class="glassBlock">
-					<p class="statsValue">{statsData.totalTasks}</p>
-					<p class="statsLabel">Решено примеров</p>
-				</div>
+	<div class="site-shell">
+		<header class="top-nav">
+			<div class="logo-wrap">
+				<div class="logo-mark">∑</div>
+				<span>Math Battle</span>
 			</div>
-		)}
-		<p class="description">
-			Math battle — это увлекательная игра, в которой каждый игрок
-			проверяет свои знания и навыки в захватывающем
-			математическом поединке. Испытай себя, прокачай логику и
-			стань лучшим в мире математики!
-		</p>
-		<div class="telegramButtonsContainer">
-			<a
-				href="https://t.me/MathlyBattleBot"
-				class="telegramButton">Играть в Telegram</a
-			>
-			<a
-				href="https://app.math-battle.ru"
-				class="telegramButton browserButton"
-				>Играть в браузере</a
-			>
-		</div>
+			<nav>
+				<a href="https://t.me/MathlyBattleBot">Telegram</a>
+			</nav>
+			<a class="nav-cta" href="https://app.math-battle.ru">Начать игру</a>
+		</header>
+
+		<main class="hero-grid">
+			<section class="hero-content">
+				<p class="eyebrow">ОНЛАЙН ТРЕНАЖЁР ДЛЯ МАТЕМАТИКИ</p>
+				<h1>
+					Прокачай скорость
+					<span>математического мышления</span>
+				</h1>
+				<p class="lead">
+					Решай задания в формате баттлов, поднимайся в рейтинге и развивай
+					логику в игровом формате на каждом раунде.
+				</p>
+				<div class="hero-actions">
+					<a class="btn btn-primary" href="https://t.me/MathlyBattleBot">Играть в Telegram</a>
+					<a class="btn btn-ghost" href="https://app.math-battle.ru">Играть в браузере</a>
+				</div>
+			</section>
+
+			<section class="hero-visual" aria-hidden="true">
+				<div class="core">
+					<div class="graph-axis graph-axis-x"></div>
+					<div class="graph-axis graph-axis-y"></div>
+					<svg class="parabola" viewBox="0 0 220 220" role="presentation" aria-hidden="true">
+						<path class="parabola-main" d="M35 35 Q110 180 185 35"></path>
+					</svg>
+					<span class="graph-label">y = x²</span>
+				</div>
+				<div class="sat sat-a">x²</div>
+				<div class="sat sat-b">√</div>
+				<div class="sat sat-c">π</div>
+				<div class="sat sat-d">Δ</div>
+			</section>
+		</main>
+
+		<section id="stats" class="stats-strip">
+			<div class="stat-card">
+				<p class="stat-value">{totalUsers}</p>
+				<p class="stat-label">игроков уже в баттлах</p>
+			</div>
+			<div class="stat-card">
+				<p class="stat-value">{totalTasks}</p>
+				<p class="stat-label">примеров решено на платформе</p>
+			</div>
+			<div class="stat-card">
+				<p class="stat-value">24/7</p>
+				<p class="stat-label">доступ из Telegram и браузера</p>
+			</div>
+		</section>
+
+		<section id="features" class="feature-section">
+			<h2>Почему это работает</h2>
+			<div class="feature-grid">
+				<article class="feature-card">
+					<h3>Интересные математические квесты</h3>
+					<p>Проходи увлекательные математические квесты и развивай навыки шаг за шагом.</p>
+				</article>
+				<article class="feature-card">
+					<h3>Уровни сложности</h3>
+					<p>Переходи от базовой арифметики к продвинутым задачам без перегруза.</p>
+				</article>
+				<article class="feature-card">
+					<h3>Рейтинг и прогресс</h3>
+					<p>Следи за статистикой и улучшай результаты с каждой тренировкой.</p>
+				</article>
+				<article class="feature-card">
+					<h3>Короткие игровые сессии</h3>
+					<p>Один матч занимает несколько минут и подходит даже в плотном графике.</p>
+				</article>
+				<article class="feature-card">
+					<h3>Фокус на скорость</h3>
+					<p>Таймер и динамика раундов формируют устойчивый навык быстрого счёта.</p>
+				</article>
+				<article class="feature-card accent-card">
+					<h3>Готов начать?</h3>
+					<p>Открой игру и проверь, насколько быстро ты думаешь в цифрах.</p>
+					<a href="https://app.math-battle.ru">Перейти к матчу</a>
+				</article>
+			</div>
+		</section>
 	</div>
 </Layout>
 
-<style is:global>
-	.container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		box-sizing: border-box;
-		padding: 20px;
-		padding-top: 40px;
-		max-width: 600px;
+<style>
+	.site-shell {
+		max-width: 1200px;
 		margin: 0 auto;
-		overflow-y: auto;
+		padding: 0 24px 40px;
 	}
 
-	.title {
-		font-size: 4rem;
-		font-weight: 700;
-		text-align: center;
-		margin-top: 0px;
-		margin-bottom: 20px;
-		color: var(--glass-text);
-		transition: color 0.3s ease;
-	}
-
-	.description {
-		font-size: 1.5rem;
-		font-weight: 400;
-		text-align: center;
-		line-height: 1.5;
-		color: var(--glass-text-secondary);
-		transition: color 0.3s ease;
-	}
-
-	.row {
-		display: flex;
+	.promo-bar {
+		margin-top: 14px;
+		display: grid;
+		grid-template-columns: auto 1fr auto;
 		gap: 14px;
-		width: 100%;
+		align-items: center;
+		padding: 10px 16px;
+		border: 1px solid var(--line);
+		border-radius: 14px;
+		background: linear-gradient(90deg, rgba(123, 125, 255, 0.2), rgba(137, 53, 215, 0.1));
 	}
 
-	.glassBlock {
-		border-radius: 16px;
-		border: 1px solid var(--glass-border);
-		padding: auto;
-		flex: 1;
-		padding: 12px;
-		text-align: center;
+	.promo-bar span {
+		font-size: 0.75rem;
+		letter-spacing: 0.1em;
+		font-weight: 800;
 	}
 
-	.statsValue {
-		font-size: 2rem;
+	.promo-bar p {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: 0.95rem;
+	}
+
+	.promo-bar a {
 		font-weight: 700;
-		color: var(--glass-text-secondary);
-		margin: 0px;
-		margin-bottom: 10px;
+		text-decoration: none;
+		padding: 8px 14px;
+		border: 1px solid var(--line-strong);
+		border-radius: 999px;
 	}
 
-	.statsLabel {
-		font-size: 1.25rem;
-		font-weight: 400;
-		color: var(--glass-text-secondary);
-		margin: 0px;
-	}
-
-	@keyframes changeSizeLight {
-		0% {
-			transform: scale(.5);
-		}
-		50% {
-			transform: scale(2);
-		}
-		100% {
-			transform: scale(.5);
-		}
-	}
-
-	.light {
-		position: absolute;
-		width: 300px;
-		height: 300px;
-		border-radius: 100%;
-		filter: blur(100px);
-		webkit-filter: blur(100px);
-		z-index: 1;
-		background-color: var(--glass-light);
-		transition: background-color 0.3s ease;
-		animation: changeSizeLight 8s ease-in-out infinite;
-	}
-
-	.telegramButton {
+	.top-nav {
+		position: sticky;
+		top: 0;
+		z-index: 30;
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		gap: 12px;
-		width: 100%;
-		flex: 1;
-		padding: 16px 32px;
-		font-size: 1.25rem;
-		font-weight: 600;
-		text-decoration: none;
-		border-radius: 16px;
-		backdrop-filter: blur(10px);
-		transition: all 0.3s ease;
-		box-sizing: border-box;
-		background-color: var(--glass-button-bg);
-		
-		color: var(--glass-text);
+		justify-content: space-between;
+		gap: 20px;
+		padding: 18px 0;
+		backdrop-filter: blur(8px);
 	}
 
-	[data-theme="dark"] .telegramButton {
-		border-top: 1px solid var(--glass-border);
-		border-right: 1px solid var(--glass-border);
-	}
-
-	.telegramButton:hover {
-		transform: translateY(-2px);
-		background-color: var(--glass-button-hover);
-	}
-
-	.telegramButtonsContainer {
+	.logo-wrap {
 		display: flex;
-		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+		font-family: "Space Grotesk", sans-serif;
+		font-weight: 700;
+	}
+
+	.logo-mark {
+		display: grid;
+		place-items: center;
+		width: 28px;
+		height: 28px;
+		border-radius: 8px;
+		background: linear-gradient(135deg, var(--accent), #a45eff);
+		color: #0a0d16;
+	}
+
+	nav {
+		display: flex;
 		gap: 18px;
-		width: 100%;
 	}
 
-	.browserButton {
-		background-color: var(--glass-button-browser-bg);
+	nav a {
+		text-decoration: none;
+		color: var(--text-muted);
+		font-size: 0.95rem;
 	}
 
-	.browserButton:hover {
-		background-color: var(--glass-button-browser-hover);
-		transform: translateY(-2px);
+	.nav-cta {
+		text-decoration: none;
+		font-weight: 700;
+		border: 1px solid var(--line-strong);
+		border-radius: 12px;
+		padding: 10px 16px;
+		background: rgba(255, 255, 255, 0.04);
 	}
 
-	@media (max-width: 768px) {
-		.container {
-			padding: 10px;
-			padding-top: 40px;
-		}
-
-		.title {
-			font-size: 2.5rem;
-		}
-
-		.description {
-			font-size: 1.25rem;
-		}
+	.hero-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 28px;
+		padding: 38px 0;
+		border-top: 1px solid var(--line);
+		border-bottom: 1px solid var(--line);
 	}
 
-	.card {
-		background-color: var(--card-bg);
-		border: 1px solid var(--border);
+	.hero-content h1 {
+		font-family: "Space Grotesk", sans-serif;
+		font-size: clamp(2.4rem, 5vw, 4.4rem);
+		line-height: 1.08;
+		margin: 8px 0 14px;
 	}
 
-	.glassBlock {
-		background-color: var(--glass-bg) !important;
-		transition: background-color 0.3s ease;
+	.hero-content h1 span {
+		display: block;
+		background: linear-gradient(90deg, #a45eff, #5479fc 65%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
 	}
 
-	.glassBlockContent {
-		background-color: var(--glass-content-bg) !important;
-		transition: background-color 0.3s ease;
+	.eyebrow {
+		letter-spacing: 0.12em;
+		font-size: 0.78rem;
+		font-weight: 700;
+		color: var(--text-muted);
 	}
 
-	.title {
-		color: var(--glass-text) !important;
-		transition: color 0.3s ease;
+	.lead {
+		max-width: 640px;
+		font-size: 1.2rem;
+		line-height: 1.65;
+		color: var(--text-muted);
 	}
 
-	.description {
-		color: var(--glass-text-secondary) !important;
-		transition: color 0.3s ease;
+	.hero-actions {
+		display: flex;
+		gap: 12px;
+		margin-top: 26px;
+		flex-wrap: wrap;
 	}
 
-	.telegramButton {
-		background-color: var(--glass-button-bg) !important;
-		border-color: var(--glass-border) !important;
-		color: var(--glass-text) !important;
-		transition: all 0.3s ease;
+	.btn {
+		text-decoration: none;
+		padding: 12px 18px;
+		font-weight: 700;
+		border-radius: 12px;
+		border: 1px solid var(--line-strong);
 	}
 
-	.telegramButton:hover {
-		background-color: var(--glass-button-hover) !important;
+	.btn-primary {
+		background: linear-gradient(90deg, rgba(123, 125, 255, 0.35), rgba(161, 53, 215, 0.3));
 	}
 
-	.browserButton {
-		background-color: var(--glass-button-browser-bg) !important;
+	.btn-ghost {
+		background: rgba(255, 255, 255, 0.03);
 	}
 
-	.browserButton:hover {
-		background-color: var(--glass-button-browser-hover) !important;
+	.hero-visual {
+		position: relative;
+		border: 1px solid var(--line);
+		border-radius: 24px;
+		min-height: 420px;
+		overflow: hidden;
+		background:
+			radial-gradient(circle at center, rgba(123, 125, 255, 0.2), transparent 60%),
+			linear-gradient(140deg, rgba(12, 16, 30, 0.9), rgba(8, 10, 17, 0.9));
+	}
+
+	.core {
+		position: absolute;
+		inset: 50% auto auto 50%;
+		transform: translate(-50%, -50%) rotate(-12deg);
+		width: 220px;
+		height: 220px;
+		border-radius: 36px;
+		background:
+			repeating-linear-gradient(
+				0deg,
+				rgba(188, 201, 255, 0.08) 0px,
+				rgba(188, 201, 255, 0.08) 1px,
+				transparent 1px,
+				transparent 22px
+			),
+			repeating-linear-gradient(
+				90deg,
+				rgba(188, 201, 255, 0.08) 0px,
+				rgba(188, 201, 255, 0.08) 1px,
+				transparent 1px,
+				transparent 22px
+			),
+			linear-gradient(130deg, rgba(123, 125, 255, 0.45), rgba(107, 53, 215, 0.18));
+		box-shadow:
+			0 24px 70px rgba(7, 10, 18, 0.9),
+			0 0 0 1px rgba(255, 255, 255, 0.18) inset;
+		animation: drift 7s ease-in-out infinite;
+		overflow: hidden;
+	}
+
+	.graph-axis {
+		position: absolute;
+		background: rgba(223, 229, 255, 0.2);
+	}
+
+	.graph-axis-x {
+		left: 18px;
+		right: 18px;
+		top: 50%;
+		height: 1px;
+	}
+
+	.graph-axis-y {
+		top: 18px;
+		bottom: 18px;
+		left: 50%;
+		width: 1px;
+	}
+
+	.parabola {
+		position: absolute;
+		inset: 0;
+	}
+
+	.parabola-main,
+	.parabola-secondary {
+		fill: none;
+		stroke-linecap: round;
 	}
 	
-	.poster {
-		width: 100%;
-		height: 100%;
-		min-height: 170px;
-		max-height: 210px;
-		max-width: 600px;
-		background-image: var(--poster-url);
-		background-size: contain;
-		background-repeat: no-repeat;
-		background-position: center;
-		margin-bottom: 20px;
+	.parabola-main {
+		stroke: rgba(229, 242, 255, 0.95);
+		stroke-width: 2.5;
+		filter: drop-shadow(0 0 8px rgba(130, 210, 255, 0.45));
+	}
+
+	.parabola-secondary {
+		stroke: rgba(130, 210, 255, 0.5);
+		stroke-width: 1.5;
+	}
+
+	.graph-label {
+		position: absolute;
+		right: 16px;
+		bottom: 14px;
+		font-family: "Space Grotesk", sans-serif;
+		font-size: 0.95rem;
+		color: rgba(235, 240, 255, 0.9);
+		background: rgba(8, 10, 17, 0.45);
+		border: 1px solid rgba(223, 229, 255, 0.25);
+		border-radius: 8px;
+		padding: 3px 8px;
+	}
+
+	.sat {
+		position: absolute;
+		width: 62px;
+		height: 62px;
+		border-radius: 16px;
+		display: grid;
+		place-items: center;
+		font-family: "Space Grotesk", sans-serif;
+		font-size: 1.4rem;
+		color: #dfe5ff;
+		background: rgba(24, 30, 52, 0.95);
+		border: 1px solid rgba(123, 125, 255, 0.55);
+		box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+	}
+
+	.sat-a {
+		top: 18%;
+		left: 16%;
+		animation: pulse 5s linear infinite;
+	}
+
+	.sat-b {
+		top: 18%;
+		right: 14%;
+		animation: pulse 4.4s linear infinite;
+	}
+
+	.sat-c {
+		bottom: 16%;
+		left: 18%;
+		animation: pulse 4.9s linear infinite;
+	}
+
+	.sat-d {
+		bottom: 18%;
+		right: 18%;
+		animation: pulse 5.2s linear infinite;
+	}
+
+	.stats-strip {
+		margin-top: 22px;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 14px;
+	}
+
+	.stat-card {
+		border: 1px solid var(--line);
+		border-radius: 14px;
+		padding: 18px;
+		background: var(--card-bg);
+	}
+
+	.stat-value {
+		margin: 0 0 6px;
+		font-size: 2rem;
+		font-family: "Space Grotesk", sans-serif;
+	}
+
+	.stat-label {
+		margin: 0;
+		color: var(--text-muted);
+	}
+
+	.feature-section {
+		padding-top: 52px;
+	}
+
+	.feature-section h2 {
+		font-size: clamp(1.8rem, 3vw, 2.5rem);
+		font-family: "Space Grotesk", sans-serif;
+		margin: 0 0 18px;
+	}
+
+	.feature-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 16px;
+	}
+
+	.feature-card {
+		border: 1px solid var(--line);
+		border-radius: 18px;
+		padding: 22px;
+		background: var(--card-bg);
+		min-height: 190px;
+	}
+
+	.feature-card h3 {
+		margin: 0 0 10px;
+		font-size: 1.35rem;
+	}
+
+	.feature-card p {
+		margin: 0;
+		font-size: 1rem;
+		line-height: 1.65;
+		color: var(--text-muted);
+	}
+
+	.accent-card {
+		background:
+			radial-gradient(circle at 85% 20%, rgba(123, 125, 255, 0.35), transparent 35%),
+			var(--card-bg);
+	}
+
+	.accent-card a {
+		display: inline-block;
+		margin-top: 14px;
+		text-decoration: none;
+		font-weight: 700;
+		padding: 10px 14px;
+		border-radius: 10px;
+		border: 1px solid var(--line-strong);
+	}
+
+	@keyframes drift {
+		0%,
+		100% {
+			transform: translate(-50%, -50%) rotate(-12deg) translateY(0px);
+		}
+		50% {
+			transform: translate(-50%, -50%) rotate(-10deg) translateY(-10px);
+		}
+	}
+
+	@keyframes pulse {
+		0%,
+		100% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.08);
+		}
+	}
+
+	@media (max-width: 1024px) {
+		.hero-grid,
+		.feature-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.hero-visual {
+			min-height: 360px;
+		}
+
+		.stats-strip {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 760px) {
+		.site-shell {
+			padding: 0 16px 28px;
+		}
+
+		.promo-bar {
+			grid-template-columns: 1fr;
+			text-align: center;
+		}
+
+		.top-nav {
+			padding: 14px 0;
+			flex-wrap: wrap;
+		}
+
+		nav {
+			order: 3;
+			width: 100%;
+			justify-content: space-between;
+		}
+
+		.hero-content h1 {
+			font-size: clamp(2rem, 10vw, 2.9rem);
+		}
+
+		.lead {
+			font-size: 1.05rem;
+		}
 	}
 </style>

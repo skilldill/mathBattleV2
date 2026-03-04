@@ -1,58 +1,36 @@
 :root {
-  /* Light theme (default) */
-  --background: #ffffff;
-  --text: #5b5b5b;
-  --primary: #2563eb;
-  --secondary: #4b5563;
-  --accent: #3b82f6;
-  --border: #e5e7eb;
-  --card-bg: #f9fafb;
-  
-  /* Glass block specific */
-  --glass-bg: #f0f4f849;
-  --glass-content-bg: rgba(255, 255, 255, 0.7);
-  --glass-text: #394d6a;
-  --glass-text-secondary: #4b5563;
-  --glass-border: rgba(0, 0, 0, 0.048);
-  --glass-button-bg: #5278ff5c;
-  --glass-button-hover: #5278ff69;
-  --glass-button-browser-bg: rgba(168, 190, 255, 0.188);
-  --glass-button-browser-hover: rgba(168, 190, 255, 0.232);
-  --glass-light: #3b82f65e;
-  --poster-url: url('./poster-light.png');
+  --bg: #080a11;
+  --bg-soft: #0e1220;
+  --line: rgba(145, 158, 196, 0.2);
+  --line-strong: rgba(145, 158, 196, 0.35);
+  --text: #f3f6ff;
+  --text-muted: #9ea8c6;
+  --accent: #7b7dff;
+  --accent-2: #35d7b7;
+  --card-bg: linear-gradient(180deg, rgba(17, 21, 35, 0.8), rgba(10, 12, 22, 0.95));
 }
 
-[data-theme="dark"] {
-  --background: #121212;
-  --text: #ffffff;
-  --primary: #3b82f6;
-  --secondary: #9ca3af;
-  --accent: #60a5fa;
-  --border: #374151;
-  --card-bg: #2d2d2d;
-  
-  /* Glass block specific */
-  --glass-bg: #27314170;
-  --glass-content-bg: rgba(7, 9, 12, 0.6);
-  --glass-text: rgba(255, 255, 255, 0.9);
-  --glass-text-secondary: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.035);
-  --glass-button-bg: #273141;
-  --glass-button-hover: #2f3b4d;
-  --glass-button-browser-bg: rgba(47, 77, 57, 0.5);
-  --glass-button-browser-hover: #2f4d39;
-  --glass-light: rgba(164, 184, 255, 0.3);
-  --poster-url: url('./poster-dark.png');
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-/* Apply theme variables */
+html,
 body {
-  background-color: var(--background);
-  color: var(--text);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  min-height: 100%;
 }
 
-.light {
-  background-color: var(--glass-light) !important;
-  transition: background-color 0.3s ease;
-} 
+body {
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    /* radial-gradient(circle at 10% -10%, rgba(251, 215, 71, 0.25), transparent 45%), */
+    radial-gradient(circle at 90% 0%, rgba(91, 16, 153, 0.18), transparent 35%),
+    linear-gradient(180deg, #0a0d16 0%, #070910 100%);
+}
+
+a {
+  color: inherit;
+}

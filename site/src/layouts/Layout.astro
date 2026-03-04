@@ -1,15 +1,20 @@
 ---
 import '../assets/theme.css';
-import ThemeToggle from '../components/ThemeToggle.astro';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+			rel="stylesheet"
+		/>
 		<title>Math battle — Онлайн Игра для Любителей Математики</title>
 		<meta name="description" content="Математическая битва — захватывающая онлайн игра для проверки знаний и развития математических навыков. Брось вызов себе и другим игрокам, прокачай логику и стань лучшим!">
 		<meta name="keywords" content="математическая битва, онлайн математика, игра на логику, математические игры, тренировка ума, развитие мышления, проверка знаний, математический поединок, обучающие игры, соревнования по математике">
@@ -24,26 +29,6 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 		<meta name="twitter:image" content="https://app.math-battle.ru/assets/MathBattleCover-nnbN8NsD.png" />		
 	</head>
 	<body>
-		<div class="theme-toggle-container">
-			<ThemeToggle />
-		</div>
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-
-	.theme-toggle-container {
-		position: fixed;
-		top: 1rem;
-		right: 1rem;
-		z-index: 1000;
-	}
-</style>
