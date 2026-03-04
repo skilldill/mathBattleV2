@@ -26,8 +26,8 @@ body {
   font-family: "Manrope", "Segoe UI", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at 10% -10%, rgba(123, 125, 255, 0.25), transparent 45%),
-    radial-gradient(circle at 90% 0%, rgba(53, 215, 183, 0.18), transparent 35%),
+    /* radial-gradient(circle at 10% -10%, rgba(251, 215, 71, 0.25), transparent 45%), */
+    radial-gradient(circle at 90% 0%, rgba(91, 16, 153, 0.18), transparent 35%),
     linear-gradient(180deg, #0a0d16 0%, #070910 100%);
 }
 
